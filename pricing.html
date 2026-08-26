@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru" class="js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Прайс — P.Cash · сайты, автоматизация, AI, UX</title>
+<meta name="description" content="Прайс-лист P.Cash: сайты, автоматизация, AI-боты, AI-аудит и UX-аудит. Сравните пакеты и выберите подходящий.">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0E0F0D">
+<link rel="stylesheet" href="fonts.css?v=8">
+<link rel="stylesheet" href="style.css?v=106">
+<style>
+  /* transparent — the shared liquid WebGL background shows through */
+  .price-stage { perspective: 1600px; padding: 40px 0 64px; background: none; }
+  .price-head { text-align: center; max-width: 720px; margin: 0 auto 34px; }
+  .price-head .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; color: var(--amber-ink); text-transform: uppercase; margin: 0 0 14px; }
+  .price-head h1 { font-family: var(--font-display); font-size: clamp(30px, 5vw, 46px); font-weight: 500; line-height: 1.08; margin: 0 0 14px; letter-spacing: -0.01em; text-wrap: balance; }
+  .price-head h1 em { font-style: normal; color: var(--teal); }
+  .price-head .sub { font-size: 15px; color: var(--ink-soft); line-height: 1.6; margin: 0; }
+
+  .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 900px; margin: 0 auto 40px; }
+  .tab { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.02em; background: rgba(16,17,23,0.5); backdrop-filter: blur(18px) saturate(1.2); -webkit-backdrop-filter: blur(18px) saturate(1.2); border: 1px solid rgba(255,255,255,0.07); color: var(--ink-soft); padding: 11px 18px; border-radius: 999px; cursor: pointer; transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1), background 0.25s, color 0.25s, border-color 0.25s, box-shadow 0.35s; }
+  .tab:hover { transform: translateY(-3px); border-color: var(--teal); color: var(--ink); }
+  .tab.active { background: var(--teal); border-color: var(--teal); color: #fff; box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--teal) 60%, transparent); transform: translateY(-3px) scale(1.03); }
+  .tab-tip { display: block; font-size: 9.5px; letter-spacing: 0.01em; opacity: 0.6; margin-top: 2px; }
+
+  .panel { display: none; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .panel.active { display: block; animation: priceRise 0.5s cubic-bezier(0.16,1,0.3,1); }
+  @keyframes priceRise { from { opacity: 0; transform: translateY(24px) rotateX(-6deg); } to { opacity: 1; transform: translateY(0) rotateX(0); } }
+  .tagline { text-align: center; font-family: var(--font-mono); font-size: 13px; color: var(--amber-ink); margin: 0 0 26px; letter-spacing: 0.02em; }
+
+  .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 22px; }
+  .pcard { position: relative; min-height: 200px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.09); background: #0A0B0F; padding: 22px 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; box-shadow: 0 8px 28px rgba(0,0,0,0.45), 0 24px 60px rgba(0,0,0,0.3); transition: border-color 0.25s, transform 0.35s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.35s; }
+  .pcard:hover { border-color: rgba(124,92,255,0.4); }
+  .pcard.recommended { border-color: rgba(124,92,255,0.35); }
+  .pcard.recommended::before { content: attr(data-rec); position: absolute; top: -11px; right: 20px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--violet); color: #fff; padding: 3px 10px; border-radius: 999px; }
+  .pname { font-family: var(--font-display); font-size: 20px; font-weight: 500; margin: 0; }
+  .pdesc { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  .pprice { font-family: var(--font-mono); font-size: 22px; color: var(--teal); font-weight: 700; margin: 0; }
+  .pprice.free { color: var(--go); }
+  .combo-badge { display: inline-block; font-family: var(--font-mono); font-size: 10px; background: color-mix(in srgb, var(--amber) 16%, transparent); color: var(--amber-ink); border: 1px solid color-mix(in srgb, var(--amber) 40%, transparent); padding: 3px 9px; border-radius: 999px; margin-bottom: 6px; width: fit-content; }
+
+  .price-cta { text-align: center; margin: 44px auto 0; max-width: 640px; }
+  .price-cta .btn { margin-top: 4px; }
+  .footer-note { text-align: center; font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-soft); margin-top: 18px; line-height: 1.6; }
+
+  @media (max-width: 520px) { .panel { padding: 0 16px; } }
+  @media (prefers-reduced-motion: reduce) { .panel.active { animation: none; } .pcard { transition: none; } }
+</style>
+</head>
+<body>
+
+<canvas id="liquid-bg" aria-hidden="true"></canvas>
+<canvas class="bg-waves" id="bgWaves" aria-hidden="true"></canvas>
+<div class="cursor-glow" aria-hidden="true"></div>
+<div class="cursor-pen" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 2.2l14.4 8.6-6.1 1.1-2.6 5.6z" fill="currentColor" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="index.html">
+      <svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M37.5 13 A17 17 0 1 0 37.5 35" fill="none" stroke="#FF6A1A" stroke-width="5" stroke-linecap="round"/>
+        <rect x="16.4" y="14.2" width="5" height="19.6" rx="2.3" fill="currentColor"/>
+        <circle cx="22.6" cy="18.8" r="6.4" fill="currentColor"/>
+        <circle cx="23.3" cy="18.8" r="2.6" fill="#FF6A1A"/>
+      </svg>
+      <span>P<span style="color:#FF6A1A">.</span>Cash</span>
+    </a>
+    <nav class="main-nav" aria-label="Навигация">
+      <a href="index.html#services" data-ru="Услуги" data-en="Services">Услуги</a>
+      <a href="index.html#about" data-ru="Обо мне" data-en="About">Обо мне</a>
+      <a href="index.html#process" data-ru="Процесс" data-en="Process">Процесс</a>
+      <a href="pricing.html" class="active" data-ru="Прайс" data-en="Pricing">Прайс</a>
+      <a href="index.html#contact" data-ru="Контакты" data-en="Contact">Контакты</a>
+      <a href="index.html#contact" class="nav-cta btn btn-primary" data-ru="Обсудить" data-en="Contact">Обсудить</a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="Язык">
+      <button data-lang="ru" class="active">RU</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="price-stage" id="top">
+  <div class="price-head">
+    <p class="eyebrow" data-ru="Прайс-лист · интерактив" data-en="Pricing · interactive">Прайс-лист · интерактив</p>
+    <h1 data-ru="Сайты · Автоматизация · UX" data-en="Sites · Automation · UX">Сайты · Автоматизация · UX</h1>
+    <p class="sub" data-ru="Выберите категорию и сравните пакеты. Рекомендованный вариант отмечен." data-en="Pick a category and compare packages. Recommended option is marked.">Выберите категорию и сравните пакеты. Рекомендованный вариант отмечен.</p>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="panels"></div>
+
+  <div class="price-cta">
+    <a href="index.html#contact" class="btn btn-primary" data-ru="Обсудить проект →" data-en="Discuss your project →">Обсудить проект →</a>
+    <p class="footer-note" data-ru="Расходы на API для AI-ботов обсуждаются отдельно · Мини AI-аудит — бесплатно, это ваш вход в диалог" data-en="API costs for AI bots discussed separately · Mini AI audit is free — it's your entry point">Расходы на API для AI-ботов обсуждаются отдельно · Мини AI-аудит — бесплатно, это ваш вход в диалог</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>© 2026 P<span style="color:#FF6A1A">.</span>Cash</span>
+    <a href="index.html" style="font-family:var(--font-mono);font-size:12.5px;color:var(--ink-soft)" data-ru="← на главную" data-en="← back to home">← на главную</a>
+  </div>
+</footer>
+
+<script src="gsap.min.js"></script>
+<script src="ScrollTrigger.min.js"></script>
+<script src="lenis.min.js?v=1"></script>
+<script src="script.js?v=98"></script>
+<script>
+const DATA_RU = {
+  sites: { label: "Сайты", tip: "лендинги и многостраничники", tagline: "",
+    items: [
+      {n:"Базовый", p:"$150–400", d:"Одностраничный сайт или визитка, адаптив под мобильные, форма заявки."},
+      {n:"Стандарт", p:"$400–800", d:"3–5 страниц, базовое SEO, связь с CRM или формой.", rec:true},
+      {n:"Премиум", p:"$1000–3000+", d:"Многостраничный сайт или интернет-магазин, индивидуальный дизайн, интеграции."},
+    ] },
+  automation: { label: "Автоматизация", tip: "без ИИ, чистая логика", tagline: "Убираем ручную рутину — сценарии, воронки, интеграции",
+    items: [
+      {n:"Базовый", p:"$80–200", d:"Один сценарий. Например: заявка → Telegram/CRM."},
+      {n:"Стандарт", p:"$250–500", d:"2–3 связанных сценария с условной логикой.", rec:true},
+      {n:"Премиум", p:"$600–1500", d:"Полная воронка: заявка → уведомления → напоминания, без вашего участия."},
+    ] },
+  aibots: { label: "AI-боты", tip: "чат-боты с ИИ", tagline: "Отвечают клиентам, понимают контекст, работают 24/7",
+    items: [
+      {n:"Базовый бот", p:"$150–350", d:"Заготовленные ответы — для частых вопросов на сайте или в мессенджере."},
+      {n:"AI-бот", p:"$400–900", d:"Отвечает по базе знаний, понимает вопросы своими словами.", rec:true},
+      {n:"AI-бот Премиум", p:"$900–3000+", d:"Память диалога, передача заявок в CRM, создание записей и бронирований."},
+    ] },
+  aiaudit: { label: "AI-аудит", tip: "оценка процессов", tagline: "Где ИИ реально сэкономит деньги, а где это просто хайп",
+    items: [
+      {n:"Мини-аудит", p:"Бесплатно", free:true, d:"3–5 ключевых процессов, что можно улучшить. Без обязательств."},
+      {n:"Полный аудит", p:"$150–300", d:"Все процессы + приоритизация + ROI + план внедрения.", rec:true},
+    ] },
+  ux: { label: "UX-аудит", tip: "анализ удобства", tagline: "Находим, где сайт теряет клиентов",
+    items: [
+      {n:"Мини-аудит", p:"$50–100", d:"5–7 конкретных проблем со скриншотами."},
+      {n:"Полный аудит", p:"$200–400", d:"Юзабилити, конверсия, мобильная версия, приоритеты.", rec:true},
+      {n:"Аудит + правки", p:"$400–800", d:"Аудит и внедрение топ-5 исправлений."},
+    ] },
+  combo: { label: "Комплексные", tip: "пакеты со скидкой", tagline: "Полное решение — дешевле, чем по отдельности",
+    items: [
+      {n:"Сайт под ключ", p:"$500–900", d:"Сайт + автоматизация приёма заявок.", combo:true, rec:true},
+      {n:"Сайт + AI-бот", p:"$700–1400", d:"Сайт + AI-бот для ответов клиентам.", combo:true},
+      {n:"Полная цифровизация", p:"$1800–3500+", d:"Сайт + автоматизация + AI-бот + UX-аудит под ключ.", combo:true},
+    ] }
+};
+
+const DATA_EN = {
+  sites: { label: "Sites", tip: "landing pages & multi-page", tagline: "",
+    items: [
+      {n:"Basic", p:"$150–400", d:"Single-page site or business card, mobile-responsive, contact form."},
+      {n:"Standard", p:"$400–800", d:"3–5 pages, basic SEO, CRM or form integration.", rec:true},
+      {n:"Premium", p:"$1000–3000+", d:"Multi-page site or e-commerce, custom design, payment and lead integrations."},
+    ] },
+  automation: { label: "Automation", tip: "no AI, pure logic", tagline: "Eliminating manual work — scenarios, funnels, integrations",
+    items: [
+      {n:"Basic", p:"$80–200", d:"One scenario. Example: lead → Telegram/CRM."},
+      {n:"Standard", p:"$250–500", d:"2–3 linked scenarios with conditional logic.", rec:true},
+      {n:"Premium", p:"$600–1500", d:"Full funnel: lead → notifications → reminders, hands-free."},
+    ] },
+  aibots: { label: "AI Bots", tip: "AI-powered chatbots", tagline: "Answer clients, understand context, work 24/7",
+    items: [
+      {n:"Basic Bot", p:"$150–350", d:"Pre-set answers for common questions on your site or messenger."},
+      {n:"AI Bot", p:"$400–900", d:"Answers from your knowledge base, understands natural language.", rec:true},
+      {n:"AI Bot Premium", p:"$900–3000+", d:"Conversation memory, CRM handoff, bookings and record creation."},
+    ] },
+  aiaudit: { label: "AI Audit", tip: "process assessment", tagline: "Where AI actually saves money and where it's just hype",
+    items: [
+      {n:"Mini Audit", p:"Free", free:true, d:"3–5 key processes, what can be improved. No commitment."},
+      {n:"Full Audit", p:"$150–300", d:"All processes + prioritization + ROI + implementation plan.", rec:true},
+    ] },
+  ux: { label: "UX Audit", tip: "usability analysis", tagline: "Finding where your site loses clients",
+    items: [
+      {n:"Mini Audit", p:"$50–100", d:"5–7 specific issues with screenshots."},
+      {n:"Full Audit", p:"$200–400", d:"Usability, conversion, mobile version, priorities.", rec:true},
+      {n:"Audit + Fixes", p:"$400–800", d:"Audit and implementation of top 5 fixes."},
+    ] },
+  combo: { label: "Bundles", tip: "discounted packages", tagline: "Complete solution — cheaper than buying separately",
+    items: [
+      {n:"Turnkey Site", p:"$500–900", d:"Site + lead intake automation.", combo:true, rec:true},
+      {n:"Site + AI Bot", p:"$700–1400", d:"Site + AI bot for client support.", combo:true},
+      {n:"Full Digitization", p:"$1800–3500+", d:"Site + automation + AI bot + UX audit, turnkey.", combo:true},
+    ] }
+};
+
+let DATA = DATA_RU;
+
+const tabsEl = document.getElementById('tabs');
+const panelsEl = document.getElementById('panels');
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+let activeKey = Object.keys(DATA)[0];
+let priceLang = 'ru';
+
+function buildPricing() {
+  const keys = Object.keys(DATA);
+  tabsEl.innerHTML = '';
+  panelsEl.innerHTML = '';
+  const comboLabel = priceLang === 'ru' ? 'Комбо' : 'Combo';
+  const recLabel = priceLang === 'ru' ? 'Рекомендую' : 'Recommended';
+
+  keys.forEach((k, i) => {
+    const isActive = k === activeKey;
+    const tab = document.createElement('div');
+    tab.className = 'tab' + (isActive ? ' active' : '');
+    tab.innerHTML = DATA[k].label + (DATA[k].tip ? '<span class="tab-tip">' + DATA[k].tip + '</span>' : '');
+    tab.dataset.key = k;
+    tab.onclick = () => switchTab(k);
+    tabsEl.appendChild(tab);
+
+    const panel = document.createElement('div');
+    panel.className = 'panel' + (isActive ? ' active' : '');
+    panel.dataset.key = k;
+    let html = '';
+    if (DATA[k].tagline) html += `<p class="tagline">${DATA[k].tagline}</p>`;
+    html += '<div class="price-grid">';
+    DATA[k].items.forEach((it, idx) => {
+      html += `
+        <div class="pcard${it.rec ? ' recommended' : ''}" data-idx="${idx}" ${it.rec ? 'data-rec="' + recLabel + '"' : ''}>
+          <div>
+            ${it.combo ? '<span class="combo-badge">' + comboLabel + '</span>' : ''}
+            <p class="pname">${it.n}</p>
+            <p class="pdesc">${it.d}</p>
+          </div>
+          <p class="pprice ${it.free ? 'free' : ''}">${it.p}</p>
+        </div>`;
+    });
+    html += '</div>';
+    panel.innerHTML = html;
+    panelsEl.appendChild(panel);
+  });
+  bindCards();
+}
+
+function switchTab(key) {
+  activeKey = key;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.key === key));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.key === key));
+  bindCards();
+}
+
+function bindCards() {
+  document.querySelectorAll('.panel.active .pcard').forEach(card => {
+    if (fine && !reduced) {
+      card.style.transition = 'transform 0.25s ease, border-color 0.25s ease';
+      card.onmouseenter = () => { card.style.transform = 'translateY(-4px)'; };
+      card.onmouseleave = () => { card.style.transform = 'none'; };
+    }
+  });
+}
+
+buildPricing();
+
+document.querySelectorAll('.lang-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const lang = btn.dataset.lang;
+    priceLang = lang;
+    DATA = lang === 'en' ? DATA_EN : DATA_RU;
+    buildPricing();
+    document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    if (typeof setLang === 'function') setLang(lang);
+  });
+});
+</script>
+</body>
+</html>
