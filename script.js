@@ -95,7 +95,7 @@ const navObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.5 });
-['services','about','cases','process','calc','guarantees','faq','contact'].forEach((id) => {
+['cases','services','about','process','calc','guarantees','faq','contact'].forEach((id) => {
   const el = document.getElementById(id);
   if (el) navObserver.observe(el);
 });
@@ -192,6 +192,20 @@ const stepObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.4 });
 steps.forEach((s) => stepObserver.observe(s));
+
+// ---- service accordion ----
+document.querySelectorAll('.service-card[role="button"]').forEach((card) => {
+  card.addEventListener('click', () => {
+    const wasOpen = card.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.service-card[aria-expanded="true"]').forEach((c) => {
+      c.setAttribute('aria-expanded', 'false');
+    });
+    if (!wasOpen) card.setAttribute('aria-expanded', 'true');
+  });
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+  });
+});
 
 // ---- faq ----
 document.querySelectorAll('.faq-q').forEach((btn) => {
@@ -576,22 +590,7 @@ if (fab && panel && chatInput && chatSend) {
 
   // word-split reveal removed — GSAP ScrollTrigger handles h2 reveals
 
-  // 3D card tilt on mouse move
-  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const tiltCards = document.querySelectorAll('.service-card, .guar-card, .step-card, .post, .about-principles li');
-    tiltCards.forEach((card, i) => {
-      card.style.setProperty('--card-i', i);
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(600px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(-4px)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-  }
+  // 3D card tilt removed — kept only on hero showcase browser
 
   // hero canvas scroll fade
   if (typeof window.__heroCanvasFade === 'function') {
@@ -870,9 +869,9 @@ void main(){
     // above 7:1 contrast while the cloud banks are clearly readable.
     const moods = [
       { sel: '.hero',        c1:'#07080C', c2:'#191233', c3:'#4A2E86', c4:'#7E52B3' },
+      { sel: '#cases',       c1:'#06070A', c2:'#151030', c3:'#3E2878', c4:'#7A52B4' },
       { sel: '#services',    c1:'#07080C', c2:'#1B1226', c3:'#4E2A52', c4:'#9D543A' },
       { sel: '#about',       c1:'#07080C', c2:'#101C22', c3:'#2A3F63', c4:'#685DAD' },
-      { sel: '#cases',       c1:'#06070A', c2:'#151030', c3:'#3E2878', c4:'#7A52B4' },
       { sel: '#process',     c1:'#06070A', c2:'#0F1720', c3:'#28324F', c4:'#5E5A9E' },
       { sel: '#calc',        c1:'#07080C', c2:'#1E1524', c3:'#572F44', c4:'#955A33' },
       { sel: '#guarantees',  c1:'#06070A', c2:'#0E1A1C', c3:'#1F3A44', c4:'#38726A' },
@@ -972,7 +971,7 @@ void main(){
 
   // Section clip-path transitions
   const clipMap = {
-    services:   { from: 'circle(0% at 50% 50%)',    to: 'circle(150% at 50% 50%)' },
+    services:   { from: 'inset(8% round 20px)',       to: 'inset(0% round 0px)' },
     about:      { from: 'polygon(0 0, 0 0, 0 100%, 0 100%)', to: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
     cases:      { from: 'inset(10% round 24px)',     to: 'inset(0% round 0px)' },
     process:    { from: 'inset(20%)',                 to: 'inset(0%)' },
@@ -1034,7 +1033,7 @@ void main(){
       blocks.forEach((el, i) => {
         const isCard = el.matches('.service-card, .guar-card, .step-card, .post, .about-principles li, .review-card, .contact-card, .faq-item');
         if (isCard) {
-          gsap.set(el, { opacity: 0, y: 40, scale: 0.94 });
+          gsap.set(el, { opacity: 0, y: 30, scale: 0.97 });
         }
         ScrollTrigger.create({
           trigger: el, start: 'top 90%', once: true,
@@ -1045,7 +1044,7 @@ void main(){
               opacity: 1, y: 0, scale: 1,
               duration: isCard ? 0.85 : 0.75,
               delay: headDelay + (isCard ? idx * 0.1 : 0),
-              ease: isCard ? 'back.out(1.2)' : 'power3.out',
+              ease: isCard ? 'expo.out' : 'power3.out',
               onComplete: () => { if (isCard) el.classList.add('seen-card'); }
             });
           }
@@ -1070,34 +1069,7 @@ void main(){
   //
   // The tilt is deliberately partial rather than a full 90deg face turn.
   // Edge-on text is unreadable, and this page has to be read.
-  if (!isTouch) {
-    // 6deg, not 15: at 15 the cards visibly go trapezoid near the edges
-    // of the viewport. This keeps the sense of a turning surface while the
-    // rectangles still read as rectangles.
-    // ONE tween per section. There were two, and both wrote `scale` —
-    // GSAP had two sources fighting over the same property every frame,
-    // which is what the juddering was. Rotation alone carries the effect.
-    const TILT = 3;
-    document.querySelectorAll('.section').forEach((section) => {
-      gsap.fromTo(section,
-        { rotateX: TILT },
-        {
-          rotateX: -TILT,
-          ease: 'none',
-          overwrite: 'auto',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top bottom',
-            end: 'bottom top',
-            // scrub:true maps straight to scroll position. A numeric scrub
-            // adds catch-up lag, and Lenis is already smoothing the scroll —
-            // two smoothing passes on top of each other stutter.
-            scrub: true,
-            invalidateOnRefresh: true
-          }
-        });
-    });
-  }
+  // 3D drum tilt removed — caused visible perspective edges on section boundaries
 
   // Content exit removed — caused invisible sections on scroll-back
 
