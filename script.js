@@ -1254,6 +1254,30 @@ void main(){
       });
     });
   }
+
+  // Cinematic scroll — scrub-driven parallax on sections
+  document.querySelectorAll('.section').forEach((sec) => {
+    gsap.to(sec, {
+      backgroundPositionY: '-40px',
+      scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+  });
+
+  // Parallax depth on ambient decorations
+  document.querySelectorAll('.ambient .amb-chip, .ambient .amb-dot').forEach((el, i) => {
+    gsap.to(el, {
+      y: -80 - i * 30,
+      scrollTrigger: { trigger: el.closest('.section'), start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+  });
+
+  // Cinematic parallax on service cards
+  document.querySelectorAll('.service-card').forEach((card) => {
+    gsap.fromTo(card, { y: 30 }, {
+      y: -15,
+      scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+  });
 })();
 
 /* ===================== hero interactivity + header state ===================== */
@@ -1306,152 +1330,164 @@ void main(){
   }
 })();
 
-/* ===================== Hero Constellation Network ===================== */
-(function initConstellation() {
+/* ===================== Hero 3D Scene (Three.js) ===================== */
+(function initHero3D() {
+  if (typeof THREE === 'undefined') return;
   const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (matchMedia('(max-width: 860px)').matches) return;
 
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.z = 18;
 
-  const COUNT = 200;
-  const LINK_DIST = 165;
-  const MOUSE_R = 260;
-  const MOUSE_GLOW_R = 320;
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0);
 
-  let W = 0, H = 0, dpr = 1;
-  let mx = -9999, my = -9999;
-  let mxSmooth = -9999, mySmooth = -9999;
+  const VIOLET = 0x7C5CFF;
+  const VIOLET2 = 0xA98BFF;
+  const AMBER = 0xE3A24C;
+  const TEAL = 0xFF7A2E;
+  const GO = 0x35C87E;
 
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = window.innerWidth; H = window.innerHeight;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const shapes = [];
+
+  function makeWireframe(geom, color, scale, pos) {
+    const edges = new THREE.EdgesGeometry(geom);
+    const mat = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.35 });
+    const wire = new THREE.LineSegments(edges, mat);
+    wire.scale.setScalar(scale);
+    wire.position.set(pos[0], pos[1], pos[2]);
+    wire.userData = {
+      basePos: [...pos],
+      rotSpeed: [0.001 + Math.random() * 0.004, 0.002 + Math.random() * 0.003, 0.001 + Math.random() * 0.002],
+      floatPhase: Math.random() * Math.PI * 2,
+      floatAmp: 0.5 + Math.random() * 1.0,
+      floatSpeed: 0.15 + Math.random() * 0.3
+    };
+    scene.add(wire);
+    shapes.push(wire);
+    return wire;
   }
-  resize();
 
-  const nodes = [];
-  for (let i = 0; i < COUNT; i++) {
-    nodes.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      r: 1.8 + Math.random() * 3,
-      phase: Math.random() * Math.PI * 2,
-      speed: 0.2 + Math.random() * 0.6,
-      hue: Math.random()
-    });
+  var simpleGeoms = [
+    new THREE.OctahedronGeometry(1, 0),
+    new THREE.TetrahedronGeometry(1, 0),
+    new THREE.IcosahedronGeometry(1, 0),
+    new THREE.DodecahedronGeometry(1, 0),
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.TorusGeometry(0.7, 0.25, 8, 16)
+  ];
+  var colors = [VIOLET, VIOLET2, AMBER, TEAL, GO];
+  var SHAPE_COUNT = 30;
+  for (var si = 0; si < SHAPE_COUNT; si++) {
+    var geom = simpleGeoms[si % simpleGeoms.length];
+    var col = colors[si % colors.length];
+    var sc = 0.15 + Math.random() * 0.25;
+    var px = (Math.random() - 0.5) * 28;
+    var py = (Math.random() - 0.5) * 18;
+    var pz = -2 - Math.random() * 8;
+    makeWireframe(geom, col, sc, [px, py, pz]);
   }
 
-  let resizeT;
-  window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(resize, 250); });
+  const particles = [];
+  const pGeom = new THREE.BufferGeometry();
+  const pCount = 120;
+  const pPos = new Float32Array(pCount * 3);
+  for (let i = 0; i < pCount; i++) {
+    pPos[i * 3] = (Math.random() - 0.5) * 30;
+    pPos[i * 3 + 1] = (Math.random() - 0.5) * 20;
+    pPos[i * 3 + 2] = (Math.random() - 0.5) * 15 - 3;
+  }
+  pGeom.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  const pMat = new THREE.PointsMaterial({ color: VIOLET2, size: 0.06, transparent: true, opacity: 0.5 });
+  const pMesh = new THREE.Points(pGeom, pMat);
+  scene.add(pMesh);
 
+  let mx = 0, my = 0;
+  let mxSmooth = 0, mySmooth = 0;
   document.addEventListener('mousemove', (e) => {
-    mx = e.clientX; my = e.clientY;
+    mx = (e.clientX / window.innerWidth - 0.5) * 2;
+    my = (e.clientY / window.innerHeight - 0.5) * 2;
   });
+
+  let scrollY = 0;
+  window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+
+  function onResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+  let resizeT;
+  window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(onResize, 200); });
 
   let t = 0;
   function tick() {
     requestAnimationFrame(tick);
     t += 0.016;
-    ctx.clearRect(0, 0, W, H);
 
-    mxSmooth += (mx - mxSmooth) * 0.08;
-    mySmooth += (my - mySmooth) * 0.08;
+    mxSmooth += (mx - mxSmooth) * 0.04;
+    mySmooth += (my - mySmooth) * 0.04;
 
-    for (let i = 0; i < COUNT; i++) {
-      const n = nodes[i];
-      n.vx += Math.sin(t * n.speed + n.phase) * 0.006;
-      n.vy += Math.cos(t * n.speed * 0.7 + n.phase) * 0.005;
+    var scrollNorm = scrollY / (document.documentElement.scrollHeight - window.innerHeight || 1);
 
-      const dx = n.x - mxSmooth;
-      const dy = n.y - mySmooth;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < MOUSE_R && dist > 0) {
-        const f = (1 - dist / MOUSE_R);
-        n.vx += (dx / dist) * f * f * 1.8;
-        n.vy += (dy / dist) * f * f * 1.8;
-      }
+    camera.position.x = mxSmooth * 0.8;
+    camera.position.y = -mySmooth * 0.5 - scrollNorm * 2;
+    camera.position.z = 18;
+    camera.lookAt(0, -scrollNorm * 1.5, -2);
 
-      n.vx *= 0.97; n.vy *= 0.97;
-      n.x += n.vx; n.y += n.vy;
+    renderer.domElement.style.opacity = 0.4;
 
-      if (n.x < -30) n.x = W + 30;
-      if (n.x > W + 30) n.x = -30;
-      if (n.y < -30) n.y = H + 30;
-      if (n.y > H + 30) n.y = -30;
+    for (let i = 0; i < shapes.length; i++) {
+      const s = shapes[i];
+      const d = s.userData;
+      s.rotation.x += d.rotSpeed[0];
+      s.rotation.y += d.rotSpeed[1];
+      s.rotation.z += d.rotSpeed[2];
+      s.position.y = d.basePos[1] + Math.sin(t * d.floatSpeed + d.floatPhase) * d.floatAmp;
+      s.position.x = d.basePos[0] + Math.cos(t * d.floatSpeed * 0.7 + d.floatPhase * 1.3) * d.floatAmp * 0.6 + mxSmooth * (0.1 + i * 0.02);
+      s.position.z = d.basePos[2] + Math.sin(t * d.floatSpeed * 0.5 + d.floatPhase * 0.8) * 0.3 + mySmooth * 0.05;
     }
 
-    // mouse glow
-    if (mxSmooth > -5000) {
-      const grd = ctx.createRadialGradient(mxSmooth, mySmooth, 0, mxSmooth, mySmooth, MOUSE_GLOW_R);
-      grd.addColorStop(0, 'rgba(124,92,255,' + (0.16) + ')');
-      grd.addColorStop(0.4, 'rgba(124,92,255,' + (0.05) + ')');
-      grd.addColorStop(1, 'rgba(124,92,255,0)');
-      ctx.fillStyle = grd;
-      ctx.fillRect(0, 0, W, H);
-    }
+    pMesh.rotation.y = t * 0.02 + mxSmooth * 0.1;
+    pMesh.rotation.x = t * 0.01 + mySmooth * 0.05;
 
-    // lines
-    for (let i = 0; i < COUNT; i++) {
-      const a = nodes[i];
-      for (let j = i + 1; j < COUNT; j++) {
-        const b = nodes[j];
-        const dx = a.x - b.x;
-        const dy = a.y - b.y;
-        const d = Math.sqrt(dx * dx + dy * dy);
-        if (d < LINK_DIST) {
-          const alpha = (1 - d / LINK_DIST) * 0.32;
-
-          const midX = (a.x + b.x) / 2;
-          const midY = (a.y + b.y) / 2;
-          const mDist = Math.sqrt((midX - mxSmooth) ** 2 + (midY - mySmooth) ** 2);
-          const mouseBoost = mDist < MOUSE_R ? (1 - mDist / MOUSE_R) * 0.4 : 0;
-
-          ctx.strokeStyle = 'rgba(169,139,255,' + (alpha + mouseBoost) + ')';
-          ctx.lineWidth = 1.0;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    // nodes
-    for (let i = 0; i < COUNT; i++) {
-      const n = nodes[i];
-      const breathe = 0.6 + 0.4 * Math.sin(t * n.speed * 2 + n.phase);
-      const r = n.r * breathe;
-
-      const mDist = Math.sqrt((n.x - mxSmooth) ** 2 + (n.y - mySmooth) ** 2);
-      const nearMouse = mDist < MOUSE_R ? (1 - mDist / MOUSE_R) : 0;
-      const glow = r + nearMouse * 8;
-
-      const alpha = (0.4 + breathe * 0.4 + nearMouse * 0.3);
-
-      if (glow > 3) {
-        const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glow * 3);
-        grad.addColorStop(0, 'rgba(124,92,255,' + (alpha * 0.3) + ')');
-        grad.addColorStop(1, 'rgba(124,92,255,0)');
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, glow * 3, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      const col = n.hue > 0.85 ? '255,122,46' : n.hue > 0.5 ? '245,243,237' : '169,139,255';
-      ctx.fillStyle = 'rgba(' + col + ',' + alpha + ')';
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-      ctx.fill();
-    }
+    renderer.render(scene, camera);
   }
+  tick();
+})();
 
+/* ===================== Showcase 3D Tilt ===================== */
+(function initShowcaseTilt() {
+  const browser = document.querySelector('.showcase-browser');
+  const hero = document.querySelector('.hero');
+  if (!browser || !hero) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (matchMedia('(max-width: 860px)').matches) return;
+
+  browser.classList.add('tilt-active');
+  let tiltX = 0, tiltY = 0, targetX = 0, targetY = 0;
+
+  hero.addEventListener('mousemove', (e) => {
+    const rect = browser.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    targetY = ((e.clientX - cx) / (rect.width / 2)) * 12;
+    targetX = -((e.clientY - cy) / (rect.height / 2)) * 8;
+  });
+
+  hero.addEventListener('mouseleave', () => { targetX = 2; targetY = -4; });
+
+  function tick() {
+    requestAnimationFrame(tick);
+    tiltX += (targetX - tiltX) * 0.06;
+    tiltY += (targetY - tiltY) * 0.06;
+    browser.style.transform = 'perspective(1200px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg)';
+  }
   tick();
 })();
 

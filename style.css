@@ -2471,6 +2471,7 @@ body { letter-spacing: 0.005em; color: #F0EDE7; }
   transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
 }
 .showcase-browser:hover { transform: perspective(1200px) rotateY(0) rotateX(0); }
+.showcase-browser.tilt-active { animation: none !important; }
 
 .showcase-bar {
   display: flex; align-items: center; gap: 10px; padding: 10px 16px;
