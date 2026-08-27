@@ -7,12 +7,12 @@ const preloaderFill = document.getElementById('preloaderFill');
 let loadProgress = 0;
 const fillInterval = setInterval(() => {
   loadProgress = Math.min(loadProgress + Math.random() * 15 + 5, 90);
-  if (preloaderFill) preloaderFill.style.width = loadProgress + '%';
+  if (preloaderFill) preloaderFill.style.transform = 'scaleX(' + (loadProgress / 100) + ')';
 }, 120);
 
 function markLoaded() {
   clearInterval(fillInterval);
-  if (preloaderFill) preloaderFill.style.width = '100%';
+  if (preloaderFill) preloaderFill.style.transform = 'scaleX(1)';
   setTimeout(() => requestAnimationFrame(() => document.body.classList.add('loaded')), 300);
 }
 if (document.readyState === 'complete') { setTimeout(markLoaded, 300); }
@@ -619,7 +619,13 @@ if (fab && panel && chatInput && chatSend) {
     my = Math.max(0, Math.min(1, (e.clientY - r.top) / r.height));
   });
 
+  let blobVisible = true;
+  const blobObs = new IntersectionObserver(([e]) => { blobVisible = e.isIntersecting; }, { threshold: 0 });
+  blobObs.observe(wrap);
+
   function draw() {
+    requestAnimationFrame(draw);
+    if (!blobVisible) return;
     t += 0.012;
     ctx.clearRect(0, 0, 380, 507);
     const cx = 190 + (mx - 0.5) * 80;
@@ -636,7 +642,6 @@ if (fab && panel && chatInput && chatSend) {
       ctx.fillStyle = grad;
       ctx.fill();
     }
-    requestAnimationFrame(draw);
   }
   draw();
 })();
@@ -666,6 +671,11 @@ if (fab && panel && chatInput && chatSend) {
 
   // WebGL Liquid Background
   const liquidCanvas = document.getElementById('liquid-bg');
+  let liquidVisible = true;
+  if (liquidCanvas) {
+    const liqObs = new IntersectionObserver(([e]) => { liquidVisible = e.isIntersecting; }, { threshold: 0 });
+    liqObs.observe(liquidCanvas);
+  }
   const liquidBg = { canvas: liquidCanvas, gl: null, program: null, uniforms: {}, mouseTarget: [0.5, 0.5], mouseCurrent: [0.5, 0.5], colors: null };
 
   if (liquidCanvas) {
@@ -838,8 +848,7 @@ void main(){
       let startTime = performance.now();
       let lastDraw = 0;
       gsap.ticker.add(() => {
-        // the fog drifts at 0.035 units/sec — 30fps is indistinguishable
-        // from 60 here and halves the shader work
+        if (!liquidVisible) return;
         const nowMs = performance.now();
         if (nowMs - lastDraw < 33) return;
         lastDraw = nowMs;
@@ -1229,29 +1238,10 @@ void main(){
     });
   }
 
-  // Cinematic scroll — scrub-driven parallax on sections
-  document.querySelectorAll('.section').forEach((sec) => {
-    gsap.to(sec, {
-      backgroundPositionY: '-40px',
-      scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: true }
-    });
-  });
-
-  // Parallax depth on ambient decorations
-  document.querySelectorAll('.ambient .amb-chip, .ambient .amb-dot').forEach((el, i) => {
-    gsap.to(el, {
-      y: -80 - i * 30,
-      scrollTrigger: { trigger: el.closest('.section'), start: 'top bottom', end: 'bottom top', scrub: true }
-    });
-  });
-
-  // Cinematic parallax on service cards
-  document.querySelectorAll('.service-card').forEach((card) => {
-    gsap.fromTo(card, { y: 30 }, {
-      y: -15,
-      scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true }
-    });
-  });
+  // Cinematic scroll parallax removed — per-section backgroundPositionY scrub,
+  // per-card y-shift, and per-ambient-element ScrollTrigger instances were
+  // creating 20+ simultaneous scrub calculators and triggering layout-adjacent
+  // property changes on every scroll frame.
 })();
 
 /* ===================== hero interactivity + header state ===================== */
@@ -1286,15 +1276,21 @@ void main(){
   const chars = [...hero.querySelectorAll('h1 .char')];
   if (chars.length) {
     let raf = null, mx = 0, my = 0;
-    const RADIUS = 90;
+    const RADIUS = 90, R2 = RADIUS * RADIUS;
+    let charRects = [];
+    let rectsStale = true;
+    const cacheRects = () => { charRects = chars.map(c => c.getBoundingClientRect()); rectsStale = false; };
+    window.addEventListener('scroll', () => { rectsStale = true; }, { passive: true });
+    window.addEventListener('resize', () => { rectsStale = true; });
     const apply = () => {
       raf = null;
-      chars.forEach((c) => {
-        const r = c.getBoundingClientRect();
+      if (rectsStale) cacheRects();
+      for (let i = 0; i < chars.length; i++) {
+        const r = charRects[i];
         const dx = mx - (r.left + r.width / 2);
         const dy = my - (r.top + r.height / 2);
-        c.classList.toggle('near', dx * dx + dy * dy < RADIUS * RADIUS);
-      });
+        chars[i].classList.toggle('near', dx * dx + dy * dy < R2);
+      }
     };
     hero.addEventListener('mousemove', (e) => {
       mx = e.clientX; my = e.clientY;
@@ -1400,8 +1396,13 @@ void main(){
   window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(onResize, 200); });
 
   let t = 0;
+  let threeVisible = true;
+  const threeObs = new IntersectionObserver(([e]) => { threeVisible = e.isIntersecting; }, { threshold: 0 });
+  threeObs.observe(canvas);
+
   function tick() {
     requestAnimationFrame(tick);
+    if (!threeVisible) return;
     t += 0.016;
 
     mxSmooth += (mx - mxSmooth) * 0.04;

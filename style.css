@@ -81,8 +81,8 @@ body.loaded .preloader { clip-path: inset(0 0 100% 0); opacity: 0; visibility: h
   width: 120px; height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
 }
 .preloader-fill {
-  width: 0%; height: 100%; background: linear-gradient(90deg, var(--violet), #FF6A1A);
-  border-radius: 2px; transition: width 0.3s ease;
+  height: 100%; background: linear-gradient(90deg, var(--violet), #FF6A1A);
+  border-radius: 2px; transform-origin: left; transform: scaleX(0); transition: transform 0.3s ease;
 }
 .preloader-text {
   font-family: var(--font-display); font-size: 18px; color: rgba(255,255,255,0.3);
@@ -752,10 +752,8 @@ body.clip-revealing.loaded { clip-path: circle(100% at 50% 50%); transition: cli
 }
 .service-card:hover::after, .guar-card:hover::after { opacity: 1; }
 
-/* CTA glow pulse */
-@keyframes ctaGlow { 0%, 100% { box-shadow: 0 4px 16px rgba(255,122,46,0.2), inset 0 1px 0 rgba(255,255,255,0.12); } 50% { box-shadow: 0 4px 24px rgba(255,122,46,0.35), inset 0 1px 0 rgba(255,255,255,0.12); } }
-.btn-primary.hero-cta-btn { animation: ctaGlow 4s ease-in-out infinite; }
-.btn-primary.hero-cta-btn:hover { animation: none; }
+/* CTA static glow — pulsing box-shadow was too expensive */
+.btn-primary.hero-cta-btn { box-shadow: 0 4px 20px rgba(255,122,46,0.28), inset 0 1px 0 rgba(255,255,255,0.12); }
 
 /* ghost button arrow */
 .btn-ghost .btn-arrow { width: 18px; flex-shrink: 0; opacity: 0; transform: translateX(-6px); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.25s ease; }
@@ -1029,12 +1027,10 @@ body:has(a:hover, button:hover, .btn:hover, input:hover, textarea:hover) .cursor
 .hero h1,
 .section h2,
 .price-head h1 {
-  background-size: 220% 100%;
+  background-size: 100% 100%;
   background-position: 0% 50%;
   filter: drop-shadow(0 0 24px rgba(124,92,255,0.28)) drop-shadow(0 2px 10px rgba(0,0,0,0.5));
-  animation: headingShift 14s ease-in-out infinite alternate;
 }
-@keyframes headingShift { to { background-position: 100% 50%; } }
 
 /* the split-text spans must not paint their own colour */
 .hero h1 span,
@@ -1625,39 +1621,9 @@ body.gsap-ready .section:not(.seen) :is(.kicker, .section-sub, .service-card,
   initial-value: 90deg;
   inherits: false;
 }
-@keyframes gradSway {
-  0%   { --grad-angle: 74deg; }
-  50%  { --grad-angle: 106deg; }
-  100% { --grad-angle: 74deg; }
-}
-.section h2,
-.price-head h1,
-.service-card h3, .post h3,
-.wf-card h3, .wf-card h4,
-.step-card h3,
-.guar-card h3, .guar-card h4,
-.about-principles strong,
-.faq-q > span, .pname,
-.hero-facts .fact strong, .fact strong,
-.form-success h3,
-.hero h1 .char {
-  animation: gradSway 11s ease-in-out infinite;
-}
-/* stagger so the whole page does not pulse in lockstep */
-.service-card:nth-child(2n) h3,
-.guar-card:nth-child(2n) h4,
-.step:nth-child(2n) .step-card h3,
-.about-principles li:nth-child(2n) strong { animation-delay: -3.6s; }
-.service-card:nth-child(3n) h3,
-.guar-card:nth-child(3n) h4,
-.step:nth-child(3n) .step-card h3,
-.about-principles li:nth-child(3n) strong { animation-delay: -7.2s; }
+/* gradSway removed — animating --grad-angle on 30+ elements per frame was
+   causing continuous repaints. Static gradient angle is visually identical. */
 
-@media (prefers-reduced-motion: reduce) {
-  .section h2, .price-head h1, .service-card h3, .post h3, .step-card h3,
-  .guar-card h4, .about-principles strong, .faq-q > span, .pname,
-  .fact strong, .hero h1 .char { animation: none; }
-}
 
 /* price rows were left on the old white-containing ramp — join the rest */
 .price-teaser .pt-row > span:first-child,
@@ -1665,12 +1631,7 @@ body.gsap-ready .section:not(.seen) :is(.kicker, .section-sub, .service-card,
   background-size: 100% 100%;
   background-repeat: no-repeat;
   width: fit-content;
-  animation: gradSway 11s ease-in-out infinite;
-}
-.pt-row:nth-child(2n) > span:first-child { animation-delay: -3.6s; }
-.pt-row:nth-child(3n) > span:first-child { animation-delay: -7.2s; }
-@media (prefers-reduced-motion: reduce) {
-  .price-teaser .pt-row > span:first-child { animation: none; }
+
 }
 
 /* the headline must be the offsetParent of its own characters, otherwise
@@ -2531,38 +2492,18 @@ body { letter-spacing: 0.005em; color: #F0EDE7; }
 .service-card, .post, .step-card, .guar-card,
 .faq-item, .review-card, .contact-card, .about-principles li {
   background-size: 200% 3px, 100% 100% !important;
-  animation: shimmer 4s ease-in-out infinite;
-  animation-delay: calc(var(--card-i, 0) * 0.6s);
-}
-
-/* floating breathe */
-@keyframes cardFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-.service-card.seen-card, .guar-card.seen-card,
-.step-card.seen-card, .post.seen-card,
-.about-principles li.seen-card {
-  animation: shimmer 4s ease-in-out infinite, cardFloat 5s ease-in-out infinite;
-  animation-delay: calc(var(--card-i, 0) * 0.6s), calc(var(--card-i, 0) * 0.8s);
 }
 
 /* 3D tilt perspective container */
 .service-card, .guar-card, .step-card, .post,
 .about-principles li { transition: transform 0.2s ease-out; }
 
-/* hero fact pulse glow */
-@keyframes factPulse {
-  0%, 100% { text-shadow: 0 2px 20px rgba(255,138,58,0.3); }
-  50% { text-shadow: 0 2px 30px rgba(255,138,58,0.6), 0 0 60px rgba(255,138,58,0.2); }
-}
-.hero-dark .count-up { animation: factPulse 3s ease-in-out infinite; }
+/* hero fact static glow — pulsing text-shadow was too expensive */
+.hero-dark .count-up { text-shadow: 0 2px 20px rgba(255,138,58,0.3); }
 
 /* reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .service-card, .post, .step-card, .guar-card,
-  .faq-item, .review-card, .contact-card, .about-principles li,
-  .hero-dark .count-up { animation: none !important; }
+  .hero-dark .count-up { text-shadow: none; }
 }
 
 /* ── section transitions ── */
