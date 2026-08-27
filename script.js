@@ -1161,8 +1161,8 @@ void main(){
     let current = 0;
     const showcaseBrowser = document.querySelector('.showcase-browser');
     if (showcaseBrowser) {
-      gsap.set(showcaseBrowser, { opacity: 0, x: 40, rotateY: -8 });
-      gsap.to(showcaseBrowser, { opacity: 1, x: 0, rotateY: 0, duration: 1.1, delay: 0.7, ease: 'power3.out' });
+      gsap.set(showcaseBrowser, { opacity: 0, y: 30 });
+      gsap.to(showcaseBrowser, { opacity: 1, y: 0, duration: 1, delay: 0.7, ease: 'power3.out' });
     }
     function goToSlide(idx) {
       showcaseSlides[current].classList.remove('active');
@@ -1433,34 +1433,24 @@ void main(){
   tick();
 })();
 
-/* ===================== Showcase 3D Tilt ===================== */
-(function initShowcaseTilt() {
+/* ===================== Showcase scroll parallax ===================== */
+(function initShowcaseParallax() {
   const browser = document.querySelector('.showcase-browser');
   const hero = document.querySelector('.hero');
-  if (!browser || !hero) return;
+  if (!browser || !hero || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (matchMedia('(max-width: 860px)').matches) return;
 
-  browser.classList.add('tilt-active');
-  let tiltX = 0, tiltY = 0, targetX = 0, targetY = 0;
-
-  hero.addEventListener('mousemove', (e) => {
-    const rect = browser.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    targetY = ((e.clientX - cx) / (rect.width / 2)) * 12;
-    targetX = -((e.clientY - cy) / (rect.height / 2)) * 8;
+  gsap.to(browser, {
+    y: -60,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: hero,
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 0.8
+    }
   });
-
-  hero.addEventListener('mouseleave', () => { targetX = 2; targetY = -4; });
-
-  function tick() {
-    requestAnimationFrame(tick);
-    tiltX += (targetX - tiltX) * 0.06;
-    tiltY += (targetY - tiltY) * 0.06;
-    browser.style.transform = 'perspective(1200px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg)';
-  }
-  tick();
 })();
 
 
