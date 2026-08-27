@@ -22,10 +22,11 @@ setTimeout(markLoaded, 2500); // safety fallback
 // ---- language toggle ----
 const langButtons = document.querySelectorAll('.lang-toggle button');
 const i18nNodes = document.querySelectorAll('[data-ru]');
-let currentLang = 'ru';
+let currentLang = (() => { try { return localStorage.getItem('pcash-lang') || 'ru'; } catch { return 'ru'; } })();
 
 function setLang(lang) {
   currentLang = lang;
+  try { localStorage.setItem('pcash-lang', lang); } catch {}
   i18nNodes.forEach((n) => {
     if (n.dataset[lang] !== undefined) {
       if (n.dataset[lang].includes('<')) n.innerHTML = n.dataset[lang];
@@ -39,6 +40,7 @@ function setLang(lang) {
   document.documentElement.lang = lang;
 }
 langButtons.forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+if (currentLang !== 'ru') setLang(currentLang);
 
 // ---- section reveal on scroll ----
 const revealObserver = new IntersectionObserver((entries) => {

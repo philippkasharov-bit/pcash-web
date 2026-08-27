@@ -563,7 +563,7 @@ body.loaded .shard.s5 { animation-delay: 0.35s; }
 .tg-btn { gap: 8px; }
 .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
 .contact-form .full { grid-column: 1 / -1; }
-.contact-form label { display: block; font-size: 12px; color: var(--ink-soft); margin-bottom: 6px; }
+.contact-form label { display: block; font-size: 14px; color: var(--ink); margin-bottom: 6px; }
 .contact-form input, .contact-form textarea { width: 100%; background: var(--page-bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-family: var(--font-body); font-size: 14px; color: var(--ink); }
 .contact-form textarea { resize: vertical; min-height: 90px; }
 .contact-form button { grid-column: 1 / -1; }
@@ -691,8 +691,9 @@ body:has(a:hover, button:hover, .btn:hover) .cursor-pen { color: var(--violet); 
 .cursor-text { font-family: var(--font-mono); font-size: 11px; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0; transition: opacity 0.2s; }
 .cursor-follow.has-text .cursor-text { opacity: 1; }
 @media (hover: none) { .cursor-dot, .cursor-pen, .cursor-glow { display: none !important; } body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button { cursor: auto; } }
-body.has-custom-cursor { cursor: none; }
-body.has-custom-cursor a, body.has-custom-cursor button, body.has-custom-cursor .btn, body.has-custom-cursor input, body.has-custom-cursor textarea { cursor: none; }
+body.has-custom-cursor { cursor: auto; }
+body.has-custom-cursor a, body.has-custom-cursor button, body.has-custom-cursor .btn { cursor: pointer; }
+body.has-custom-cursor input, body.has-custom-cursor textarea { cursor: text; }
 
 /* preloader clip-path reveal */
 body.clip-revealing { clip-path: circle(0% at 50% 50%); }
@@ -1419,7 +1420,7 @@ body.gsap-ready .section:not(.seen) :is(.kicker, .section-sub, .service-card,
 .phint { font-size: 11.5px; color: #B9B6C6; letter-spacing: 0.08em; }
 .footer-note { font-size: 12.5px; color: #B9B6C6; }
 .review-form label, .contact-form label, form label {
-  font-size: 12.5px; color: #C9C6D4; letter-spacing: 0.02em;
+  font-size: 14px; color: #ECEAE3; letter-spacing: 0.02em;
 }
 .addon-price, .pt-row b { font-size: 14.5px; }
 .site-footer, .footer-inner { font-size: 13px; }
@@ -1718,8 +1719,8 @@ input, textarea, select, .step-num, .drop-link, .quick {
 .service-card p, .step-card p, .guar-card p,
 .about-principles span, .about-text p, .faq-a p, .pdesc { font-size: 14px; }
 .kicker, .stack-label, .use-cases-label, .phint,
-.step-tag, .pill, .footer-note, .flow-node,
-.review-form label, .contact-form label, form label { font-size: 12px; }
+.step-tag, .pill, .footer-note, .flow-node { font-size: 12px; }
+.review-form label, .contact-form label, form label { font-size: 14px; }
 .main-nav a, .mobile-menu a, .drop-link, .site-footer,
 .hero-roles, .fact > span, .lang-toggle button { font-size: 13px; }
 .pt-row, .pt-row b, .addon-price, .btn { font-size: 14px; }
@@ -2663,6 +2664,14 @@ body { letter-spacing: 0.005em; color: #F0EDE7; }
   .quick { padding: 10px 16px; font-size: 13px; }
   .burger { padding: 10px; }
 }
+
+/* hide showcase browser on narrow mobile — too small to read, wastes space */
+@media (max-width: 620px) {
+  .hero-showcase { display: none; }
+}
+
+/* proof items: ensure readable contrast */
+.proof-item { color: var(--ink); }
 
 /* tablet: two-column layouts where it helps */
 @media (min-width: 761px) and (max-width: 1023px) {
