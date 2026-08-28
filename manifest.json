@@ -1,7 +1,7 @@
 {
-  "name": "P.Cash — UI/UX, веб-разработка и ИИ",
+  "name": "P.Cash — UI/UX, Web Development & AI",
   "short_name": "P.Cash",
-  "description": "Сайты, приложения и ИИ-боты, которые работают, а не просто выглядят.",
+  "description": "Websites, apps and AI bots that work, not just look good.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0E0F0D",

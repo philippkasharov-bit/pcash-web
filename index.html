@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>P.Cash — UI/UX, веб-разработка и ИИ</title>
-<meta name="description" content="P.Cash — сайты под ключ, ИИ чат-боты и автоматизация для малого бизнеса. Дизайн, код и запуск в одних руках. From $25.">
+<title>P.Cash — UI/UX, Web Development & AI</title>
+<meta name="description" content="P.Cash — turnkey websites, AI chatbots and automation for small business. Design, code and launch in one pair of hands. From $25.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M37.5 13 A17 17 0 1 0 37.5 35' fill='none' stroke='%23FF6A1A' stroke-width='5' stroke-linecap='round'/%3E%3Crect x='16.4' y='14.2' width='5' height='19.6' rx='2.3' fill='%231B1A17'/%3E%3Ccircle cx='22.6' cy='18.8' r='6.4' fill='%231B1A17'/%3E%3Ccircle cx='23.3' cy='18.8' r='2.6' fill='%23FF6A1A'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
-<meta property="og:title" content="P.Cash — UI/UX, веб-разработка и ИИ">
-<meta property="og:description" content="Сайты под ключ, ИИ чат-боты и автоматизация для малого бизнеса. Дизайн, код и запуск в одних руках.">
+<meta property="og:title" content="P.Cash — UI/UX, Web Development & AI">
+<meta property="og:description" content="Turnkey websites, AI chatbots and automation for small business. Design, code and launch in one pair of hands.">
 <meta property="og:image" content="https://pcash.pro/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pcash.pro/og-image.png">
@@ -19,41 +19,37 @@
 <link rel="canonical" href="https://pcash.pro/">
 <link rel="stylesheet" href="fonts.css?v=8">
 <link rel="stylesheet" href="style.css?v=106">
-<!-- ─── Приватная аналитика (Plausible) ───────────────────────────────
-     Privacy-friendly, без cookies и персональных данных, GDPR-friendly.
-     Чтобы включить: 1) заведи сайт на plausible.io (или self-hosted Umami),
-     2) впиши свой домен в data-domain ниже, 3) раскомментируй <script defer>.
-     До активации события просто копятся в очереди и никуда не уходят. -->
+<!-- Analytics (Plausible) — uncomment and set your domain to enable -->
 <script>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };</script>
-<!-- <script defer data-domain="ТВОЙ-ДОМЕН.ру" src="https://plausible.io/js/script.js"></script> -->
+<!-- <script defer data-domain="YOUR-DOMAIN.com" src="https://plausible.io/js/script.js"></script> -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "P.Cash — UI/UX, веб-разработка и ИИ",
-  "description": "Сайты под ключ, ИИ чат-боты и автоматизация для малого бизнеса. Дизайн, код и запуск в одних руках.",
+  "name": "P.Cash — UI/UX, Web Development & AI",
+  "description": "Turnkey websites, AI chatbots and automation for small business. Design, code and launch in one pair of hands.",
   "email": "philippkasharov@gmail.com",
   "priceRange": "from $25",
   "image": "og-image.png",
   "founder": {
     "@type": "Person",
-    "name": "Филип",
+    "name": "Philip",
     "alternateName": "P.Cash",
-    "jobTitle": "UI/UX-дизайнер и веб-разработчик",
+    "jobTitle": "UI/UX Designer & Web Developer",
     "email": "philippkasharov@gmail.com",
-    "knowsAbout": ["UI/UX-дизайн", "Веб-разработка", "ИИ чат-боты", "Автоматизация процессов", "UX-аудит"]
+    "knowsAbout": ["UI/UX Design", "Web Development", "AI Chatbots", "Process Automation", "UX Audit"]
   },
   "makesOffer": [
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UI/UX-дизайн" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Сайты под ключ" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ИИ чат-боты и автоматизация" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UX-аудит" } }
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UI/UX Design" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Turnkey Websites" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Chatbots & Automation" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UX Audit" } }
   ]
 }
 </script>
 </head>
 <body>
-<a class="skip-link" href="#top">Перейти к содержимому</a>
+<a class="skip-link" href="#top">Skip to content</a>
 <canvas id="liquid-bg" aria-hidden="true"></canvas>
 <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
 <div class="cursor-glow" aria-hidden="true"></div>
@@ -73,7 +69,7 @@
 </div>
 <canvas class="bg-waves" id="bgWaves" aria-hidden="true"></canvas>
 <div class="scroll-progress" id="scrollProgress"></div>
-<nav class="dot-nav" id="dotNav" aria-label="Разделы страницы"></nav>
+<nav class="dot-nav" id="dotNav" aria-label="Page sections"></nav>
 
 <header class="site-header">
   <div class="wrap header-inner">
@@ -86,33 +82,29 @@
       </svg>
       <span>P<span style="color:#FF6A1A">.</span>Cash</span>
     </a>
-    <nav class="main-nav" aria-label="Навигация">
-      <a href="#cases" data-ru="Работы" data-en="Work">Работы</a>
-      <a href="#services" data-ru="Услуги" data-en="Services">Услуги</a>
-      <a href="#about" data-ru="Обо мне" data-en="About">Обо мне</a>
-      <a href="#process" data-ru="Процесс" data-en="Process">Процесс</a>
-      <a href="pricing.html" data-ru="Прайс" data-en="Pricing">Прайс</a>
-      <a href="#faq" data-ru="Вопросы" data-en="FAQ">Вопросы</a>
-      <a href="#contact" data-ru="Контакты" data-en="Contact">Контакты</a>
-      <a href="#contact" class="nav-cta btn btn-primary" data-ru="Обсудить" data-en="Let's talk">Обсудить</a>
+    <nav class="main-nav" aria-label="Navigation">
+      <a href="#cases" >Work</a>
+      <a href="#services" >Services</a>
+      <a href="#about" >About</a>
+      <a href="#process" >Process</a>
+      <a href="pricing.html" >Pricing</a>
+      <a href="#faq" >FAQ</a>
+      <a href="#contact" >Contact</a>
+      <a href="#contact" class="nav-cta btn btn-primary" >Let's talk</a>
     </nav>
     <div class="nav-right">
-      <div class="lang-toggle" role="group" aria-label="Язык">
-        <button data-lang="ru" class="active">RU</button>
-        <button data-lang="en">EN</button>
-      </div>
-      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#cases" data-ru="Работы" data-en="Work">Работы</a>
-    <a href="#services" data-ru="Услуги" data-en="Services">Услуги</a>
-    <a href="#about" data-ru="Обо мне" data-en="About">Обо мне</a>
-    <a href="#process" data-ru="Процесс" data-en="Process">Процесс</a>
-    <a href="pricing.html" data-ru="Прайс" data-en="Pricing">Прайс</a>
-    <a href="#faq" data-ru="Вопросы" data-en="FAQ">Вопросы</a>
-    <a href="#contact" data-ru="Контакты" data-en="Contact">Контакты</a>
-    <a href="#contact" class="btn btn-primary btn-block" data-ru="Обсудить задачу" data-en="Discuss a project">Обсудить задачу</a>
+    <a href="#cases" >Work</a>
+    <a href="#services" >Services</a>
+    <a href="#about" >About</a>
+    <a href="#process" >Process</a>
+    <a href="pricing.html" >Pricing</a>
+    <a href="#faq" >FAQ</a>
+    <a href="#contact" >Contact</a>
+    <a href="#contact" class="btn btn-primary btn-block" >Discuss a project</a>
   </div>
 </header>
 
@@ -122,11 +114,11 @@
     <div class="hero-portal" aria-hidden="true"></div>
     <div class="hero-split">
       <div class="hero-copy">
-        <h1 data-ru="Сайты и ИИ, которые <em>приносят заявки</em>" data-en="Sites & AI that <em>bring leads</em>">Сайты и ИИ, которые <em>приносят заявки</em></h1>
-        <p class="hero-sub" data-ru="Я Филип. Проектирую интерфейс, пишу код и собираю ИИ-ботов — весь цикл в одних руках, без передачи задачи между исполнителями." data-en="I'm Philip. I design the interface, write the code and build AI bots — the whole cycle in one pair of hands.">Я Филип. Проектирую интерфейс, пишу код и собираю ИИ-ботов — весь цикл в одних руках, без передачи задачи между исполнителями.</p>
+        <h1 >Sites & AI that <em>bring leads</em></em></h1>
+        <p class="hero-sub" >I'm Philip. I design the interface, write the code and build AI bots — the whole cycle in one pair of hands.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary hero-cta-btn" href="#contact" data-ru="Обсудить задачу" data-en="Discuss a project">Обсудить задачу</a>
-          <a class="btn btn-ghost" href="#process" data-ru="Как я работаю" data-en="How I work">Как я работаю<svg class="btn-arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a class="btn btn-primary hero-cta-btn" href="#contact" >Discuss a project</a>
+          <a class="btn btn-ghost" href="#process" >How I work</svg></a>
         </div>
       </div>
       <div class="hero-showcase" aria-label="Design process animation">
@@ -226,17 +218,17 @@
       <div class="fact fact-panel">
         <span class="fact-status fact-status--live"></span>
         <strong><span class="count-up" data-to="3">0</span></strong>
-        <span data-ru="года опыта с ИИ" data-en="years with AI">года опыта с ИИ</span>
+        <span >years with AI</span>
       </div>
       <div class="fact fact-panel">
         <span class="fact-status fact-status--ready"></span>
-        <strong data-ru="полный цикл" data-en="full cycle">полный цикл</strong>
-        <span data-ru="дизайн · код · запуск" data-en="design · code · launch">дизайн · код · запуск</span>
+        <strong >full cycle</strong>
+        <span >design · code · launch</span>
       </div>
       <div class="fact fact-panel">
         <span class="fact-status fact-status--live"></span>
         <strong>100<span style="font-size:0.6em;opacity:0.7">/100</span></strong>
-        <span data-ru="Lighthouse на каждом сайте" data-en="Lighthouse on every site">Lighthouse на каждом сайте</span>
+        <span >Lighthouse on every site</span>
       </div>
     </div>
   </section>
@@ -246,27 +238,27 @@
       <span class="amb-chip ac2 amb-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-4 4 3 3-3 6 5"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></span>
       <div class="amb-dot ad1"></div>
     </div>
-    <p class="kicker" data-ru="Работы" data-en="Work">Работы</p>
-    <h2 data-ru="Разборы: почему сделано именно так" data-en="Case studies: why it was built this way">Разборы: почему сделано именно так</h2>
-    <p class="section-sub" data-ru="Живые разборы появляются здесь по мере готовности. Пока это в основном самостоятельные проекты — честно говорю об этом в каждом кейсе." data-en="Teardowns and cases appear here as they're ready. For now these are mostly self-initiated projects — I say so directly in every case study.">Живые разборы появляются здесь по мере готовности. Пока это в основном самостоятельные проекты — честно говорю об этом в каждом кейсе.</p>
+    <p class="kicker" >Work</p>
+    <h2 >Case studies: why it was built this way</h2>
+    <p class="section-sub" >Teardowns and cases appear here as they're ready. For now these are mostly self-initiated projects — I say so directly in every case study.</p>
     <div class="posts">
       <a class="post has-thumb" href="case-krsh.html">
         <span class="post-thumb">
-          <img src="images/case-krsh-cover.jpg" width="760" height="428" alt="KRSH — streetwear-магазин, обложка проекта" loading="lazy" decoding="async">
+          <img src="images/case-krsh-cover.jpg" width="760" height="428" alt="KRSH — streetwear store, project cover" loading="lazy" decoding="async">
         </span>
-        <span class="post-tag case" data-ru="Кейс" data-en="Case study">Кейс</span>
-        <h3 data-ru="KRSH — e-commerce от каталога до чекаута" data-en="KRSH — e-commerce from catalog to checkout">KRSH — e-commerce от каталога до чекаута</h3>
-        <p data-ru="Самостоятельный streetwear-магазин: полный покупательский путь, Lighthouse 100/100/100/100, доступность на уровне продакшена." data-en="A self-initiated streetwear store: full customer journey, Lighthouse 100/100/100/100, production-level accessibility.">Самостоятельный streetwear-магазин: полный покупательский путь, Lighthouse 100/100/100/100, доступность на уровне продакшена.</p>
-        <span class="post-read" data-ru="Читать разбор →" data-en="Read the case study →">Читать разбор →</span>
+        <span class="post-tag case" >Case study</span>
+        <h3 >KRSH — e-commerce from catalog to checkout</h3>
+        <p >A self-initiated streetwear store: full customer journey, Lighthouse 100/100/100/100, production-level accessibility.</p>
+        <span class="post-read" >Read the case study →</span>
       </a>
       <a class="post has-thumb" href="case-pcash.html">
         <span class="post-thumb">
-          <img src="images/case-pcash/01-hero.webp" width="1200" height="760" alt="P.Cash — сайт-портфолио, обложка проекта" loading="lazy" decoding="async">
+          <img src="images/case-pcash/01-hero.webp" width="1200" height="760" alt="P.Cash — portfolio site, project cover" loading="lazy" decoding="async">
         </span>
-        <span class="post-tag case" data-ru="Кейс" data-en="Case study">Кейс</span>
-        <h3 data-ru="P.Cash — сайт, который продаёт меня" data-en="P.Cash — the site that sells me">P.Cash — сайт, который продаёт меня</h3>
-        <p data-ru="Разбор страницы, которую вы читаете: почему один цвет закреплён за одним смыслом, что было убрано и зачем, как фон стал втрое дешевле." data-en="A teardown of the page you're reading: why one colour means one thing, what was removed and why, how the background got three times cheaper.">Разбор страницы, которую вы читаете: почему один цвет закреплён за одним смыслом, что было убрано и зачем, как фон стал втрое дешевле.</p>
-        <span class="post-read" data-ru="Читать разбор →" data-en="Read the case study →">Читать разбор →</span>
+        <span class="post-tag case" >Case study</span>
+        <h3 >P.Cash — the site that sells me</h3>
+        <p >A teardown of the page you're reading: why one colour means one thing, what was removed and why, how the background got three times cheaper.</p>
+        <span class="post-read" >Read the case study →</span>
       </a>
     </div>
   </section>
@@ -280,32 +272,32 @@
       <div class="amb-dot ad1"></div>
       <div class="amb-dot ad2"></div>
     </div>
-    <p class="kicker" data-ru="Услуги" data-en="Services">Услуги</p>
-    <h2 data-ru="Что я делаю — на примерах, а не только словами" data-en="What I do — shown, not just told">Что я делаю — на примерах, а не только словами</h2>
+    <p class="kicker" >Services</p>
+    <h2 >What I do — shown, not just told</h2>
     <div class="services">
 
       <div class="service-card" tabindex="0" role="button" aria-expanded="false">
         <div class="service-header">
-          <span class="pill" data-ru="UI/UX-дизайн" data-en="UI/UX design">UI/UX-дизайн</span>
-          <h3 data-ru="Дизайн под задачу бизнеса, а не «покрасивее»" data-en="Design for the business goal, not just looks">Дизайн под задачу бизнеса, а не «покрасивее»</h3>
-          <p class="service-oneliner" data-ru="Путь пользователя от цели до действия — выше конверсия, меньше отказов." data-en="User path from goal to action — higher conversion, fewer drop-offs.">Путь пользователя от цели до действия — выше конверсия, меньше отказов.</p>
+          <span class="pill" >UI/UX design</span>
+          <h3 >Design for the business goal, not just looks</h3>
+          <p class="service-oneliner" >User path from goal to action — higher conversion, fewer drop-offs.</p>
           <span class="service-toggle" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8l5 5 5-5"/></svg></span>
         </div>
         <div class="service-body"><div class="service-body-inner">
           <div class="service-text">
-            <p data-ru="Проектирую путь пользователя от цели до действия — заявки, покупки, звонка. Каждый экран решает конкретную задачу и убирает то, что мешает клиенту дойти до кнопки. Польза прямая: выше конверсия и меньше отказов, а не просто «свежий вид»." data-en="I design the user's path from goal to action — a lead, a purchase, a call. Every screen solves a specific task and removes whatever stops the client from reaching the button. The payoff is direct: higher conversion and fewer drop-offs, not just a fresh look.">Проектирую путь пользователя от цели до действия — заявки, покупки, звонка. Каждый экран решает конкретную задачу и убирает то, что мешает клиенту дойти до кнопки. Польза прямая: выше конверсия и меньше отказов, а не просто «свежий вид».</p>
-            <span class="use-cases-label" data-ru="Где применяю" data-en="Where it applies">Где применяю</span>
+            <p >I design the user's path from goal to action — a lead, a purchase, a call. Every screen solves a specific task and removes whatever stops the client from reaching the button. The payoff is direct: higher conversion and fewer drop-offs, not just a fresh look.</p>
+            <span class="use-cases-label" >Where it applies</span>
             <ul class="use-cases">
-              <li data-ru="Продающие лендинги и сайты услуг" data-en="Selling landing pages and service sites">Продающие лендинги и сайты услуг</li>
-              <li data-ru="Редизайн сайта, который не приносит заявок" data-en="Redesign of a site that brings no leads">Редизайн сайта, который не приносит заявок</li>
-              <li data-ru="Интерфейсы приложений и личных кабинетов" data-en="App and dashboard interfaces">Интерфейсы приложений и личных кабинетов</li>
+              <li >Selling landing pages and service sites</li>
+              <li >Redesign of a site that brings no leads</li>
+              <li >App and dashboard interfaces</li>
             </ul>
             <div class="flow">
-              <div class="flow-node n1" data-ru="Задача" data-en="Task">Задача</div>
+              <div class="flow-node n1" >Task</div>
               <div class="flow-line l1"></div>
-              <div class="flow-node n2" data-ru="Прототип" data-en="Prototype">Прототип</div>
+              <div class="flow-node n2" >Prototype</div>
               <div class="flow-line l2"></div>
-              <div class="flow-node n3" data-ru="Интерфейс" data-en="Interface">Интерфейс</div>
+              <div class="flow-node n3" >Interface</div>
             </div>
           </div>
           <div class="demo wireframe-demo">
@@ -316,33 +308,33 @@
 
       <div class="service-card" tabindex="0" role="button" aria-expanded="false">
         <div class="service-header">
-          <span class="pill" data-ru="Сайты под ключ" data-en="Full-cycle sites">Сайты под ключ</span>
-          <h3 data-ru="Сайт под ключ — от макета до запуска" data-en="A site from mockup to launch">Сайт под ключ — от макета до запуска</h3>
-          <p class="service-oneliner" data-ru="Дизайн, вёрстка, SEO и деплой — всё в одних руках." data-en="Design, build, SEO and deploy — all in one pair of hands.">Дизайн, вёрстка, SEO и деплой — всё в одних руках.</p>
+          <span class="pill" >Full-cycle sites</span>
+          <h3 >A site from mockup to launch</h3>
+          <p class="service-oneliner" >Design, build, SEO and deploy — all in one pair of hands.</p>
           <span class="service-toggle" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8l5 5 5-5"/></svg></span>
         </div>
         <div class="service-body"><div class="service-body-inner">
           <div class="service-text">
-            <p data-ru="Беру проект целиком: дизайн, адаптивная вёрстка, базовое SEO, форма заявки и деплой на хостинг. Вы получаете быстрый сайт, который одинаково работает на телефоне и десктопе и сразу приносит обращения — без передачи макета «кому-то на вёрстку»." data-en="I take the whole project: design, responsive build, basic SEO, a lead form and deploy to hosting. You get a fast site that works the same on phone and desktop and brings enquiries right away — no handing the mockup off to someone else to build.">Беру проект целиком: дизайн, адаптивная вёрстка, базовое SEO, форма заявки и деплой на хостинг. Вы получаете быстрый сайт, который одинаково работает на телефоне и десктопе и сразу приносит обращения — без передачи макета «кому-то на вёрстку».</p>
-            <span class="use-cases-label" data-ru="Где применяю" data-en="Where it applies">Где применяю</span>
+            <p >I take the whole project: design, responsive build, basic SEO, a lead form and deploy to hosting. You get a fast site that works the same on phone and desktop and brings enquiries right away — no handing the mockup off to someone else to build.</p>
+            <span class="use-cases-label" >Where it applies</span>
             <ul class="use-cases">
-              <li data-ru="Сайт услуг или визитка для малого бизнеса" data-en="A service or business-card site for small business">Сайт услуг или визитка для малого бизнеса</li>
-              <li data-ru="Продающий лендинг под рекламу" data-en="A selling landing page for ad traffic">Продающий лендинг под рекламу</li>
-              <li data-ru="Замена устаревшего медленного сайта" data-en="Replacing an outdated, slow site">Замена устаревшего медленного сайта</li>
+              <li >A service or business-card site for small business</li>
+              <li >A selling landing page for ad traffic</li>
+              <li >Replacing an outdated, slow site</li>
             </ul>
             <div class="flow">
-              <div class="flow-node n1" data-ru="Дизайн" data-en="Design">Дизайн</div>
+              <div class="flow-node n1" >Design</div>
               <div class="flow-line l1"></div>
-              <div class="flow-node n2" data-ru="Код" data-en="Code">Код</div>
+              <div class="flow-node n2" >Code</div>
               <div class="flow-line l2"></div>
-              <div class="flow-node n3" data-ru="Сайт" data-en="Live site">Сайт</div>
+              <div class="flow-node n3" >Live site</div>
             </div>
           </div>
           <div class="demo">
             <div class="code-demo">
               <div class="code-window">
                 <div class="code-line">&lt;<span class="c2">button</span> <span class="c1">class</span>=<span class="c1">"btn"</span>&gt;</div>
-                <div class="code-line">&nbsp;&nbsp;<span data-ru="Отправить" data-en="Submit">Отправить</span></div>
+                <div class="code-line">&nbsp;&nbsp;<span >Submit</span></div>
                 <div class="code-line">&lt;/<span class="c2">button</span>&gt;</div>
                 <div class="code-line"><span class="c1">// live ✓</span></div>
               </div>
@@ -354,33 +346,33 @@
 
       <div class="service-card highlight" tabindex="0" role="button" aria-expanded="false">
         <div class="service-header">
-          <span class="pill" data-ru="ИИ · автоматизация" data-en="AI · automation">ИИ · автоматизация</span>
-          <h3 data-ru="ИИ чат-боты и автоматизация" data-en="AI chatbots and automation">ИИ чат-боты и автоматизация</h3>
-          <p class="service-oneliner" data-ru="Бот отвечает 24/7, заявки сами уходят в CRM." data-en="Bot answers 24/7, leads flow into CRM automatically.">Бот отвечает 24/7, заявки сами уходят в CRM.</p>
+          <span class="pill" >AI · automation</span>
+          <h3 >AI chatbots and automation</h3>
+          <p class="service-oneliner" >Bot answers 24/7, leads flow into CRM automatically.</p>
           <span class="service-toggle" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8l5 5 5-5"/></svg></span>
         </div>
         <div class="service-body"><div class="service-body-inner">
           <div class="service-text">
-            <p data-ru="Бот отвечает клиентам мгновенно 24/7 по базе знаний вашего бизнеса — на сайте или в мессенджерах — и сам передаёт заявку в CRM. Вы не теряете обращения ночью и в пик. Автоматизация снимает ручную рутину: заявки, уведомления, рассылки, интеграции сервисов между собой." data-en="A bot answers clients instantly 24/7 from your business's knowledge base — on the site or in messengers — and passes the lead into your CRM by itself. You stop losing enquiries at night and at peak times. Automation removes the manual routine: leads, notifications, mailings, connecting services to each other.">Бот отвечает клиентам мгновенно 24/7 по базе знаний вашего бизнеса — на сайте или в мессенджерах — и сам передаёт заявку в CRM. Вы не теряете обращения ночью и в пик. Автоматизация снимает ручную рутину: заявки, уведомления, рассылки, интеграции сервисов между собой.</p>
-            <span class="use-cases-label" data-ru="Где применяю" data-en="Where it applies">Где применяю</span>
+            <p >A bot answers clients instantly 24/7 from your business's knowledge base — on the site or in messengers — and passes the lead into your CRM by itself. You stop losing enquiries at night and at peak times. Automation removes the manual routine: leads, notifications, mailings, connecting services to each other.</p>
+            <span class="use-cases-label" >Where it applies</span>
             <ul class="use-cases">
-              <li data-ru="Бот-консультант на сайте и в мессенджерах" data-en="A consultant bot on the site and in messengers">Бот-консультант на сайте и в мессенджерах</li>
-              <li data-ru="Авто-обработка заявок: заявка → CRM → уведомление" data-en="Auto lead handling: lead → CRM → notification">Авто-обработка заявок: заявка → CRM → уведомление</li>
-              <li data-ru="Авто-рассылки, напоминания, регулярные отчёты" data-en="Auto mailings, reminders, recurring reports">Авто-рассылки, напоминания, регулярные отчёты</li>
+              <li >A consultant bot on the site and in messengers</li>
+              <li >Auto lead handling: lead → CRM → notification</li>
+              <li >Auto mailings, reminders, recurring reports</li>
             </ul>
             <div class="flow">
-              <div class="flow-node n1" data-ru="Вопрос" data-en="Question">Вопрос</div>
+              <div class="flow-node n1" >Question</div>
               <div class="flow-line l1"></div>
-              <div class="flow-node n2" data-ru="ИИ" data-en="AI">ИИ</div>
+              <div class="flow-node n2" >AI</div>
               <div class="flow-line l2"></div>
-              <div class="flow-node n3" data-ru="Ответ + CRM" data-en="Answer + CRM">Ответ + CRM</div>
+              <div class="flow-node n3" >Answer + CRM</div>
             </div>
           </div>
           <div class="demo">
             <div class="chat-mini">
-              <div class="bubble user" data-ru="Сколько стоит доставка в Казань?" data-en="How much is delivery to Kazan?">Сколько стоит доставка в Казань?</div>
+              <div class="bubble user" >How much is delivery to Kazan?</div>
               <div class="typing-dots"><span></span><span></span><span></span></div>
-              <div class="bubble bot" data-ru="Доставка в Казань — от $12, 2-3 дня." data-en="Delivery to Kazan — from $12, 2-3 days.">Доставка в Казань — от $12, 2-3 дня.</div>
+              <div class="bubble bot" >Delivery to Kazan — from $12, 2-3 days.</div>
             </div>
           </div>
         </div></div>
@@ -388,33 +380,33 @@
 
       <div class="service-card" tabindex="0" role="button" aria-expanded="false">
         <div class="service-header">
-          <span class="pill" data-ru="UX-аудит" data-en="UX audit">UX-аудит</span>
-          <h3 data-ru="Аудит: где сайт теряет клиентов" data-en="Audit: where the site loses clients">Аудит: где сайт теряет клиентов</h3>
-          <p class="service-oneliner" data-ru="Нахожу, где уходят клиенты, и даю план по приоритету." data-en="I find where clients leave and hand over a prioritised fix plan.">Нахожу, где уходят клиенты, и даю план по приоритету.</p>
+          <span class="pill" >UX audit</span>
+          <h3 >Audit: where the site loses clients</h3>
+          <p class="service-oneliner" >I find where clients leave and hand over a prioritised fix plan.</p>
           <span class="service-toggle" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8l5 5 5-5"/></svg></span>
         </div>
         <div class="service-body"><div class="service-body-inner">
           <div class="service-text">
-            <p data-ru="Прохожу сайт как реальный клиент на разных устройствах и нахожу места, где люди бросают путь: запутанная форма, баги, непонятные шаги, медленная загрузка. Отдаю не список придирок, а отчёт с приоритетом по влиянию на выручку — что чинить в первую очередь, чтобы заявок стало больше." data-en="I go through the site as a real client on different devices and find where people drop off: a confusing form, bugs, unclear steps, slow loading. I hand over not a list of nitpicks, but a report prioritized by revenue impact — what to fix first to get more leads.">Прохожу сайт как реальный клиент на разных устройствах и нахожу места, где люди бросают путь: запутанная форма, баги, непонятные шаги, медленная загрузка. Отдаю не список придирок, а отчёт с приоритетом по влиянию на выручку — что чинить в первую очередь, чтобы заявок стало больше.</p>
-            <span class="use-cases-label" data-ru="Где применяю" data-en="Where it applies">Где применяю</span>
+            <p >I go through the site as a real client on different devices and find where people drop off: a confusing form, bugs, unclear steps, slow loading. I hand over not a list of nitpicks, but a report prioritized by revenue impact — what to fix first to get more leads.</p>
+            <span class="use-cases-label" >Where it applies</span>
             <ul class="use-cases">
-              <li data-ru="Сайт есть, а заявок мало" data-en="You have a site but few leads">Сайт есть, а заявок мало</li>
-              <li data-ru="Перед запуском рекламы — чтобы не лить трафик в дырявую воронку" data-en="Before launching ads — so traffic isn't poured into a leaky funnel">Перед запуском рекламы — чтобы не лить трафик в дырявую воронку</li>
-              <li data-ru="Проверка нового сайта перед сдачей клиенту" data-en="Checking a new site before handing it to the client">Проверка нового сайта перед сдачей клиенту</li>
+              <li >You have a site but few leads</li>
+              <li >Before launching ads — so traffic isn't poured into a leaky funnel</li>
+              <li >Checking a new site before handing it to the client</li>
             </ul>
             <div class="flow">
-              <div class="flow-node n1" data-ru="Проход" data-en="Walk-through">Проход</div>
+              <div class="flow-node n1" >Walk-through</div>
               <div class="flow-line l1"></div>
-              <div class="flow-node n2" data-ru="Находки" data-en="Findings">Находки</div>
+              <div class="flow-node n2" >Findings</div>
               <div class="flow-line l2"></div>
-              <div class="flow-node n3" data-ru="Отчёт + план" data-en="Report + plan">Отчёт + план</div>
+              <div class="flow-node n3" >Report + plan</div>
             </div>
           </div>
           <div class="demo">
             <div class="checklist-mini">
-              <div class="check-item"><span class="box"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l5 5L19 7"/></svg></span><span data-ru="Путь до заявки — понятен" data-en="Path to a lead — clear">Путь до заявки — понятен</span></div>
-              <div class="check-item warn"><span class="box"></span><span data-ru="Найдено: форма отсекает клиента" data-en="Found: the form drives clients away">Найдено: форма отсекает клиента</span></div>
-              <div class="check-item"><span class="box"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l5 5L19 7"/></svg></span><span data-ru="Проверено на мобильном" data-en="Checked on mobile">Проверено на мобильном</span></div>
+              <div class="check-item"><span class="box"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l5 5L19 7"/></svg></span><span >Path to a lead — clear</span></div>
+              <div class="check-item warn"><span class="box"></span><span >Found: the form drives clients away</span></div>
+              <div class="check-item"><span class="box"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l5 5L19 7"/></svg></span><span >Checked on mobile</span></div>
             </div>
           </div>
         </div></div>
@@ -423,8 +415,8 @@
     </div>
   </section>
 
-  <section class="stack-strip wrap" aria-label="Инструменты">
-    <span class="stack-label" data-ru="Работаю с" data-en="I work with">Работаю с</span>
+  <section class="stack-strip wrap" aria-label="Tools">
+    <span class="stack-label" >I work with</span>
     <div class="marquee">
       <div class="marquee-track stack-chips">
         <span>Figma</span><span>JavaScript</span><span>React</span><span>Node</span><span>n8n</span><span>Claude API</span><span>TypeScript</span><span>Framer Motion</span><span>OpenAI API</span><span>Vercel</span>
@@ -440,26 +432,26 @@
       <div class="amb-dot ad1"></div>
       <div class="amb-dot ad2"></div>
     </div>
-    <p class="kicker" data-ru="Обо мне" data-en="About me">Обо мне</p>
-    <h2 data-ru="Пришёл в веб через ИИ — и остался ради результата" data-en="I came to the web through AI — and stayed for the result">Пришёл в веб через ИИ — и остался ради результата</h2>
+    <p class="kicker" >About me</p>
+    <h2 >I came to the web through AI — and stayed for the result</h2>
     <div class="about-layout">
       <div class="about-text">
-        <p data-ru="Мне 22. Начинал с ИИ — промптинг, автоматизации, разбор новых инструментов по мере их появления. Довольно быстро понял, что интереснее не изучать технологии, а применять их к чужим задачам." data-en="I&#39;m 22. I started with AI — prompting, automations, working through new tools as they appeared. It became clear fairly quickly that applying the technology to someone&#39;s problem is more interesting than studying it.">Мне 22. Начинал с ИИ — промптинг, автоматизации, разбор новых инструментов по мере их появления. Довольно быстро понял, что интереснее не изучать технологии, а применять их к чужим задачам.</p>
-        <p data-ru="За три года собрал полный цикл: интерфейс, вёрстка, код, запуск. Список услуг специально не расширяю — берусь за то, что делаю сам от начала до конца, без подрядчиков." data-en="Over three years I built up the full cycle: interface, markup, code, launch. I deliberately keep the service list short — I take on what I can do end to end myself, with no subcontractors.">За три года собрал полный цикл: интерфейс, вёрстка, код, запуск. Список услуг специально не расширяю — берусь за то, что делаю сам от начала до конца, без подрядчиков.</p>
-        <p data-ru="Честно про опыт: корпоративных проектов и громких имён за мной нет — есть заказы, выполненные фрилансом для клиентов. Работаю напрямую: без менеджеров, посредников и передачи задачи по цепочке. Если вижу, что задача не моя — скажу об этом сразу." data-en="Honestly about experience: there are no corporate projects or big names behind me — there is freelance work delivered for clients. I work directly: no managers, no middlemen, nothing passed down a chain. If I can see a job is not mine, I say so straight away.">Честно про опыт: корпоративных проектов и громких имён за мной нет — есть заказы, выполненные фрилансом для клиентов. Работаю напрямую: без менеджеров, посредников и передачи задачи по цепочке. Если вижу, что задача не моя — скажу об этом сразу.</p>
+        <p >I&#39;m 22. I started with AI — prompting, automations, working through new tools as they appeared. It became clear fairly quickly that applying the technology to someone&#39;s problem is more interesting than studying it.</p>
+        <p >Over three years I built up the full cycle: interface, markup, code, launch. I deliberately keep the service list short — I take on what I can do end to end myself, with no subcontractors.</p>
+        <p >Honestly about experience: there are no corporate projects or big names behind me — there is freelance work delivered for clients. I work directly: no managers, no middlemen, nothing passed down a chain. If I can see a job is not mine, I say so straight away.</p>
       </div>
       <ul class="about-principles">
         <li>
           <span class="ap-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg></span>
-          <div><strong data-ru="ИИ — мой фокус" data-en="AI is my focus">ИИ — мой фокус</strong><span data-ru="Боты и автоматизация — то, в чём я сильнее всего и что реже встретишь у веб-мастеров." data-en="Bots and automation are my strongest area — and rarer to find in a web freelancer.">Боты и автоматизация — то, в чём я сильнее всего и что реже встретишь у веб-мастеров.</span></div>
+          <div><strong >AI is my focus</strong><span >Bots and automation are my strongest area — and rarer to find in a web freelancer.</span></div>
         </li>
         <li>
           <span class="ap-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></span>
-          <div><strong data-ru="Полный цикл" data-en="Full cycle">Полный цикл</strong><span data-ru="Дизайн, код и запуск в одних руках — без «передам верстальщику» и потери качества на стыках." data-en="Design, code and launch in one pair of hands — no «I'll hand it to a coder» and no quality lost at the seams.">Дизайн, код и запуск в одних руках — без «передам верстальщику» и потери качества на стыках.</span></div>
+          <div><strong >Full cycle</strong><span >Design, code and launch in one pair of hands — no «I'll hand it to a coder» and no quality lost at the seams.</span></div>
         </li>
         <li>
           <span class="ap-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <div><strong data-ru="Честно и прозрачно" data-en="Honest and transparent">Честно и прозрачно</strong><span data-ru="Фиксирую цену и срок письменно, показываю прогресс по ходу. Первым клиентам — цена ниже рынка за честный отзыв." data-en="I fix price and deadline in writing and show progress along the way. First clients get below-market pricing for an honest review.">Фиксирую цену и срок письменно, показываю прогресс по ходу. Первым клиентам — цена ниже рынка за честный отзыв.</span></div>
+          <div><strong >Honest and transparent</strong><span >I fix price and deadline in writing and show progress along the way. First clients get below-market pricing for an honest review.</span></div>
         </li>
       </ul>
     </div>
@@ -472,42 +464,42 @@
       <span class="amb-chip ac1 amb-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
       <span class="amb-chip ac3 amb-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M20 6L9 17l-5-5"/></svg></span>
     </div>
-    <p class="kicker" data-ru="Процесс" data-en="Process">Процесс</p>
-    <h2 data-ru="Как я работаю" data-en="How I work">Как я работаю</h2>
+    <p class="kicker" >Process</p>
+    <h2 >How I work</h2>
     <div class="steps">
       <div class="step">
         <div class="step-card">
           <div class="step-top"><span class="step-num">1</span><span class="step-ic"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v12H8l-4 4V4z"/></svg></span></div>
-          <h3 data-ru="Заявка и бриф" data-en="Request and brief">Заявка и бриф</h3>
-          <p data-ru="Вы описываете задачу — я задаю уточняющие вопросы. Коротко, по делу." data-en="You describe the task — I ask clarifying questions. Short and to the point.">Вы описываете задачу — я задаю уточняющие вопросы. Коротко, по делу.</p>
-          <span class="step-tag" data-ru="в течение дня" data-en="within a day">в течение дня</span>
+          <h3 >Request and brief</h3>
+          <p >You describe the task — I ask clarifying questions. Short and to the point.</p>
+          <span class="step-tag" >within a day</span>
         </div>
         <div class="step-arrow"><svg aria-hidden="true" width="20" height="10" viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 5h17M12 1l5 4-5 4"/></svg></div>
       </div>
       <div class="step">
         <div class="step-card">
           <div class="step-top"><span class="step-num">2</span><span class="step-ic"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span></div>
-          <h3 data-ru="Цена и срок — письменно" data-en="Price and deadline — in writing">Цена и срок — письменно</h3>
-          <p data-ru="Фиксирую объём, стоимость и срок до старта. Никаких «доплатить» в середине." data-en="I fix scope, cost, and deadline before we start. No mid-project surprises.">Фиксирую объём, стоимость и срок до старта. Никаких «доплатить» в середине.</p>
-          <span class="step-tag" data-ru="фиксация до старта" data-en="fixed upfront">фиксация до старта</span>
+          <h3 >Price and deadline — in writing</h3>
+          <p >I fix scope, cost, and deadline before we start. No mid-project surprises.</p>
+          <span class="step-tag" >fixed upfront</span>
         </div>
         <div class="step-arrow"><svg aria-hidden="true" width="20" height="10" viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 5h17M12 1l5 4-5 4"/></svg></div>
       </div>
       <div class="step">
         <div class="step-card">
           <div class="step-top"><span class="step-num">3</span><span class="step-ic"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a8.5 8.5 0 0114.4-4.6L23 8M1 16l4.1 3.6A8.5 8.5 0 0020.5 15"/></svg></span></div>
-          <h3 data-ru="Работа с промежуточными показами" data-en="Work with progress check-ins">Работа с промежуточными показами</h3>
-          <p data-ru="Вы видите прогресс по ходу, а не «сюрприз» в конце." data-en="You see progress as it happens, not a surprise at the end.">Вы видите прогресс по ходу, а не «сюрприз» в конце.</p>
-          <span class="step-tag" data-ru="прозрачный прогресс" data-en="transparent progress">прозрачный прогресс</span>
+          <h3 >Work with progress check-ins</h3>
+          <p >You see progress as it happens, not a surprise at the end.</p>
+          <span class="step-tag" >transparent progress</span>
         </div>
         <div class="step-arrow"><svg aria-hidden="true" width="20" height="10" viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M0 5h17M12 1l5 4-5 4"/></svg></div>
       </div>
       <div class="step">
         <div class="step-card">
           <div class="step-top"><span class="step-num">4</span><span class="step-ic"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 11l3 3L22 4M21 12a9 9 0 11-6-8.5"/></svg></span></div>
-          <h3 data-ru="Сдача и проверка" data-en="Delivery and review">Сдача и проверка</h3>
-          <p data-ru="Показываю результат в работе. Остаток оплаты — после вашей проверки." data-en="I show the result working. The remaining payment comes after your review.">Показываю результат в работе. Остаток оплаты — после вашей проверки.</p>
-          <span class="step-tag" data-ru="оплата по этапам" data-en="staged payment">оплата по этапам</span>
+          <h3 >Delivery and review</h3>
+          <p >I show the result working. The remaining payment comes after your review.</p>
+          <span class="step-tag" >staged payment</span>
         </div>
       </div>
     </div>
@@ -518,67 +510,67 @@
       <span class="amb-chip ac1 amb-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 4h4.5a4 4 0 010 8H9V4zM9 12v8M6 15h7M6 12h3"/></svg></span>
       <div class="amb-dot ad1"></div>
     </div>
-    <p class="kicker" data-ru="Цены" data-en="Pricing">Цены</p>
-    <h2 data-ru="Прозрачный прайс без сюрпризов" data-en="Transparent pricing, no surprises">Прозрачный прайс без сюрпризов</h2>
-    <p class="section-sub" data-ru="Стартовые цены по каждой услуге собраны на отдельной странице — с составом работ и сроками. Точную цифру назову после короткого брифа." data-en="Starting prices for every service live on a dedicated page — with scope and timelines. I'll give the exact figure after a short brief.">Стартовые цены по каждой услуге собраны на отдельной странице — с составом работ и сроками. Точную цифру назову после короткого брифа.</p>
+    <p class="kicker" >Pricing</p>
+    <h2 >Transparent pricing, no surprises</h2>
+    <p class="section-sub" >Starting prices for every service live on a dedicated page — with scope and timelines. I'll give the exact figure after a short brief.</p>
     <div class="price-grid">
       <div class="price-card" data-accent="violet">
         <div class="price-card-head">
           <span class="price-icon"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></span>
-          <h3 data-ru="Лендинг / дизайн" data-en="Landing / design">Лендинг / дизайн</h3>
-          <div class="price-amount">$100<span class="price-from" data-ru="от" data-en="from">от</span></div>
+          <h3 >Landing / design</h3>
+          <div class="price-amount">$100<span class="price-from" >from</span></div>
         </div>
         <ul class="price-includes">
-          <li data-ru="Макет в Figma" data-en="Figma mockup">Макет в Figma</li>
-          <li data-ru="Адаптив: мобайл + десктоп" data-en="Responsive: mobile + desktop">Адаптив: мобайл + десктоп</li>
-          <li data-ru="1–3 правки в цене" data-en="1–3 revisions included">1–3 правки в цене</li>
+          <li >Figma mockup</li>
+          <li >Responsive: mobile + desktop</li>
+          <li >1–3 revisions included</li>
         </ul>
-        <span class="price-timeline" data-ru="3–5 дней" data-en="3–5 days">3–5 дней</span>
+        <span class="price-timeline" >3–5 days</span>
       </div>
       <div class="price-card" data-accent="teal">
         <div class="price-card-head">
           <span class="price-icon"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg></span>
-          <h3 data-ru="Сайт под ключ" data-en="Full-cycle site">Сайт под ключ</h3>
-          <div class="price-amount">$250<span class="price-from" data-ru="от" data-en="from">от</span></div>
+          <h3 >Full-cycle site</h3>
+          <div class="price-amount">$250<span class="price-from" >from</span></div>
         </div>
         <ul class="price-includes">
-          <li data-ru="Дизайн + код + домен" data-en="Design + code + domain">Дизайн + код + домен</li>
-          <li data-ru="SEO-основа и аналитика" data-en="SEO basics and analytics">SEO-основа и аналитика</li>
-          <li data-ru="Правки + поддержка 30 дней" data-en="Revisions + 30-day support">Правки + поддержка 30 дней</li>
+          <li >Design + code + domain</li>
+          <li >SEO basics and analytics</li>
+          <li >Revisions + 30-day support</li>
         </ul>
-        <span class="price-timeline" data-ru="7–14 дней" data-en="7–14 days">7–14 дней</span>
+        <span class="price-timeline" >7–14 days</span>
       </div>
       <div class="price-card" data-accent="go">
         <div class="price-card-head">
           <span class="price-icon"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v12H8l-4 4V4z"/></svg></span>
-          <h3 data-ru="ИИ чат-бот" data-en="AI chatbot">ИИ чат-бот</h3>
-          <div class="price-amount">$80<span class="price-from" data-ru="от" data-en="from">от</span></div>
+          <h3 >AI chatbot</h3>
+          <div class="price-amount">$80<span class="price-from" >from</span></div>
         </div>
         <ul class="price-includes">
-          <li data-ru="Настройка + обучение" data-en="Setup + training">Настройка + обучение</li>
-          <li data-ru="Интеграция на сайт" data-en="Website integration">Интеграция на сайт</li>
-          <li data-ru="Telegram / виджет" data-en="Telegram / widget">Telegram / виджет</li>
+          <li >Setup + training</li>
+          <li >Website integration</li>
+          <li >Telegram / widget</li>
         </ul>
-        <span class="price-timeline" data-ru="2–5 дней" data-en="2–5 days">2–5 дней</span>
+        <span class="price-timeline" >2–5 days</span>
       </div>
       <div class="price-card" data-accent="amber">
         <div class="price-card-head">
           <span class="price-icon"><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-          <h3 data-ru="UX-аудит" data-en="UX audit">UX-аудит</h3>
-          <div class="price-amount">$25<span class="price-from" data-ru="от" data-en="from">от</span></div>
+          <h3 >UX audit</h3>
+          <div class="price-amount">$25<span class="price-from" >from</span></div>
         </div>
         <ul class="price-includes">
-          <li data-ru="Анализ текущего сайта" data-en="Current site analysis">Анализ текущего сайта</li>
-          <li data-ru="Список проблем + приоритеты" data-en="Issue list + priorities">Список проблем + приоритеты</li>
-          <li data-ru="Рекомендации по конверсии" data-en="Conversion recommendations">Рекомендации по конверсии</li>
+          <li >Current site analysis</li>
+          <li >Issue list + priorities</li>
+          <li >Conversion recommendations</li>
         </ul>
-        <span class="price-timeline" data-ru="1–2 дня" data-en="1–2 days">1–2 дня</span>
+        <span class="price-timeline" >1–2 days</span>
       </div>
     </div>
-    <p class="pt-guarantee" data-ru="Предоплата 50%, остаток — после сдачи и вашей проверки. Цена и срок фиксируются письменно до старта." data-en="50% upfront, the rest after delivery and your review. Price and deadline fixed in writing before we start.">Предоплата 50%, остаток — после сдачи и вашей проверки. Цена и срок фиксируются письменно до старта.</p>
+    <p class="pt-guarantee" >50% upfront, the rest after delivery and your review. Price and deadline fixed in writing before we start.</p>
     <div class="pt-cta">
-      <a class="btn btn-primary" href="#contact" data-ru="Обсудить задачу" data-en="Discuss a project">Обсудить задачу</a>
-      <a class="btn btn-ghost" href="pricing.html" data-ru="Открыть полный прайс" data-en="Open the full price list">Открыть полный прайс</a>
+      <a class="btn btn-primary" href="#contact" >Discuss a project</a>
+      <a class="btn btn-ghost" href="pricing.html" >Open the full price list</a>
     </div>
   </section>
 
@@ -589,29 +581,29 @@
       <div class="amb-dot ad1"></div>
       <div class="amb-dot ad2"></div>
     </div>
-    <p class="kicker" data-ru="Гарантии" data-en="Guarantees">Гарантии</p>
-    <h2 data-ru="Как вы защищены" data-en="How you're protected">Как вы защищены</h2>
-    <p class="section-sub" data-ru="Четыре правила, которые действуют на каждом проекте — чтобы вы были спокойны, даже работая с фрилансером впервые." data-en="Four rules that apply to every project — so you feel safe, even hiring a freelancer for the first time.">Четыре правила, которые действуют на каждом проекте — чтобы вы были спокойны, даже работая с фрилансером впервые.</p>
+    <p class="kicker" >Guarantees</p>
+    <h2 >How you're protected</h2>
+    <p class="section-sub" >Four rules that apply to every project — so you feel safe, even hiring a freelancer for the first time.</p>
     <div class="guarantees">
       <div class="guar-card">
         <span class="guar-num">01</span>
-        <h3 data-ru="Оплата по этапам" data-en="Staged payment">Оплата по этапам</h3>
-        <p data-ru="Вы не платите полную сумму вперёд — рискует исполнитель, а не вы." data-en="You never pay the full amount upfront — the risk is on me, not on you.">Вы не платите полную сумму вперёд — рискует исполнитель, а не вы.</p>
+        <h3 >Staged payment</h3>
+        <p >You never pay the full amount upfront — the risk is on me, not on you.</p>
       </div>
       <div class="guar-card">
         <span class="guar-num">02</span>
-        <h3 data-ru="Правки — в цене" data-en="Edits included">Правки — в цене</h3>
-        <p data-ru="Любые корректировки в рамках задачи — бесплатно. Доплата только если объём вырастет." data-en="Any edits within scope are free. Extra cost only if the scope grows.">Любые корректировки в рамках задачи — бесплатно. Доплата только если объём вырастет.</p>
+        <h3 >Edits included</h3>
+        <p >Any edits within scope are free. Extra cost only if the scope grows.</p>
       </div>
       <div class="guar-card">
         <span class="guar-num">03</span>
-        <h3 data-ru="Срок фиксируется" data-en="Deadline is fixed">Срок фиксируется</h3>
-        <p data-ru="Если проект затягивается по моей вине — доплаты нет. Письменная фиксация защищает обе стороны." data-en="If the project runs late on my end — no extra charge. The written agreement protects both sides.">Если проект затягивается по моей вине — доплаты нет. Письменная фиксация защищает обе стороны.</p>
+        <h3 >Deadline is fixed</h3>
+        <p >If the project runs late on my end — no extra charge. The written agreement protects both sides.</p>
       </div>
       <div class="guar-card">
         <span class="guar-num">04</span>
-        <h3 data-ru="Результат — вживую" data-en="Result shown live">Результат — вживую</h3>
-        <p data-ru="Вы видите рабочий сайт или бота, а не скриншот макета. Финальная оплата — после вашего ОК." data-en="You see a working site or bot, not a mockup screenshot. Final payment comes after your OK.">Вы видите рабочий сайт или бота, а не скриншот макета. Финальная оплата — после вашего ОК.</p>
+        <h3 >Result shown live</h3>
+        <p >You see a working site or bot, not a mockup screenshot. Final payment comes after your OK.</p>
       </div>
     </div>
   </section>
@@ -623,13 +615,13 @@
       <div class="amb-dot ad1"></div>
       <div class="amb-dot ad2"></div>
     </div>
-    <p class="kicker" data-ru="Вопросы" data-en="FAQ">Вопросы</p>
-    <h2 data-ru="Частые вопросы" data-en="Frequently asked">Частые вопросы</h2>
+    <p class="kicker" >FAQ</p>
+    <h2 >Frequently asked</h2>
     <div class="faq">
-      <div class="faq-item open"><button class="faq-q" aria-expanded="false"><span data-ru="Можно ли начать с небольшой задачи?" data-en="Can I start with a small task?">Можно ли начать с небольшой задачи?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p data-ru="Да — UX-аудит или одна автоматизация занимают 2–3 дня и стоят от $25. Это хороший способ попробовать работу вместе без большого бюджета." data-en="Yes — a UX audit or a single automation takes 2–3 days and starts at $25. It's a great way to try working together without a big budget.">Да — UX-аудит или одна автоматизация занимают 2–3 дня и стоят от $25. Это хороший способ попробовать работу вместе без большого бюджета.</p></div></div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false"><span data-ru="Как устроена оплата?" data-en="How does payment work?">Как устроена оплата?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p data-ru="По этапам: предоплата 50% до старта, остаток — после сдачи и вашей проверки." data-en="In stages: 50% upfront, the rest after delivery and your review.">По этапам: предоплата 50% до старта, остаток — после сдачи и вашей проверки.</p></div></div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false"><span data-ru="Какие сроки?" data-en="What about timelines?">Какие сроки?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p data-ru="UX-аудит — 2–3 дня, лендинг — от недели, сайт с ИИ-ботом — 2–3 недели. Срок фиксируется до старта." data-en="UX audit — 2–3 days, landing — from a week, site with an AI bot — 2–3 weeks. The deadline is fixed before we start.">UX-аудит — 2–3 дня, лендинг — от недели, сайт с ИИ-ботом — 2–3 недели. Срок фиксируется до старта.</p></div></div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false"><span data-ru="Что если результат не понравится?" data-en="What if I don't like the result?">Что если результат не понравится?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p data-ru="Для этого и есть промежуточные показы — курс корректируется по ходу, а не в конце. Правки в рамках задачи входят в цену." data-en="That's what the progress check-ins are for — we correct course along the way, not at the end. Edits within scope are included.">Для этого и есть промежуточные показы — курс корректируется по ходу, а не в конце. Правки в рамках задачи входят в цену.</p></div></div></div>
+      <div class="faq-item open"><button class="faq-q" aria-expanded="false"><span >Can I start with a small task?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p >Yes — a UX audit or a single automation takes 2–3 days and starts at $25. It's a great way to try working together without a big budget.</p></div></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false"><span >How does payment work?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p >In stages: 50% upfront, the rest after delivery and your review.</p></div></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false"><span >What about timelines?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p >UX audit — 2–3 days, landing — from a week, site with an AI bot — 2–3 weeks. The deadline is fixed before we start.</p></div></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false"><span >What if I don't like the result?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p >That's what the progress check-ins are for — we correct course along the way, not at the end. Edits within scope are included.</p></div></div></div>
     </div>
   </section>
 
@@ -641,26 +633,26 @@
       <div class="amb-dot ad2"></div>
     </div>
     <div class="contact-card">
-      <p class="kicker" data-ru="Контакты" data-en="Contact">Контакты</p>
-      <h2 data-ru="Обсудим задачу?" data-en="Let's talk">Обсудим задачу?</h2>
-      <p class="section-sub" data-ru="Расскажите, что нужно сделать — отвечу в течение дня. Если пойму, что задача не моя, скажу сразу и по возможности подскажу, к кому обратиться. Или напишите на philippkasharov@gmail.com" data-en="Tell me what you need — I reply within a day. Or email philippkasharov@gmail.com">Расскажите, что нужно сделать — отвечу в течение дня. Если пойму, что задача не моя, скажу сразу и по возможности подскажу, к кому обратиться. Или напишите на philippkasharov@gmail.com</p>
+      <p class="kicker" >Contact</p>
+      <h2 >Let's talk</h2>
+      <p class="section-sub" >Tell me what you need — I reply within a day. Or email philippkasharov@gmail.com</p>
       <div class="contact-proof">
-        <span class="proof-item"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--go)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 2"/></svg><span data-ru="Отвечаю за 2-3 часа" data-en="Reply within 2-3 hours">Отвечаю за 2-3 часа</span></span>
-        <span class="proof-item"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg><span data-ru="Lighthouse 100 на каждом проекте" data-en="Lighthouse 100 on every project">Lighthouse 100 на каждом проекте</span></span>
+        <span class="proof-item"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--go)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 2"/></svg><span >Reply within 2-3 hours</span></span>
+        <span class="proof-item"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg><span >Lighthouse 100 on every project</span></span>
       </div>
       <form class="contact-form" id="contactForm" novalidate>
-        <div><label data-ru="Имя" data-en="Name" for="cf-name">Имя</label><input type="text" id="cf-name" autocomplete="name" required aria-required="true" maxlength="100"><span class="field-error" aria-live="polite"></span></div>
-        <div><label data-ru="Email или Telegram" data-en="Email or Telegram" for="cf-contact">Email или Telegram</label><input type="text" id="cf-contact" autocomplete="email" required aria-required="true" maxlength="100" placeholder="you@mail.ru или @ник" data-ph-ru="you@mail.ru или @ник" data-ph-en="you@mail.com or @handle"><span class="field-error" aria-live="polite"></span></div>
-        <div class="full"><label data-ru="Задача" data-en="Task" for="cf-msg">Задача</label><textarea id="cf-msg" required aria-required="true" maxlength="2000"></textarea><span class="field-error" aria-live="polite"></span></div>
+        <div><label for="cf-name">Name</label><input type="text" id="cf-name" autocomplete="name" required aria-required="true" maxlength="100"><span class="field-error" aria-live="polite"></span></div>
+        <div><label for="cf-contact">Email or Telegram</label><input type="text" id="cf-contact" autocomplete="email" required aria-required="true" maxlength="100" placeholder="you@mail.com or @handle"><span class="field-error" aria-live="polite"></span></div>
+        <div class="full"><label for="cf-msg">Task</label><textarea id="cf-msg" required aria-required="true" maxlength="2000"></textarea><span class="field-error" aria-live="polite"></span></div>
         <div class="contact-actions">
-          <button type="submit" class="btn btn-primary" data-ru="Отправить" data-en="Send">Отправить</button>
-          <a href="https://t.me/pcashpro" class="btn btn-ghost tg-btn" target="_blank" rel="noopener"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.3 15.6c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.3l-4.9-1.5c-1-.3-1-1 .2-1.5l19.1-7.4c.9-.3 1.6.2 1.3 1.4z"/></svg><span data-ru="Написать в Telegram" data-en="Message on Telegram">Написать в Telegram</span></a>
+          <button type="submit" class="btn btn-primary" >Send</button>
+          <a href="https://t.me/pcashpro" class="btn btn-ghost tg-btn" target="_blank" rel="noopener"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.3 15.6c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.3l-4.9-1.5c-1-.3-1-1 .2-1.5l19.1-7.4c.9-.3 1.6.2 1.3 1.4z"/></svg><span >Message on Telegram</span></a>
         </div>
       </form>
       <div class="form-success" id="formSuccess" role="status" aria-live="polite" hidden>
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--go)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
-        <h3 data-ru="Сообщение отправлено!" data-en="Message sent!">Сообщение отправлено!</h3>
-        <p data-ru="Отвечу в течение дня. Если не получите ответ — проверьте спам или напишите в Telegram." data-en="I'll reply within a day. If you don't hear back, check spam or message me on Telegram.">Отвечу в течение дня. Если не получите ответ — проверьте спам или напишите в Telegram.</p>
+        <h3 >Message sent!</h3>
+        <p >I'll reply within a day. If you don't hear back, check spam or message me on Telegram.</p>
       </div>
     </div>
   </section>
@@ -677,29 +669,29 @@
   </div>
 </footer>
 
-<button class="to-top" id="toTop" aria-label="Наверх"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<button class="to-top" id="toTop" aria-label="Back to top"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
-<button class="chat-fab" id="fab" aria-label="Открыть демо ИИ-бота"><span class="fab-badge" aria-hidden="true" data-ru="демо" data-en="demo">демо</span>
+<button class="chat-fab" id="fab" aria-label="Open AI bot demo"><span class="fab-badge" aria-hidden="true" >demo</span>
   <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H8l-4 4V4z"/></svg>
 </button>
-<div class="chat-panel" id="panel" role="dialog" aria-label="Чат">
+<div class="chat-panel" id="panel" role="dialog" aria-label="Chat">
   <div class="chat-head">
     <span class="cdot"></span>
     <div>
-      <div class="ctitle" data-ru="Демо ИИ-бота" data-en="AI bot — live demo">Демо ИИ-бота</div>
-      <div class="cstatus" data-ru="так он будет отвечать вашим клиентам" data-en="this is how it will answer your clients">так он будет отвечать вашим клиентам</div>
+      <div class="ctitle" >AI bot — live demo</div>
+      <div class="cstatus" >this is how it will answer your clients</div>
     </div>
   </div>
   <div class="chat-log" id="log"></div>
   <div class="quick-row" id="quickRow">
-    <button class="quick" data-q="цена" data-ru="Сколько стоит?" data-en="How much?">Сколько стоит?</button>
-    <button class="quick" data-q="бот" data-ru="Что за боты?" data-en="What bots?">Что за боты?</button>
-    <button class="quick" data-q="срок" data-ru="Сроки?" data-en="Timelines?">Сроки?</button>
+    <button class="quick" data-q="price" >How much?</button>
+    <button class="quick" data-q="bot" >What bots?</button>
+    <button class="quick" data-q="timeline" >Timelines?</button>
   </div>
-  <a class="chat-cta" href="#contact" data-ru="Хочу такого же бота →" data-en="I want a bot like this →">Хочу такого же бота →</a>
+  <a class="chat-cta" href="#contact" >I want a bot like this →</a>
   <div class="chat-input-row">
-    <input type="text" id="chatInput" data-ph-ru="Напишите вопрос..." data-ph-en="Type a question..." placeholder="Напишите вопрос...">
-    <button id="chatSend" aria-label="Отправить"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+    <input type="text" id="chatInput" placeholder="Type a question...">
+    <button id="chatSend" aria-label="Send"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
   </div>
 </div>
 
@@ -707,6 +699,6 @@
 <script src="gsap.min.js"></script>
 <script src="ScrollTrigger.min.js"></script>
 <script src="lenis.min.js?v=1"></script>
-<script src="script.js?v=98"></script>
+<script src="script.js?v=99"></script>
 </body>
 </html>

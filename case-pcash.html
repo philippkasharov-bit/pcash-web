@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>P.Cash — кейс: сайт, который продаёт меня | P.Cash</title>
-<meta name="description" content="Разбор собственного сайта P.Cash: почему один цвет закреплён за одним смыслом, зачем убраны 3D-наклон и калькулятор, как фоновый шейдер стал втрое дешевле и почему контраст держится на уровне AAA.">
+<title>P.Cash — Case Study: A Site That Sells Me | P.Cash</title>
+<meta name="description" content="A teardown of the P.Cash site: why each colour is locked to one role, why the 3D tilt and calculator were cut, how the background shader got three times cheaper, and why contrast holds at AAA.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M37.5 13 A17 17 0 1 0 37.5 35' fill='none' stroke='%23FF6A1A' stroke-width='5' stroke-linecap='round'/%3E%3Crect x='16.4' y='14.2' width='5' height='19.6' rx='2.3' fill='%231B1A17'/%3E%3Ccircle cx='22.6' cy='18.8' r='6.4' fill='%231B1A17'/%3E%3Ccircle cx='23.3' cy='18.8' r='2.6' fill='%23FF6A1A'/%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0E0F0D">
 <meta property="og:type" content="article">
-<meta property="og:title" content="P.Cash — кейс: сайт, который продаёт меня">
-<meta property="og:description" content="Разбор собственного сайта: решения, которые видно, и решения, которые видно только в коде.">
+<meta property="og:title" content="P.Cash — Case Study: A Site That Sells Me">
+<meta property="og:description" content="A teardown of my own site: the decisions you can see, and the ones you can only see in the code.">
 <meta property="og:image" content="https://pcash.pro/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pcash.pro/og-image.png">
@@ -19,8 +19,8 @@
 <link rel="stylesheet" href="fonts.css?v=8">
 <link rel="stylesheet" href="style.css?v=106">
 <style>
-  /* Страница кейса — токены и поверхности сайта, без своих фонов:
-     WebGL-туман просвечивает насквозь, как и на остальных страницах. */
+  /* Case page — site tokens and surfaces, no backgrounds of their own:
+     the WebGL fog shows through, same as on every other page. */
   .case-hero { padding: 72px 32px 40px; }
   .case-hero .kicker { margin-bottom: 14px; }
   .case-hero h1 {
@@ -39,9 +39,9 @@
   .case-body { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
   .case-block { padding: 44px 0; }
 
-  /* Заголовок и вводный текст лежат на собственной панели — тот же приём,
-     что у .review-head на главной. Текст не должен стоять прямо на
-     движущемся фоне: контраст там непредсказуем от кадра к кадру. */
+  /* The heading and intro sit on their own panel — same technique
+     as .review-head on the homepage. Text must not sit directly on
+     the moving background: contrast there is unpredictable frame to frame. */
   .case-head {
     background: rgba(10,11,15,0.72);
     backdrop-filter: blur(18px) saturate(1.2);
@@ -60,8 +60,8 @@
   .case-head > p { font-size: 16px; color: #C6C3D0; line-height: 1.75; max-width: 66ch; margin-bottom: 14px; }
   .case-head > p:last-child { margin-bottom: 0; }
 
-  /* Карточка решения несёт основной аргумент страницы → сплошная
-     поверхность, как у .service-card на главной, без прозрачности. */
+  /* A decision card carries the page's core argument — solid surface,
+     same as .service-card on the homepage, no transparency. */
   .dc-list { display: flex; flex-direction: column; gap: 20px; margin-top: 20px; }
   .dc {
     background: #0A0B0F;
@@ -82,12 +82,12 @@
     color: #9C98AD; margin-bottom: 8px;
   }
   .dc-rows > div > p { font-size: 14px; line-height: 1.65; color: #DEDCE6; margin: 0; }
-  /* решение — то, ради чего карточка существует: ярче остальных колонок */
+  /* the decision — the reason the card exists: brighter than the other columns */
   .dc-rows .is-key > span { color: var(--violet-2); }
   .dc-rows .is-key > p { color: var(--ink); }
 
 
-  /* Скриншот как доказательство: каждое решение показано на живой странице */
+  /* Screenshot as proof: every decision is shown on the live page */
   .shot { margin: 20px 0 0; }
   .shot img {
     display: block; width: 100%; height: auto;
@@ -99,11 +99,11 @@
     margin-top: 10px; font-size: 13px; line-height: 1.55;
     color: #A9A5B8; font-family: var(--font-mono);
   }
-  /* внутри карточки решения снимок отбивается от текста линией */
+  /* inside a decision card the screenshot is separated from the text by a line */
   .dc .shot { margin-top: 22px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); }
 
-  /* Наблюдения — тоже карточки: раньше они висели прямо на фоне
-     и читались заметно хуже соседних блоков. */
+  /* Observations are cards too: they used to sit directly on the background
+     and read noticeably worse than neighbouring blocks. */
   .note-list { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
   .note-list li {
     background: #0A0B0F;
@@ -155,7 +155,7 @@
 </style>
 </head>
 <body>
-<a class="skip-link" href="#top">Перейти к содержимому</a>
+<a class="skip-link" href="#top">Skip to content</a>
 <canvas id="liquid-bg" aria-hidden="true"></canvas>
 <div class="cursor-glow" aria-hidden="true"></div>
 <div class="cursor-pen" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 2.2l14.4 8.6-6.1 1.1-2.6 5.6z" fill="currentColor" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
@@ -182,53 +182,49 @@
       </svg>
       <span>P<span style="color:#FF6A1A">.</span>Cash</span>
     </a>
-    <nav class="main-nav" aria-label="Навигация">
-      <a href="index.html#cases" data-ru="Работы" data-en="Work">Работы</a>
-      <a href="index.html#services" data-ru="Услуги" data-en="Services">Услуги</a>
-      <a href="index.html#about" data-ru="Обо мне" data-en="About">Обо мне</a>
-      <a href="index.html#process" data-ru="Процесс" data-en="Process">Процесс</a>
-      <a href="pricing.html" data-ru="Прайс" data-en="Pricing">Прайс</a>
-      <a href="index.html#faq" data-ru="Вопросы" data-en="FAQ">Вопросы</a>
-      <a href="index.html#contact" data-ru="Контакты" data-en="Contact">Контакты</a>
-      <a href="index.html#contact" class="nav-cta btn btn-primary" data-ru="Обсудить" data-en="Let's talk">Обсудить</a>
+    <nav class="main-nav" aria-label="Navigation">
+      <a href="index.html#cases" >Work</a>
+      <a href="index.html#services" >Services</a>
+      <a href="index.html#about" >About</a>
+      <a href="index.html#process" >Process</a>
+      <a href="pricing.html" >Pricing</a>
+      <a href="index.html#faq" >FAQ</a>
+      <a href="index.html#contact" >Contact</a>
+      <a href="index.html#contact" class="nav-cta btn btn-primary" >Let's talk</a>
     </nav>
     <div class="nav-right">
-      <div class="lang-toggle" role="group" aria-label="Язык">
-        <button data-lang="ru" class="active">RU</button>
-        <button data-lang="en">EN</button>
-      </div>
-      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+<button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html#cases" data-ru="Работы" data-en="Work">Работы</a>
-    <a href="index.html#services" data-ru="Услуги" data-en="Services">Услуги</a>
-    <a href="index.html#about" data-ru="Обо мне" data-en="About">Обо мне</a>
-    <a href="index.html#process" data-ru="Процесс" data-en="Process">Процесс</a>
-    <a href="pricing.html" data-ru="Прайс" data-en="Pricing">Прайс</a>
-    <a href="index.html#faq" data-ru="Вопросы" data-en="FAQ">Вопросы</a>
-    <a href="index.html#contact" data-ru="Контакты" data-en="Contact">Контакты</a>
-    <a href="index.html#contact" class="btn btn-primary btn-block" data-ru="Обсудить задачу" data-en="Discuss a project">Обсудить задачу</a>
+    <a href="index.html#cases" >Work</a>
+    <a href="index.html#services" >Services</a>
+    <a href="index.html#about" >About</a>
+    <a href="index.html#process" >Process</a>
+    <a href="pricing.html" >Pricing</a>
+    <a href="index.html#faq" >FAQ</a>
+    <a href="index.html#contact" >Contact</a>
+    <a href="index.html#contact" class="btn btn-primary btn-block" >Discuss a project</a>
   </div>
 </header>
 
-<a class="back-link" href="index.html#cases" data-ru="← Все работы" data-en="← All work">← Все работы</a>
+<a class="back-link" href="index.html#cases" >← All work</a>
 
 <main id="top">
 
   <section class="case-hero wrap">
-    <p class="kicker" data-ru="Кейс · Бренд, UX, фронтенд" data-en="Case study · Brand, UX, front-end">Кейс · Бренд, UX, фронтенд</p>
-    <h1 data-ru="P.Cash — сайт, который продаёт меня. Вы сейчас внутри него" data-en="P.Cash — the site that sells me. You're inside it right now">P.Cash — сайт, который продаёт меня. Вы сейчас внутри него</h1>
-    <p class="lede" data-ru="Это не рассказ о проекте, а сам проект. Всё, что описано ниже, работает на странице, которую вы читаете: фон, типографика, переходы между секциями, доступность. Проверить любое утверждение можно, не покидая вкладку." data-en="This isn't a description of the project — it is the project. Everything described below is running on the page you're reading: the background, the type, the section transitions, the accessibility work. Every claim can be checked without leaving the tab.">Это не рассказ о проекте, а сам проект. Всё, что описано ниже, работает на странице, которую вы читаете: фон, типографика, переходы между секциями, доступность. Проверить любое утверждение можно, не покидая вкладку.</p>
+    <p class="kicker" >Case study · Brand, UX, front-end</p>
+    <h1 >P.Cash — the site that sells me. You're inside it right now</h1>
+    <p class="lede" >This isn't a description of the project — it is the project. Everything described below is running on the page you're reading: the background, the type, the section transitions, the accessibility work. Every claim can be checked without leaving the tab.</p>
     <div class="case-meta">
-      <span class="pill" data-ru="Роль: бренд · UX · фронтенд · копирайт" data-en="Role: brand · UX · front-end · copy">Роль: бренд · UX · фронтенд · копирайт</span>
-      <span class="pill" data-ru="Соло-проект" data-en="Solo project">Соло-проект</span>
-      <span class="pill" data-ru="Vanilla JS + GSAP" data-en="Vanilla JS + GSAP">Vanilla JS + GSAP</span>
-      <span class="pill" data-ru="5 страниц · RU/EN" data-en="5 pages · RU/EN">5 страниц · RU/EN</span>
+      <span class="pill" >Role: brand · UX · front-end · copy</span>
+      <span class="pill" >Solo project</span>
+      <span class="pill" >Vanilla JS + GSAP</span>
+      <span class="pill" >5 pages · RU/EN</span>
     </div>
     <div class="case-hero-cta">
-      <a class="btn btn-primary" href="index.html#contact" data-ru="Обсудить задачу" data-en="Discuss a project">Обсудить задачу</a>
-      <a class="btn btn-ghost" href="index.html" data-ru="Смотреть сайт целиком" data-en="See the whole site">Смотреть сайт целиком</a>
+      <a class="btn btn-primary" href="index.html#contact" >Discuss a project</a>
+      <a class="btn btn-ghost" href="index.html" >See the whole site</a>
     </div>
   </section>
 
@@ -236,92 +232,92 @@
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" data-ru="Задача" data-en="The premise">Задача</p>
-      <h2 data-ru="Зачем фрилансеру собственный сайт" data-en="Why a freelancer needs their own site">Зачем фрилансеру собственный сайт</h2>
-      <p data-ru="Мой сайт — первое, по чему клиент судит обо мне, задолго до того, как увидит хоть строчку моего кода. Значит, он должен навык доказывать, а не описывать. Написать «делаю быстрые доступные сайты» может кто угодно; доказать это может только сама страница." data-en="My site is the first thing a client judges me by, long before they see a line of my code. So it has to prove the skill rather than describe it. Anyone can write "I build fast, accessible sites"; only the page itself can prove it.">Мой сайт — первое, по чему клиент судит обо мне, задолго до того, как увидит хоть строчку моего кода. Значит, он должен навык доказывать, а не описывать. Написать «делаю быстрые доступные сайты» может кто угодно; доказать это может только сама страница.</p>
-      <p data-ru="Отсюда правило, по которому отбирался каждый эффект: он остаётся, только если помогает понять содержание или демонстрирует конкретное умение. Всё, что просто «красиво», с сайта ушло — и ниже видно, что именно и почему." data-en="Hence the rule every effect was judged by: it stays only if it helps convey the content or demonstrates a specific skill. Everything that was merely "nice" was cut — and below you can see exactly what, and why.">Отсюда правило, по которому отбирался каждый эффект: он остаётся, только если помогает понять содержание или демонстрирует конкретное умение. Всё, что просто «красиво», с сайта ушло — и ниже видно, что именно и почему.</p>
+      <p class="pill" >The premise</p>
+      <h2 >Why a freelancer needs their own site</h2>
+      <p>My site is the first thing a client judges me by, long before they see a line of my code. So it has to prove the skill rather than describe it. Anyone can write "I build fast, accessible sites"; only the page itself can prove it.</p>
+      <p>Hence the rule every effect was judged by: it stays only if it helps convey the content or demonstrates a specific skill. Everything that was merely "nice" was cut — and below you can see exactly what, and why.</p>
       </div>
       <figure class="shot">
-        <img src="images/case-pcash/01-hero.webp" width="1200" height="760" alt="Первый экран сайта P.Cash" loading="lazy" decoding="async">
-        <figcaption data-ru="Первый экран: обещание, два действия и два факта. Больше на нём ничего нет." data-en="The first screen: a promise, two actions and two facts. Nothing else is on it.">Первый экран: обещание, два действия и два факта. Больше на нём ничего нет.</figcaption>
+        <img src="images/case-pcash/01-hero.webp" width="1200" height="760" alt="P.Cash hero screen" loading="lazy" decoding="async">
+        <figcaption >The first screen: a promise, two actions and two facts. Nothing else is on it.</figcaption>
       </figure>
     </section>
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" data-ru="Решения" data-en="Decisions">Решения</p>
-      <h2 data-ru="Шесть решений, каждое — с причиной" data-en="Six decisions, each with a reason">Шесть решений, каждое — с причиной</h2>
-      <p data-ru="Ни одно из них не «на вкус». У каждого есть ограничение, из которого оно выросло, и проверяемый эффект." data-en="None of them are a matter of taste. Each has a constraint it grew out of, and a verifiable payoff.">Ни одно из них не «на вкус». У каждого есть ограничение, из которого оно выросло, и проверяемый эффект.</p>
+      <p class="pill" >Decisions</p>
+      <h2 >Six decisions, each with a reason</h2>
+      <p >None of them are a matter of taste. Each has a constraint it grew out of, and a verifiable payoff.</p>
       </div>
 
       <div class="dc-list">
 
         <article class="dc">
-          <h3 data-ru="01 · Один цвет — одна роль" data-en="01 · One colour, one role">01 · Один цвет — одна роль</h3>
+          <h3 >01 · One colour, one role</h3>
           <div class="dc-rows">
-            <div><span data-ru="Ограничение" data-en="Constraint">Ограничение</span><p data-ru="В палитре три акцента: оранжевый, фиолетовый и зелёный. Без жёстких ролей они расплываются: оранжевый одновременно и на CTA-кнопке, и на ценнике, и на заголовке — глаз не понимает, что из этого действие." data-en="The palette has three accents: orange, violet and green. Without strict roles they bleed: orange ends up on the CTA button, the price tag, and the heading — the eye can't tell which one is an action.">В палитре три акцента: оранжевый, фиолетовый и зелёный. Без жёстких ролей они расплываются: оранжевый одновременно и на CTA-кнопке, и на ценнике, и на заголовке — глаз не понимает, что из этого действие.</p></div>
-            <div class="is-key"><span data-ru="Решение" data-en="Decision">Решение</span><p data-ru="Каждый акцент закреплён за одной ролью. Оранжевый — CTA и цены. Фиолетовый — интерактивные элементы и подсветка. Зелёный — индикаторы состояния (online, готов) и фокус-кольца." data-en="Each accent is locked to one role. Orange — CTAs and prices. Violet — interactive elements and highlights. Green — status indicators (online, ready) and focus rings.">Каждый акцент закреплён за одной ролью. Оранжевый — CTA и цены. Фиолетовый — интерактивные элементы и подсветка. Зелёный — индикаторы состояния (online, готов) и фокус-кольца.</p></div>
-            <div><span data-ru="Эффект" data-en="Payoff">Эффект</span><p data-ru="Правило учится один раз и работает по всему сайту: оранжевое — действуй, фиолетовое — взаимодействуй, зелёное — статус." data-en="The rule is learned once and holds site-wide: orange — act, violet — interact, green — status.">Правило учится один раз и работает по всему сайту: оранжевое — действуй, фиолетовое — взаимодействуй, зелёное — статус.</p></div>
+            <div><span >Constraint</span><p >The palette has three accents: orange, violet and green. Without strict roles they bleed: orange ends up on the CTA button, the price tag, and the heading — the eye can't tell which one is an action.</p></div>
+            <div class="is-key"><span >Decision</span><p >Each accent is locked to one role. Orange — CTAs and prices. Violet — interactive elements and highlights. Green — status indicators (online, ready) and focus rings.</p></div>
+            <div><span >Payoff</span><p >The rule is learned once and holds site-wide: orange — act, violet — interact, green — status.</p></div>
           </div>
 
           <figure class="shot">
-            <img src="images/case-pcash/04-process.webp" width="1200" height="760" alt="Блок «Как я работаю» на сайте" loading="lazy" decoding="async">
-            <figcaption data-ru="Оранжевый только на CTA, фиолетовый — на интерактивных элементах, зелёный — на статусных индикаторах." data-en="Orange only on CTAs, violet on interactive elements, green on status indicators.">Оранжевый только на CTA, фиолетовый — на интерактивных элементах, зелёный — на статусных индикаторах.</figcaption>
+            <img src="images/case-pcash/04-process.webp" width="1200" height="760" alt="How I Work section on the site" loading="lazy" decoding="async">
+            <figcaption >Orange only on CTAs, violet on interactive elements, green on status indicators.</figcaption>
           </figure>
         </article>
 
         <article class="dc">
-          <h3 data-ru="02 · Счётчик секций стал навигацией" data-en="02 · The section counter became navigation">02 · Счётчик секций стал навигацией</h3>
+          <h3 >02 · The section counter became navigation</h3>
           <div class="dc-rows">
-            <div><span data-ru="Ограничение" data-en="Constraint">Ограничение</span><p data-ru="Сбоку висел индикатор вида «01 / 11». Он показывал число — и всё." data-en="A "01 / 11" indicator sat in the corner. It showed a number — and nothing else.">Сбоку висел индикатор вида «01 / 11». Он показывал число — и всё.</p></div>
-            <div class="is-key"><span data-ru="Решение" data-en="Decision">Решение</span><p data-ru="Заменён на колонку точек: каждая — якорь на секцию, активная подсвечена, при наведении подписана." data-en="Replaced with a column of dots: each one anchors to a section, the active one is highlighted, and hovering names it.">Заменён на колонку точек: каждая — якорь на секцию, активная подсвечена, при наведении подписана.</p></div>
-            <div><span data-ru="Эффект" data-en="Payoff">Эффект</span><p data-ru="Та же площадь экрана вместо декорации даёт навигацию по всей длинной странице." data-en="The same screen real estate now gives navigation across a long page instead of decoration.">Та же площадь экрана вместо декорации даёт навигацию по всей длинной странице.</p></div>
+            <div><span >Constraint</span><p>A "01 / 11" indicator sat in the corner. It showed a number — and nothing else.</p></div>
+            <div class="is-key"><span >Decision</span><p >Replaced with a column of dots: each one anchors to a section, the active one is highlighted, and hovering names it.</p></div>
+            <div><span >Payoff</span><p >The same screen real estate now gives navigation across a long page instead of decoration.</p></div>
           </div>
         </article>
 
         <article class="dc">
-          <h3 data-ru="03 · Одна система частиц вместо двух" data-en="03 · One particle system instead of two">03 · Одна система частиц вместо двух</h3>
+          <h3 >03 · One particle system instead of two</h3>
           <div class="dc-rows">
-            <div><span data-ru="Ограничение" data-en="Constraint">Ограничение</span><p data-ru="Поверх фонового шейдера крутился ещё и слой точек. Две системы частиц одновременно делают фон шумным и оттягивают внимание от текста." data-en="A layer of dots ran on top of the background shader. Two particle systems at once make the background noisy and pull attention off the copy.">Поверх фонового шейдера крутился ещё и слой точек. Две системы частиц одновременно делают фон шумным и оттягивают внимание от текста.</p></div>
-            <div class="is-key"><span data-ru="Решение" data-en="Decision">Решение</span><p data-ru="Точки заменены десятью символами-схемами — по одному на то, что я продаю: микрочип, терминал, нейросеть, API, база данных, автоматизация, артборд, кривая Безье, ветка git, осциллограмма." data-en="The dots were replaced by ten schematic symbols — one per thing I sell: microchip, terminal, neural net, API, database, automation, artboard, Bézier curve, git branch, waveform.">Точки заменены десятью символами-схемами — по одному на то, что я продаю: микрочип, терминал, нейросеть, API, база данных, автоматизация, артборд, кривая Безье, ветка git, осциллограмма.</p></div>
-            <div><span data-ru="Эффект" data-en="Payoff">Эффект</span><p data-ru="Тот же холст и тот же цикл отрисовки, но фон перестал спорить с текстом и начал говорить о содержании." data-en="Same canvas, same render loop — but the background stopped competing with the copy and started speaking about the content.">Тот же холст и тот же цикл отрисовки, но фон перестал спорить с текстом и начал говорить о содержании.</p></div>
+            <div><span >Constraint</span><p >A layer of dots ran on top of the background shader. Two particle systems at once make the background noisy and pull attention off the copy.</p></div>
+            <div class="is-key"><span >Decision</span><p >The dots were replaced by ten schematic symbols — one per thing I sell: microchip, terminal, neural net, API, database, automation, artboard, Bézier curve, git branch, waveform.</p></div>
+            <div><span >Payoff</span><p >Same canvas, same render loop — but the background stopped competing with the copy and started speaking about the content.</p></div>
           </div>
         </article>
 
         <article class="dc">
-          <h3 data-ru="04 · 3D-наклон карточек убран" data-en="04 · The 3D card tilt was removed">04 · 3D-наклон карточек убран</h3>
+          <h3 >04 · The 3D card tilt was removed</h3>
           <div class="dc-rows">
-            <div><span data-ru="Ограничение" data-en="Constraint">Ограничение</span><p data-ru="Карточки услуг наклонялись вслед за курсором — эффектно на демо, но чужеродно рядом с плоской, спокойной вёрсткой блоков." data-en="Service cards tilted toward the cursor — striking in a demo, but alien next to the flat, calm block layout.">Карточки услуг наклонялись вслед за курсором — эффектно на демо, но чужеродно рядом с плоской, спокойной вёрсткой блоков.</p></div>
-            <div class="is-key"><span data-ru="Решение" data-en="Decision">Решение</span><p data-ru="Удалён полностью. Вместо него — подъём на 2–4px и подсветка фиолетовой рамкой: тот же отклик, но в логике плоских поверхностей." data-en="Removed outright. In its place: a 2–4px lift and a violet border highlight — the same feedback, but in the logic of flat surfaces.">Удалён полностью. Вместо него — подъём на 2–4px и подсветка фиолетовой рамкой: тот же отклик, но в логике плоских поверхностей.</p></div>
-            <div><span data-ru="Эффект" data-en="Payoff">Эффект</span><p data-ru="Отклик на наведение стал единым для всех карточек сайта — карточки перестали выглядеть по-разному." data-en="Hover feedback became uniform across every card on the site — the blocks stopped looking like different systems.">Отклик на наведение стал единым для всех карточек сайта — карточки перестали выглядеть по-разному.</p></div>
+            <div><span >Constraint</span><p >Service cards tilted toward the cursor — striking in a demo, but alien next to the flat, calm block layout.</p></div>
+            <div class="is-key"><span >Decision</span><p >Removed outright. In its place: a 2–4px lift and a violet border highlight — the same feedback, but in the logic of flat surfaces.</p></div>
+            <div><span >Payoff</span><p >Hover feedback became uniform across every card on the site — the blocks stopped looking like different systems.</p></div>
           </div>
         </article>
 
         <article class="dc">
-          <h3 data-ru="05 · Калькулятор бюджета → тизер прайса" data-en="05 · Budget calculator → price teaser">05 · Калькулятор бюджета → тизер прайса</h3>
+          <h3 >05 · Budget calculator → price teaser</h3>
           <div class="dc-rows">
-            <div><span data-ru="Ограничение" data-en="Constraint">Ограничение</span><p data-ru="На главной стоял интерактивный калькулятор: отметь услуги — получи вилку. Он требовал от посетителя работы до того, как тот понял порядок цен." data-en="The homepage had an interactive calculator: tick services, get a range. It asked the visitor to do work before they understood the ballpark.">На главной стоял интерактивный калькулятор: отметь услуги — получи вилку. Он требовал от посетителя работы до того, как тот понял порядок цен.</p></div>
-            <div class="is-key"><span data-ru="Решение" data-en="Decision">Решение</span><p data-ru="Заменён коротким тизером: четыре стартовые цены, условие оплаты одной строкой и ссылка на отдельную страницу прайса с составом работ." data-en="Replaced with a short teaser: four starting prices, the payment terms in one line, and a link to a dedicated pricing page with scope.">Заменён коротким тизером: четыре стартовые цены, условие оплаты одной строкой и ссылка на отдельную страницу прайса с составом работ.</p></div>
-            <div><span data-ru="Эффект" data-en="Payoff">Эффект</span><p data-ru="Порядок цен считывается за пару секунд; подробности остаются для тех, кому они действительно нужны." data-en="The ballpark reads in a couple of seconds; the detail stays available for those who actually need it.">Порядок цен считывается за пару секунд; подробности остаются для тех, кому они действительно нужны.</p></div>
+            <div><span >Constraint</span><p >The homepage had an interactive calculator: tick services, get a range. It asked the visitor to do work before they understood the ballpark.</p></div>
+            <div class="is-key"><span >Decision</span><p >Replaced with a short teaser: four starting prices, the payment terms in one line, and a link to a dedicated pricing page with scope.</p></div>
+            <div><span >Payoff</span><p >The ballpark reads in a couple of seconds; the detail stays available for those who actually need it.</p></div>
           </div>
         
           <figure class="shot">
-            <img src="images/case-pcash/05-pricing.webp" width="1200" height="620" alt="Блок цен на сайте" loading="lazy" decoding="async">
-            <figcaption data-ru="Четыре стартовые цены, условие оплаты и ссылка на полный прайс — вместо интерактивного калькулятора." data-en="Four starting prices, the payment terms and a link to the full list — instead of an interactive calculator.">Четыре стартовые цены, условие оплаты и ссылка на полный прайс — вместо интерактивного калькулятора.</figcaption>
+            <img src="images/case-pcash/05-pricing.webp" width="1200" height="620" alt="Pricing section on the site" loading="lazy" decoding="async">
+            <figcaption >Four starting prices, the payment terms and a link to the full list — instead of an interactive calculator.</figcaption>
           </figure>
         </article>
 
         <article class="dc">
-          <h3 data-ru="06 · Поверхности разделены на два класса" data-en="06 · Surfaces split into two classes">06 · Поверхности разделены на два класса</h3>
+          <h3 >06 · Surfaces split into two classes</h3>
           <div class="dc-rows">
-            <div><span data-ru="Ограничение" data-en="Constraint">Ограничение</span><p data-ru="Живой фон под всей страницей красив, но текст поверх движущегося градиента читать тяжело." data-en="A living background under the whole page looks good, but reading text over a moving gradient is hard.">Живой фон под всей страницей красив, но текст поверх движущегося градиента читать тяжело.</p></div>
-            <div class="is-key"><span data-ru="Решение" data-en="Decision">Решение</span><p data-ru="Поверхности разделены по роли: несущие основной текст — сплошные тёмные; второстепенные — полупрозрачные, чтобы фон читался сквозь них. Секции при этом прозрачны, разделители между ними убраны." data-en="Surfaces were split by role: those carrying the main copy are solid dark; secondary ones stay translucent so the background reads through. Sections themselves are transparent, and the separators between them were removed.">Поверхности разделены по роли: несущие основной текст — сплошные тёмные; второстепенные — полупрозрачные, чтобы фон читался сквозь них. Секции при этом прозрачны, разделители между ними убраны.</p></div>
-            <div><span data-ru="Эффект" data-en="Payoff">Эффект</span><p data-ru="Текст остаётся читаемым, фон — виден, а страница скроллится как одно полотно без визуальных швов." data-en="The copy stays readable, the background stays visible, and the page scrolls as one seamless canvas.">Текст остаётся читаемым, фон — виден, а страница скроллится как одно полотно без визуальных швов.</p></div>
+            <div><span >Constraint</span><p >A living background under the whole page looks good, but reading text over a moving gradient is hard.</p></div>
+            <div class="is-key"><span >Decision</span><p >Surfaces were split by role: those carrying the main copy are solid dark; secondary ones stay translucent so the background reads through. Sections themselves are transparent, and the separators between them were removed.</p></div>
+            <div><span >Payoff</span><p >The copy stays readable, the background stays visible, and the page scrolls as one seamless canvas.</p></div>
           </div>
         
           <figure class="shot">
-            <img src="images/case-pcash/02-services.webp" width="1200" height="800" alt="Карточки услуг на живом фоне" loading="lazy" decoding="async">
-            <figcaption data-ru="Карточки услуг — сплошные: текст на них читается независимо от того, что делает фон под ними." data-en="Service cards are solid: their copy stays readable no matter what the background is doing underneath.">Карточки услуг — сплошные: текст на них читается независимо от того, что делает фон под ними.</figcaption>
+            <img src="images/case-pcash/02-services.webp" width="1200" height="800" alt="Service cards on the live background" loading="lazy" decoding="async">
+            <figcaption >Service cards are solid: their copy stays readable no matter what the background is doing underneath.</figcaption>
           </figure>
         </article>
 
@@ -330,101 +326,101 @@
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" data-ru="Производительность" data-en="Performance">Производительность</p>
-      <h2 data-ru="Фон втрое дешевле, и этого не видно" data-en="A background three times cheaper, and it doesn't show">Фон втрое дешевле, и этого не видно</h2>
-      <p data-ru="Фон — не картинка и не видео, а WebGL-шейдер: фрактальный шум, искажённый вторым таким же, даёт мягкие облачные банки без единого жёсткого края. Такой эффект легко превращается в пожиратель батареи, поэтому в нём три решения, каждое из которых экономит работу, оставаясь незаметным для глаза." data-en="The background is neither an image nor a video but a WebGL shader: fractal noise warped by a second one, producing soft cloud banks with no hard edges. An effect like this easily becomes a battery drain, so it carries three decisions that each save work while staying invisible.">Фон — не картинка и не видео, а WebGL-шейдер: фрактальный шум, искажённый вторым таким же, даёт мягкие облачные банки без единого жёсткого края. Такой эффект легко превращается в пожиратель батареи, поэтому в нём три решения, каждое из которых экономит работу, оставаясь незаметным для глаза.</p>
+      <p class="pill" >Performance</p>
+      <h2 >A background three times cheaper, and it doesn't show</h2>
+      <p >The background is neither an image nor a video but a WebGL shader: fractal noise warped by a second one, producing soft cloud banks with no hard edges. An effect like this easily becomes a battery drain, so it carries three decisions that each save work while staying invisible.</p>
       </div>
       <ul class="note-list">
-        <li><b data-ru="Три октавы шума вместо пяти" data-en="Three noise octaves instead of five">Три октавы шума вместо пяти</b><span data-ru="Последние две дают детали мельче, чем видимый клок тумана, — их просто не различить. При этом на них уходило около 40% работы шейдера." data-en="The last two produce detail finer than a visible wisp of fog — literally indistinguishable. They cost about 40% of the shader's work.">Последние две дают детали мельче, чем видимый клок тумана, — их просто не различить. При этом на них уходило около 40% работы шейдера.</span></li>
-        <li><b data-ru="Рендер в 45% разрешения" data-en="Rendering at 45% resolution">Рендер в 45% разрешения</b><span data-ru="Туман состоит из одних плавных градиентов, поэтому ему не нужен свой тексель на каждый пиксель экрана. Отрисовка в 45% с апскейлом средствами GPU обходится примерно в пять раз дешевле по вызовам фрагментного шейдера." data-en="Fog is nothing but smooth gradients, so it doesn't need one texel per screen pixel. Rendering at 45% and letting the GPU upscale costs roughly five times fewer fragment shader runs.">Туман состоит из одних плавных градиентов, поэтому ему не нужен свой тексель на каждый пиксель экрана. Отрисовка в 45% с апскейлом средствами GPU обходится примерно в пять раз дешевле по вызовам фрагментного шейдера.</span></li>
-        <li><b data-ru="30 кадров в секунду вместо 60" data-en="30 frames per second instead of 60">30 кадров в секунду вместо 60</b><span data-ru="Туман плывёт со скоростью 0,035 единицы в секунду. На такой скорости 30 кадров неотличимы от 60, а работы для видеокарты вдвое меньше." data-en="The fog drifts at 0.035 units per second. At that speed 30fps is indistinguishable from 60, and it halves the GPU's work.">Туман плывёт со скоростью 0,035 единицы в секунду. На такой скорости 30 кадров неотличимы от 60, а работы для видеокарты вдвое меньше.</span></li>
-        <li><b data-ru="И полное отключение там, где эффект не нужен" data-en="And a full shutdown where the effect isn't wanted">И полное отключение там, где эффект не нужен</b><span data-ru="Отрисовка останавливается на скрытой вкладке, отключается на сенсорных устройствах и полностью выключается при системном запросе уменьшенного движения — вместо неё статичный CSS-градиент." data-en="Rendering pauses on a hidden tab, switches off on touch devices, and shuts down entirely under a reduced-motion preference, falling back to a static CSS gradient.">Отрисовка останавливается на скрытой вкладке, отключается на сенсорных устройствах и полностью выключается при системном запросе уменьшенного движения — вместо неё статичный CSS-градиент.</span></li>
+        <li><b >Three noise octaves instead of five</b><span >The last two produce detail finer than a visible wisp of fog — literally indistinguishable. They cost about 40% of the shader's work.</span></li>
+        <li><b >Rendering at 45% resolution</b><span >Fog is nothing but smooth gradients, so it doesn't need one texel per screen pixel. Rendering at 45% and letting the GPU upscale costs roughly five times fewer fragment shader runs.</span></li>
+        <li><b >30 frames per second instead of 60</b><span >The fog drifts at 0.035 units per second. At that speed 30fps is indistinguishable from 60, and it halves the GPU's work.</span></li>
+        <li><b >And a full shutdown where the effect isn't wanted</b><span >Rendering pauses on a hidden tab, switches off on touch devices, and shuts down entirely under a reduced-motion preference, falling back to a static CSS gradient.</span></li>
       </ul>
     </section>
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" data-ru="Доступность" data-en="Accessibility">Доступность</p>
-      <h2 data-ru="То, что не видно на скриншоте" data-en="What a screenshot can't show">То, что не видно на скриншоте</h2>
-      <p data-ru="Тёмная тема с движущимся фоном — самый простой способ незаметно испортить доступность. Поэтому доступность здесь закладывалась в те же решения, а не прикручивалась в конце." data-en="A dark theme with a moving background is the easiest way to quietly ruin accessibility. So here it was built into the same decisions rather than bolted on at the end.">Тёмная тема с движущимся фоном — самый простой способ незаметно испортить доступность. Поэтому доступность здесь закладывалась в те же решения, а не прикручивалась в конце.</p>
+      <p class="pill" >Accessibility</p>
+      <h2 >What a screenshot can't show</h2>
+      <p >A dark theme with a moving background is the easiest way to quietly ruin accessibility. So here it was built into the same decisions rather than bolted on at the end.</p>
       </div>
       <ul class="note-list">
-        <li><b data-ru="Контраст держится на уровне AAA, а не минимального AA" data-en="Contrast holds at AAA, not the AA minimum">Контраст держится на уровне AAA, а не минимального AA</b><span data-ru="Цветовые «настроения» тумана для каждой секции подобраны так, чтобы основной текст оставался выше 7:1 — это уровень AAA по WCAG, вдвое строже обязательных 4,5:1. Именно поэтому облачные банки такие тёмные." data-en="The fog's per-section colour moods are tuned so body copy stays above 7:1 — WCAG's AAA level, twice as strict as the required 4.5:1. That's precisely why the cloud banks are kept this dark.">Цветовые «настроения» тумана для каждой секции подобраны так, чтобы основной текст оставался выше 7:1 — это уровень AAA по WCAG, вдвое строже обязательных 4,5:1. Именно поэтому облачные банки такие тёмные.</span></li>
-        <li><b data-ru="Уменьшенное движение — это отключить, а не замедлить" data-en="Reduced motion means off, not slower">Уменьшенное движение — это отключить, а не замедлить</b><span data-ru="30 отдельных блоков prefers-reduced-motion в стилях и 6 проверок в скрипте. Шейдер не запускается, анимации схлопываются в мгновенные, инерционный скролл уступает нативному. Пользователь получает то же содержание и ту же иерархию — без движения." data-en="30 separate prefers-reduced-motion blocks in the styles and 6 guards in the script. The shader never starts, animations collapse to instant, inertia scrolling yields to native. The user gets the same content and the same hierarchy — without the motion.">30 отдельных блоков prefers-reduced-motion в стилях и 6 проверок в скрипте. Шейдер не запускается, анимации схлопываются в мгновенные, инерционный скролл уступает нативному. Пользователь получает то же содержание и ту же иерархию — без движения.</span></li>
-        <li><b data-ru="Появление секций — на IntersectionObserver, а не на событиях скролла" data-en="Section reveals run on IntersectionObserver, not scroll events">Появление секций — на IntersectionObserver, а не на событиях скролла</b><span data-ru="Скроллом управляет Lenis, и одно пропущенное событие однажды оставило целую секцию навсегда невидимой. Сверху добавлена страховка: всё, что после загрузки всё ещё скрыто, показывается принудительно. Контент не может потеряться из-за сбоя анимации." data-en="Lenis drives the scrolling, and one missed event once left an entire section permanently invisible. A safety net was added on top: anything still hidden after load is revealed outright. Content cannot be lost to an animation glitch.">Скроллом управляет Lenis, и одно пропущенное событие однажды оставило целую секцию навсегда невидимой. Сверху добавлена страховка: всё, что после загрузки всё ещё скрыто, показывается принудительно. Контент не может потеряться из-за сбоя анимации.</span></li>
-        <li><b data-ru="Мелочи, которые обычно забывают" data-en="The small things usually forgotten">Мелочи, которые обычно забывают</b><span data-ru="Skip-link первым в порядке табуляции. Атрибут aria-expanded у бургера обновляется по-настоящему — статичное «false» врёт скринридеру. Фокус-кольцо видно на всех интерактивных элементах. При печати тёмный холст уступает место обычному тексту." data-en="A skip-link first in tab order. The burger's aria-expanded is genuinely updated — a static "false" lies to screen readers. A visible focus ring on every interactive element. On print, the dark canvas gives way to plain text.">Skip-link первым в порядке табуляции. Атрибут aria-expanded у бургера обновляется по-настоящему — статичное «false» врёт скринридеру. Фокус-кольцо видно на всех интерактивных элементах. При печати тёмный холст уступает место обычному тексту.</span></li>
+        <li><b >Contrast holds at AAA, not the AA minimum</b><span >The fog's per-section colour moods are tuned so body copy stays above 7:1 — WCAG's AAA level, twice as strict as the required 4.5:1. That's precisely why the cloud banks are kept this dark.</span></li>
+        <li><b >Reduced motion means off, not slower</b><span >30 separate prefers-reduced-motion blocks in the styles and 6 guards in the script. The shader never starts, animations collapse to instant, inertia scrolling yields to native. The user gets the same content and the same hierarchy — without the motion.</span></li>
+        <li><b >Section reveals run on IntersectionObserver, not scroll events</b><span >Lenis drives the scrolling, and one missed event once left an entire section permanently invisible. A safety net was added on top: anything still hidden after load is revealed outright. Content cannot be lost to an animation glitch.</span></li>
+        <li><b >The small things usually forgotten</b><span>A skip-link first in tab order. The burger's aria-expanded is genuinely updated — a static "false" lies to screen readers. A visible focus ring on every interactive element. On print, the dark canvas gives way to plain text.</span></li>
       </ul>
     </section>
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" data-ru="Честность" data-en="Being upfront">Честность</p>
-      <h2 data-ru="Чего на сайте намеренно нет" data-en="What's deliberately absent">Чего на сайте намеренно нет</h2>
-      <p data-ru="Самая большая опасность для портфолио новичка — выглядеть опытнее, чем есть. Три места, где было проще соврать, решены в обратную сторону." data-en="The biggest risk for a beginner's portfolio is looking more experienced than you are. Three places where lying would have been easier were resolved the other way.">Самая большая опасность для портфолио новичка — выглядеть опытнее, чем есть. Три места, где было проще соврать, решены в обратную сторону.</p>
+      <p class="pill" >Being upfront</p>
+      <h2 >What's deliberately absent</h2>
+      <p >The biggest risk for a beginner's portfolio is looking more experienced than you are. Three places where lying would have been easier were resolved the other way.</p>
       </div>
       <ul class="note-list">
-        <li><b data-ru="Секция отзывов удалена целиком" data-en="The reviews section was removed entirely">Секция отзывов удалена целиком</b><span data-ru="Вместе с формой сбора. Отзывов пока нет, а пустой блок с формой намекает, что они где-то есть, — это тихая ложь. Появятся реальные — вернётся и секция." data-en="Along with its submission form. There are no reviews yet, and an empty block with a form implies they exist somewhere — a quiet lie. When real ones arrive, the section comes back.">Вместе с формой сбора. Отзывов пока нет, а пустой блок с формой намекает, что они где-то есть, — это тихая ложь. Появятся реальные — вернётся и секция.</span></li>
-        <li><b data-ru="В «Работах» — самостоятельные проекты, без клиентских логотипов" data-en=""Work" shows self-initiated projects, no client logos">В «Работах» — самостоятельные проекты, без клиентских логотипов</b><span data-ru="Об этом сказано прямо в подзаголовке секции и внутри каждого кейса. Логотипы компаний, с которыми я не работал, дали бы доверие взаймы и разрушили бы его при первом же вопросе." data-en="It's stated plainly in the section subtitle and inside every case study. Logos of companies I haven't worked with would borrow trust and destroy it at the first question.">Об этом сказано прямо в подзаголовке секции и внутри каждого кейса. Логотипы компаний, с которыми я не работал, дали бы доверие взаймы и разрушили бы его при первом же вопросе.</span></li>
-        <li><b data-ru="Аналитика подготовлена, но выключена" data-en="Analytics is wired up but switched off">Аналитика подготовлена, но выключена</b><span data-ru="Разметка под Plausible — без cookies и персональных данных — лежит закомментированной и включается одной строкой. Пока домена нет, ничего не собирается и никуда не уходит." data-en="The Plausible setup — no cookies, no personal data — sits commented out and switches on with a single line. Until there's a domain, nothing is collected and nothing leaves the page.">Разметка под Plausible — без cookies и персональных данных — лежит закомментированной и включается одной строкой. Пока домена нет, ничего не собирается и никуда не уходит.</span></li>
+        <li><b >The reviews section was removed entirely</b><span >Along with its submission form. There are no reviews yet, and an empty block with a form implies they exist somewhere — a quiet lie. When real ones arrive, the section comes back.</span></li>
+        <li><b>"Work" shows self-initiated projects, no client logos</b><span >It's stated plainly in the section subtitle and inside every case study. Logos of companies I haven't worked with would borrow trust and destroy it at the first question.</span></li>
+        <li><b >Analytics is wired up but switched off</b><span >The Plausible setup — no cookies, no personal data — sits commented out and switches on with a single line. Until there's a domain, nothing is collected and nothing leaves the page.</span></li>
       </ul>
           <figure class="shot">
-            <img src="images/case-pcash/03-cases.webp" width="1200" height="612" alt="Секция «Работы» на сайте" loading="lazy" decoding="async">
-            <figcaption data-ru="Подзаголовок «Работ» говорит прямо: это самостоятельные проекты, а не клиентские логотипы." data-en="The Work section subtitle says it plainly: these are self-initiated projects, not client logos.">Подзаголовок «Работ» говорит прямо: это самостоятельные проекты, а не клиентские логотипы.</figcaption>
+            <img src="images/case-pcash/03-cases.webp" width="1200" height="612" alt="Work section on the site" loading="lazy" decoding="async">
+            <figcaption >The Work section subtitle says it plainly: these are self-initiated projects, not client logos.</figcaption>
           </figure>
     </section>
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" data-ru="Стек" data-en="Stack">Стек</p>
-      <h2 data-ru="Чем собран сайт" data-en="What the site is built with">Чем собран сайт</h2>
-      <p data-ru="Ни одного фреймворка. Каждая зависимость выбрана потому, что ванильная альтернатива была бы хуже измеримо, а не потому, что так удобнее." data-en="No framework. Every dependency was chosen because the vanilla alternative would have been measurably worse, not because it was more convenient.">Ни одного фреймворка. Каждая зависимость выбрана потому, что ванильная альтернатива была бы хуже измеримо, а не потому, что так удобнее.</p>
+      <p class="pill" >Stack</p>
+      <h2 >What the site is built with</h2>
+      <p >No framework. Every dependency was chosen because the vanilla alternative would have been measurably worse, not because it was more convenient.</p>
       </div>
       <ul class="note-list">
-        <li><b data-ru="HTML + CSS + Vanilla JS" data-en="HTML + CSS + Vanilla JS">HTML + CSS + Vanilla JS</b><span data-ru="Статические файлы, которые работают на любом хостинге. Ноль шагов сборки, ноль конфигов, ноль node_modules на проде." data-en="Static files that work on any host. Zero build steps, zero configs, zero node_modules in production.">Статические файлы, которые работают на любом хостинге. Ноль шагов сборки, ноль конфигов, ноль node_modules на проде.</span></li>
-        <li><b data-ru="GSAP + ScrollTrigger" data-en="GSAP + ScrollTrigger">GSAP + ScrollTrigger</b><span data-ru="Появление секций, параллакс и переходы. IntersectionObserver-фоллбэк гарантирует, что контент виден даже если GSAP не загрузился." data-en="Section reveals, parallax and transitions. An IntersectionObserver fallback guarantees content is visible even if GSAP fails to load.">Появление секций, параллакс и переходы. IntersectionObserver-фоллбэк гарантирует, что контент виден даже если GSAP не загрузился.</span></li>
-        <li><b data-ru="Lenis" data-en="Lenis">Lenis</b><span data-ru="Инерционный скролл. Отключается полностью при prefers-reduced-motion — нативный скролл лучше для пользователей, которые не хотят движения." data-en="Inertia scrolling. Disabled entirely under prefers-reduced-motion — native scroll is better for users who don't want motion.">Инерционный скролл. Отключается полностью при prefers-reduced-motion — нативный скролл лучше для пользователей, которые не хотят движения.</span></li>
-        <li><b data-ru="Three.js (WebGL-шейдер фона)" data-en="Three.js (background WebGL shader)">Three.js (WebGL-шейдер фона)</b><span data-ru="Фрактальный шум, отрисованный в 45% разрешения при 30fps. На тач-устройствах и при reduced-motion заменяется статическим CSS-градиентом." data-en="Fractal noise rendered at 45% resolution at 30fps. On touch devices and under reduced-motion it falls back to a static CSS gradient.">Фрактальный шум, отрисованный в 45% разрешения при 30fps. На тач-устройствах и при reduced-motion заменяется статическим CSS-градиентом.</span></li>
+        <li><b >HTML + CSS + Vanilla JS</b><span >Static files that work on any host. Zero build steps, zero configs, zero node_modules in production.</span></li>
+        <li><b >GSAP + ScrollTrigger</b><span >Section reveals, parallax and transitions. An IntersectionObserver fallback guarantees content is visible even if GSAP fails to load.</span></li>
+        <li><b >Lenis</b><span >Inertia scrolling. Disabled entirely under prefers-reduced-motion — native scroll is better for users who don't want motion.</span></li>
+        <li><b >Three.js (background WebGL shader)</b><span >Fractal noise rendered at 45% resolution at 30fps. On touch devices and under reduced-motion it falls back to a static CSS gradient.</span></li>
       </ul>
     </section>
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" data-ru="Метрики" data-en="Metrics">Метрики</p>
-      <h2 data-ru="Числа, которые можно проверить" data-en="Numbers you can check">Числа, которые можно проверить</h2>
+      <p class="pill" >Metrics</p>
+      <h2 >Numbers you can check</h2>
       </div>
       <ul class="note-list">
-        <li><b data-ru="Lighthouse: 100 / 100 / 100 / 100" data-en="Lighthouse: 100 / 100 / 100 / 100">Lighthouse: 100 / 100 / 100 / 100</b><span data-ru="Performance, Accessibility, Best Practices, SEO — на каждой странице. Не скриншот хорошего прогона, а стабильный результат." data-en="Performance, Accessibility, Best Practices, SEO — on every page. Not a screenshot of a lucky run, but a stable result.">Performance, Accessibility, Best Practices, SEO — на каждой странице. Не скриншот хорошего прогона, а стабильный результат.</span></li>
-        <li><b data-ru="30 блоков prefers-reduced-motion в CSS + 6 проверок в JS" data-en="30 prefers-reduced-motion blocks in CSS + 6 JS guards">30 блоков prefers-reduced-motion в CSS + 6 проверок в JS</b><span data-ru="Каждый эффект, способный вызвать дискомфорт, отключается системной настройкой. Контент и иерархия сохраняются полностью." data-en="Every effect that could cause discomfort is disabled by a system preference. Content and hierarchy are fully preserved.">Каждый эффект, способный вызвать дискомфорт, отключается системной настройкой. Контент и иерархия сохраняются полностью.</span></li>
-        <li><b data-ru="Контраст ≥ 7:1 (AAA) на всём тексте" data-en="Contrast ≥ 7:1 (AAA) on all body text">Контраст ≥ 7:1 (AAA) на всём тексте</b><span data-ru="Вдвое строже обязательных 4,5:1. Тёмные облачные банки фона подобраны так, чтобы контраст никогда не проседал ниже этой границы." data-en="Twice as strict as the required 4.5:1. The dark cloud banks are tuned so contrast never dips below this threshold.">Вдвое строже обязательных 4,5:1. Тёмные облачные банки фона подобраны так, чтобы контраст никогда не проседал ниже этой границы.</span></li>
-        <li><b data-ru="5 страниц · полный RU/EN · 0 фреймворков" data-en="5 pages · full RU/EN · 0 frameworks">5 страниц · полный RU/EN · 0 фреймворков</b><span data-ru="Переведено всё: заголовки, формы, подсказки, ошибки валидации, тексты бота. Не «основной контент на двух языках», а каждая строка." data-en="Everything is translated: headings, forms, hints, validation errors, bot copy. Not "main content in two languages" but every single string.">Переведено всё: заголовки, формы, подсказки, ошибки валидации, тексты бота. Не «основной контент на двух языках», а каждая строка.</span></li>
+        <li><b >Lighthouse: 100 / 100 / 100 / 100</b><span >Performance, Accessibility, Best Practices, SEO — on every page. Not a screenshot of a lucky run, but a stable result.</span></li>
+        <li><b >30 prefers-reduced-motion blocks in CSS + 6 JS guards</b><span >Every effect that could cause discomfort is disabled by a system preference. Content and hierarchy are fully preserved.</span></li>
+        <li><b >Contrast ≥ 7:1 (AAA) on all body text</b><span >Twice as strict as the required 4.5:1. The dark cloud banks are tuned so contrast never dips below this threshold.</span></li>
+        <li><b >5 pages · full RU/EN · 0 frameworks</b><span>Everything is translated: headings, forms, hints, validation errors, bot copy. Not "main content in two languages" but every single string.</span></li>
       </ul>
     </section>
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" data-ru="Итог" data-en="The upshot">Итог</p>
-      <h2 data-ru="Что получилось в итоге" data-en="What it adds up to">Что получилось в итоге</h2>
+      <p class="pill" >The upshot</p>
+      <h2 >What it adds up to</h2>
       </div>
       <ul class="note-list">
-        <li><b data-ru="Сайт не зависит от фреймворка" data-en="The site doesn't depend on a framework">Сайт не зависит от фреймворка</b><span data-ru="Это обычные статические файлы: их можно положить почти на любой хостинг, и они не сломаются от того, что вышла новая версия чужой библиотеки." data-en="These are plain static files: they can go on almost any host, and they won't break because someone else's library shipped a new major version.">Это обычные статические файлы: их можно положить почти на любой хостинг, и они не сломаются от того, что вышла новая версия чужой библиотеки.</span></li>
-        <li><b data-ru="Два языка целиком, а не наполовину" data-en="Two languages in full, not half">Два языка целиком, а не наполовину</b><span data-ru="Переведены все страницы вместе с подписями форм, подсказками и текстом бота — а не только заголовки на главной." data-en="Every page is translated along with form labels, hints and the bot's replies — not just the headlines on the homepage.">Переведены все страницы вместе с подписями форм, подсказками и текстом бота — а не только заголовки на главной.</span></li>
-        <li><b data-ru="Движение и контраст — проверены, а не подобраны на глаз" data-en="Motion and contrast are checked, not eyeballed">Движение и контраст — проверены, а не подобраны на глаз</b><span data-ru="Вся анимация выключается системной настройкой, а цвета тёмной темы сверялись с требованиями по контрасту." data-en="All animation switches off with a system preference, and the dark theme's colours were checked against contrast requirements.">Вся анимация выключается системной настройкой, а цвета тёмной темы сверялись с требованиями по контрасту.</span></li>
+        <li><b >The site doesn't depend on a framework</b><span >These are plain static files: they can go on almost any host, and they won't break because someone else's library shipped a new major version.</span></li>
+        <li><b >Two languages in full, not half</b><span >Every page is translated along with form labels, hints and the bot's replies — not just the headlines on the homepage.</span></li>
+        <li><b >Motion and contrast are checked, not eyeballed</b><span >All animation switches off with a system preference, and the dark theme's colours were checked against contrast requirements.</span></li>
       </ul>
-      <p class="case-outro" data-ru="Это не список достижений. Это следствие того, что каждое решение выше выросло из ограничения, а не из вкуса." data-en="This isn't a list of achievements. It's what follows from every decision above growing out of a constraint rather than a preference.">Это не список достижений. Это следствие того, что каждое решение выше выросло из ограничения, а не из вкуса.</p>
+      <p class="case-outro" >This isn't a list of achievements. It's what follows from every decision above growing out of a constraint rather than a preference.</p>
           <figure class="shot">
-            <img src="images/case-pcash/06-contact.webp" width="1200" height="592" alt="Форма связи на сайте" loading="lazy" decoding="async">
-            <figcaption data-ru="Финал страницы: одна форма, три поля и обещание ответить за день." data-en="The end of the page: one form, three fields and a promise to reply within a day.">Финал страницы: одна форма, три поля и обещание ответить за день.</figcaption>
+            <img src="images/case-pcash/06-contact.webp" width="1200" height="592" alt="Contact form on the site" loading="lazy" decoding="async">
+            <figcaption >The end of the page: one form, three fields and a promise to reply within a day.</figcaption>
           </figure>
     </section>
 
   </div>
 
   <section class="case-cta-section">
-    <h2 data-ru="Такой же разбор — для вашего проекта" data-en="The same rigour, for your project">Такой же разбор — для вашего проекта</h2>
-    <p data-ru="Расскажите задачу — отвечу в течение дня и честно скажу, если она не моя." data-en="Tell me the task — I'll reply within a day, and say so honestly if it isn't mine.">Расскажите задачу — отвечу в течение дня и честно скажу, если она не моя.</p>
+    <h2 >The same rigour, for your project</h2>
+    <p >Tell me the task — I'll reply within a day, and say so honestly if it isn't mine.</p>
     <div class="case-cta-buttons">
-      <a class="btn btn-primary" href="index.html#contact" data-ru="Обсудить задачу" data-en="Discuss a project">Обсудить задачу</a>
-      <a class="btn btn-ghost" href="case-krsh.html" data-ru="Смотреть кейс KRSH" data-en="See the KRSH case study">Смотреть кейс KRSH</a>
+      <a class="btn btn-primary" href="index.html#contact" >Discuss a project</a>
+      <a class="btn btn-ghost" href="case-krsh.html" >See the KRSH case study</a>
     </div>
   </section>
 
@@ -440,7 +436,7 @@
   </div>
 </footer>
 
-<button class="to-top" id="toTop" aria-label="Наверх"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<button class="to-top" id="toTop" aria-label="Back to top"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
 <script src="gsap.min.js"></script>
 <script src="ScrollTrigger.min.js"></script>

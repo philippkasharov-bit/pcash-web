@@ -19,28 +19,7 @@ if (document.readyState === 'complete') { setTimeout(markLoaded, 300); }
 else { window.addEventListener('load', () => setTimeout(markLoaded, 350)); }
 setTimeout(markLoaded, 2500); // safety fallback
 
-// ---- language toggle ----
-const langButtons = document.querySelectorAll('.lang-toggle button');
-const i18nNodes = document.querySelectorAll('[data-ru]');
-let currentLang = (() => { try { return localStorage.getItem('pcash-lang') || 'ru'; } catch { return 'ru'; } })();
-
-function setLang(lang) {
-  currentLang = lang;
-  try { localStorage.setItem('pcash-lang', lang); } catch {}
-  i18nNodes.forEach((n) => {
-    if (n.dataset[lang] !== undefined) {
-      if (n.dataset[lang].includes('<')) n.innerHTML = n.dataset[lang];
-      else n.textContent = n.dataset[lang];
-    }
-  });
-  document.querySelectorAll('[data-ph-ru]').forEach(el => {
-    el.placeholder = el.dataset['ph' + (lang === 'ru' ? 'Ru' : 'En')];
-  });
-  langButtons.forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
-  document.documentElement.lang = lang;
-}
-langButtons.forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
-if (currentLang !== 'ru') setLang(currentLang);
+const currentLang = 'en';
 
 // ---- section reveal on scroll ----
 const revealObserver = new IntersectionObserver((entries) => {
@@ -108,10 +87,10 @@ const navObserver = new IntersectionObserver((entries) => {
   const nav = document.getElementById('dotNav');
   if (!nav) return;
   const names = {
-    cases: 'Работы', services: 'Услуги', about: 'Обо мне', process: 'Процесс',
-    calc: 'Цены', guarantees: 'Гарантии', faq: 'Вопросы', contact: 'Контакты'
+    cases: 'Work', services: 'Services', about: 'About', process: 'Process',
+    calc: 'Pricing', guarantees: 'Guarantees', faq: 'FAQ', contact: 'Contact'
   };
-  const secs = [{ id: 'top', el: document.querySelector('.hero'), name: 'Начало' }]
+  const secs = [{ id: 'top', el: document.querySelector('.hero'), name: 'Home' }]
     .concat(Object.keys(names)
       .map((id) => ({ id, el: document.getElementById(id), name: names[id] }))
       .filter((s) => s.el));
@@ -125,29 +104,21 @@ const navObserver = new IntersectionObserver((entries) => {
     s.link = a;
   });
 
-  // Активной была последняя секция, пересёкшая порог 0.35: на высоком
-  // экране порог одновременно проходят несколько, и нижняя затирала
-  // верхнюю — подсветка перескакивала через «Вопросы» на «Контакты».
-  // Считать «кто накрывает середину экрана» тоже неверно: секции здесь
-  // короче экрана, и после перехода по якорю середину накрывает уже
-  // следующая секция. Берём обычный scroll-spy: активна последняя
-  // секция, чей верх поднялся выше линии под липкой шапкой.
+  // scroll-spy: highlight the last section whose top has scrolled past the sticky header
   const SPY_LINE = 140;
   function syncDots() {
     let best = secs[0];
     secs.forEach((s) => {
       if (s.el.getBoundingClientRect().top - SPY_LINE <= 0) best = s;
     });
-    // у самого низа страницы последняя секция может не дотянуть до линии
+    // at the very bottom the last section may not reach the spy line
     const atBottom = window.innerHeight + window.scrollY >=
       document.documentElement.scrollHeight - 4;
     if (atBottom) best = secs[secs.length - 1];
     secs.forEach((s) => s.link.classList.toggle('active', s === best));
   }
   syncDots();
-  // Скроллом управляет Lenis, а он подавляет нативное событие scroll —
-  // слушать только window бесполезно. IntersectionObserver срабатывает
-  // от изменения геометрии и служит основным триггером.
+  // Lenis suppresses native scroll events; IntersectionObserver is the primary trigger
   const io = new IntersectionObserver(syncDots, { threshold: [0, 0.25, 0.5, 0.75, 1] });
   secs.forEach((s) => io.observe(s.el));
   window.addEventListener('resize', syncDots);
@@ -247,7 +218,7 @@ function formPayload(form) {
   const o = {};
   fd.forEach((v, k) => { o[k] = v; });
   const rating = form.querySelectorAll('#stars button.on').length;
-  if (rating) o['Оценка'] = rating + '/5';
+  if (rating) o['Rating'] = rating + '/5';
   return o;
 }
 
@@ -260,10 +231,7 @@ function showFormResult(form, ok) {
     const parent = form.parentElement;
     const msg = document.createElement('div');
     msg.className = 'form-success';
-    const ru = currentLang === 'ru';
-    msg.innerHTML = ru
-      ? '<span class="success-icon">✉</span><h3>Почти отправлено</h3><p>Откроется почтовый клиент с готовым письмом — нажмите «Отправить». Если клиент не открылся, напишите напрямую на ' + FORM_EMAIL + '</p>'
-      : '<span class="success-icon">✉</span><h3>Almost sent</h3><p>Your mail app will open with a draft — hit send. If nothing opens, email me directly at ' + FORM_EMAIL + '</p>';
+    msg.innerHTML = '<span class="success-icon">✉</span><h3>Almost sent</h3><p>Your mail app will open with a draft — hit send. If nothing opens, email me directly at ' + FORM_EMAIL + '</p>';
     form.style.display = 'none';
     parent.appendChild(msg);
   }
@@ -281,14 +249,13 @@ function mailtoFallback(form, subject) {
 
 function validateContactForm(form) {
   let valid = true;
-  const ru = currentLang === 'ru';
   form.querySelectorAll('.field-error').forEach(el => el.textContent = '');
   form.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
 
   const name = form.querySelector('#cf-name');
   if (name && !name.value.trim()) {
     name.classList.add('invalid');
-    name.nextElementSibling.textContent = ru ? 'Введите имя' : 'Enter your name';
+    name.nextElementSibling.textContent = 'Enter your name';
     valid = false;
   }
 
@@ -299,11 +266,11 @@ function validateContactForm(form) {
     const looksLikeTelegram = /^@?\w{3,}/.test(v);
     if (!v) {
       contact.classList.add('invalid');
-      contact.nextElementSibling.textContent = ru ? 'Укажите email или Telegram' : 'Enter email or Telegram';
+      contact.nextElementSibling.textContent = 'Enter email or Telegram';
       valid = false;
     } else if (!looksLikeEmail && !looksLikeTelegram) {
       contact.classList.add('invalid');
-      contact.nextElementSibling.textContent = ru ? 'Введите email (you@mail.ru) или Telegram (@ник)' : 'Enter an email (you@mail.com) or Telegram (@handle)';
+      contact.nextElementSibling.textContent = 'Enter an email (you@mail.com) or Telegram (@handle)';
       valid = false;
     }
   }
@@ -311,20 +278,19 @@ function validateContactForm(form) {
   const msg = form.querySelector('#cf-msg');
   if (msg && !msg.value.trim()) {
     msg.classList.add('invalid');
-    msg.nextElementSibling.textContent = ru ? 'Опишите задачу' : 'Describe your task';
+    msg.nextElementSibling.textContent = 'Describe your task';
     valid = false;
   }
   return valid;
 }
 
-function submitWithFeedback(form, subjectRu, subjectEn) {
+function submitWithFeedback(form, subject) {
   if (!form) return;
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!validateContactForm(form)) return;
     const btn = form.querySelector('button[type="submit"]');
     if (!btn || btn.classList.contains('loading') || btn.classList.contains('success')) return;
-    const subject = currentLang === 'ru' ? subjectRu : subjectEn;
     btn.classList.add('loading');
     if (window.plausible) window.plausible('Form submit', { props: { form: form.id } });
 
@@ -338,7 +304,7 @@ function submitWithFeedback(form, subjectRu, subjectEn) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(Object.assign(
-          { access_key: FORM_ACCESS_KEY, subject: subject, from_name: 'P.Cash — сайт' },
+          { access_key: FORM_ACCESS_KEY, subject: subject, from_name: 'P.Cash' },
           formPayload(form)))
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -350,18 +316,18 @@ function submitWithFeedback(form, subjectRu, subjectEn) {
     }
   });
 }
-submitWithFeedback(document.getElementById('contactForm'), 'Заявка с сайта P.Cash', 'Enquiry from the P.Cash site');
+submitWithFeedback(document.getElementById('contactForm'), 'Enquiry from P.Cash');
 
 // ---- chat widget ----
 const kb = [
-  { keys: ['цена','стоит','сколько','прайс','стоимость','price','cost','how much'], ru: 'Сайт под ключ — от $250, ИИ-бот — от $80, UX-аудит — от $25. Точная цена — после брифа.', en: 'Full site — from $250, AI bot — from $80, UX audit — from $25. Exact price after a brief.' },
-  { keys: ['бот','ии','чат','автоматиз','bot','ai','chat','automat'], ru: 'Делаю ИИ-ботов, которые отвечают по базе знаний вашего бизнеса — на сайте или в мессенджерах. Плюс любые автоматизации: заявки, CRM, уведомления. Бот вроде меня.', en: 'I build AI bots that answer from your business knowledge base — on the site or in messengers. Plus any automation: leads, CRM, notifications. A bot like me.' },
-  { keys: ['срок','долго','когда','время','time','deadline','how long'], ru: 'Лендинг — от недели, сайт с ботом — 2-3 недели, аудит — 2-3 дня. Срок фиксируем до старта.', en: 'Landing — from a week, site with a bot — 2-3 weeks, audit — 2-3 days. Deadline fixed before we start.' },
-  { keys: ['опыт','отзыв','кейс','кто','experience','review','case','who'], ru: 'Филип — дизайнер и разработчик с 2 годами практики. Первым клиентам — цена ниже рынка за честный отзыв.', en: 'Philip — designer and developer with 2 years of practice. First clients get below-market pricing for an honest review.' },
-  { keys: ['оплат','предоплат','pay','payment'], ru: 'Предоплата 50%, остаток — после сдачи и вашей проверки.', en: '50% upfront, the rest after delivery and your review.' },
-  { keys: ['привет','здравств','hello','hi'], ru: 'Привет! Спросите про услуги, цены или сроки.', en: 'Hi! Ask about services, prices or timelines.' },
+  { keys: ['price','cost','how much'], text: 'Full site — from $250, AI bot — from $80, UX audit — from $25. Exact price after a brief.' },
+  { keys: ['bot','ai','chat','automat'], text: 'I build AI bots that answer from your business knowledge base — on the site or in messengers. Plus any automation: leads, CRM, notifications. A bot like me.' },
+  { keys: ['time','deadline','how long'], text: 'Landing — from a week, site with a bot — 2-3 weeks, audit — 2-3 days. Deadline fixed before we start.' },
+  { keys: ['experience','review','case','who'], text: 'Philip — designer and developer with 2 years of practice. First clients get below-market pricing for an honest review.' },
+  { keys: ['pay','payment'], text: '50% upfront, the rest after delivery and your review.' },
+  { keys: ['hello','hi'], text: 'Hi! Ask about services, prices or timelines.' },
 ];
-const fallback = { ru: 'На это лучше ответит сам Филип — напишите в форму внизу или на philippkasharov@gmail.com.', en: 'Philip can answer that best — use the form below or email philippkasharov@gmail.com.' };
+const fallback = 'Philip can answer that best — use the form below or email philippkasharov@gmail.com.';
 
 const fab = document.getElementById('fab');
 const panel = document.getElementById('panel');
@@ -377,7 +343,7 @@ if (fab && panel && chatInput && chatSend) {
     if (!opened) {
       opened = true;
       if (window.plausible) window.plausible('Chat open');
-      setTimeout(() => botSay(currentLang === 'ru' ? 'Это демо ИИ-бота — такого же я соберу под ваш бизнес. Спросите про услуги, цены или сроки.' : "This is a live demo of the AI bot I build. Ask about services, prices or timelines."), 350);
+      setTimeout(() => botSay("This is a live demo of the AI bot I build. Ask about services, prices or timelines."), 350);
     }
   });
   function addMsg(text, who) {
@@ -394,7 +360,7 @@ if (fab && panel && chatInput && chatSend) {
   function answer(q) {
     const lower = q.toLowerCase();
     const hit = kb.find((item) => item.keys.some((k) => lower.includes(k)));
-    botSay(hit ? hit[currentLang] : fallback[currentLang]);
+    botSay(hit ? hit.text : fallback);
   }
   function submitChat() {
     const q = chatInput.value.trim();
@@ -433,40 +399,40 @@ if (fab && panel && chatInput && chatSend) {
   const C = (x, y, r) => 'M' + x + ' ' + y + 'm-' + r + ' 0a' + r + ' ' + r +
                          ' 0 10' + (r * 2) + ' 0a' + r + ' ' + r + ' 0 10-' + (r * 2) + ' 0';
   const GLYPHS = [
-    // микрочип — корпус, ядро, выводы с четырёх сторон
+    // microchip
     ['M7 7h10v10H7z', 'M10.5 10.5h3v3h-3z',
      'M9.5 7V4', 'M12 7V4', 'M14.5 7V4',
      'M9.5 17v3', 'M12 17v3', 'M14.5 17v3',
      'M7 9.5H4', 'M7 12H4', 'M7 14.5H4',
      'M17 9.5h3', 'M17 12h3', 'M17 14.5h3'],
-    // терминал — окно, заголовок, приглашение и строка
+    // terminal
     ['M3 5h18v14H3z', 'M3 9h18', C(5.6, 7, 0.6), C(7.8, 7, 0.6), C(10, 7, 0.6),
      'M6 12.5l2.4 2.2L6 16.9', 'M11.5 16.9h6'],
-    // нейросеть — три слоя узлов со связями
+    // neural network
     [C(5, 7, 1.5), C(5, 17, 1.5), C(12, 12, 1.5), C(19, 7, 1.5), C(19, 17, 1.5),
      'M6.4 7.8l4.2 3.4', 'M6.4 16.2l4.2-3.4', 'M13.4 11.2l4.2-3.4', 'M13.4 12.8l4.2 3.4'],
-    // API — скобки и полезная нагрузка между ними
+    // API
     ['M9 4C6 4 7 10 4 12c3 2 2 8 5 8', 'M15 4c3 0 2 6 5 8-3 2-2 8-5 8',
      C(10.4, 12, 0.85), C(13.6, 12, 0.85)],
-    // база данных — три слоя с индикатором
+    // database
     ['M4 6c0-1.66 3.58-3 8-3s8 1.34 8 3-3.58 3-8 3-8-1.34-8-3z',
      'M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6',
      'M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6',
      'M16.5 17.5h1.5'],
-    // автоматизация — узлы и связи потока
+    // automation
     ['M3 4h6v5H3z', 'M15 4h6v5h-6z', 'M9 15h6v5H9z',
      'M9 6.5h6', 'M18 9v3.5H12V15', 'M6 9v6.5h3',
      'M15.6 5.9l1.4 1.4 2-2.4'],
-    // артборд — рамка с точками привязки и сеткой
+    // artboard
     ['M6.5 6.5h11v11h-11z', 'M6.5 11h11', 'M11 6.5v11',
      C(6.5, 6.5, 1.4), C(17.5, 6.5, 1.4), C(6.5, 17.5, 1.4), C(17.5, 17.5, 1.4)],
-    // безье — кривая с управляющими рычагами
+    // bezier curve
     ['M4 18c6.5 0 9.5-12 16-12', 'M4 18l5-6', 'M20 6l-5 6',
      C(4, 18, 1.5), C(20, 6, 1.5), C(9, 12, 0.9), C(15, 12, 0.9)],
-    // git — ветвление с коммитами
+    // git branch
     [C(6, 5.5, 1.8), C(6, 18.5, 1.8), C(18, 9.5, 1.8),
      'M6 7.3v9.4', 'M18 11.3v.7c0 3.4-4.2 3.6-6.6 4.8'],
-    // сигнал — осциллограмма на сетке
+    // signal waveform
     ['M2 20V4', 'M2 20h20', 'M2 12h20',
      'M4 12l2.5-6 2.6 12L12 9l2.2 5 2.3-8L19 12h3']
   ];
@@ -479,17 +445,26 @@ if (fab && panel && chatInput && chatSend) {
     H = c.height = Math.floor(innerHeight * dpr);
     c.style.width = innerWidth + 'px';
     c.style.height = innerHeight + 'px';
-    const count = innerWidth < 760 ? 9 : 18;
-    items = Array.from({ length: count }, (_, i) => spawn(i));
+    const count = innerWidth < 760 ? 12 : 24;
+    const cols = Math.ceil(Math.sqrt(count * (W / H)));
+    const rows = Math.ceil(count / cols);
+    items = Array.from({ length: count }, (_, i) => {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      const cellW = W / cols;
+      const cellH = H / rows;
+      const cx = (col + 0.2 + Math.random() * 0.6) * cellW;
+      const cy = (row + 0.2 + Math.random() * 0.6) * cellH;
+      return spawn(i, cx, cy);
+    });
   }
 
-  function spawn(i) {
-    // three depth layers: far ones smaller, fainter, slower
+  function spawn(i, startX, startY) {
     const depth = 0.35 + Math.random() * 0.65;
     return {
       paths: GLYPHS[i % GLYPHS.length],
-      x: Math.random() * W,
-      y: Math.random() * H,
+      x: startX != null ? startX : Math.random() * W,
+      y: startY != null ? startY : Math.random() * H,
       size: (22 + depth * 24) * dpr,
       vx: (Math.random() - 0.5) * 0.10 * depth * dpr,
       vy: (0.05 + Math.random() * 0.10) * depth * dpr,
@@ -970,13 +945,64 @@ void main(){
     gsap.to(heroVisual, { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
   }
 
-  // Enhanced preloader exit
+  // Cinematic first-load entrance
   const preloader = document.getElementById('preloader');
+  const header = document.querySelector('.site-header');
+  const heroH1 = document.querySelector('.hero h1');
+  const heroSub = document.querySelector('.hero-sub');
+  const heroCtas = document.querySelectorAll('.hero-cta .btn');
+  const heroShowcase = document.querySelector('.hero-showcase');
+  const dotNav = document.getElementById('dotNav');
+
   if (preloader) {
-    const tl = gsap.timeline({ delay: 0.3 });
-    tl.to(preloader.querySelector('svg'), { scale: 1.5, opacity: 0, duration: 0.6, ease: 'power2.in' })
-      .to(preloader, { opacity: 0, duration: 0.4, ease: 'power2.in' }, '-=0.2')
+    const intro = gsap.timeline({ delay: 0.2 });
+
+    // 1. Preloader logo shrinks to a point
+    intro.to(preloader.querySelector('.preloader-text'), { opacity: 0, y: 10, duration: 0.3, ease: 'power2.in' })
+      .to(preloader.querySelector('.preloader-bar'), { scaleX: 0, opacity: 0, duration: 0.3, ease: 'power2.in' }, '<')
+      .to(preloader.querySelector('svg'), { scale: 0.4, opacity: 0, duration: 0.5, ease: 'back.in(2)' }, '-=0.1')
+      // 2. Preloader wipes away with circle reveal
+      .to(preloader, { clipPath: 'circle(0% at 50% 50%)', duration: 0.7, ease: 'power3.in' }, '-=0.2')
       .call(() => { preloader.style.display = 'none'; });
+
+    // 3. Header drops in
+    if (header) {
+      gsap.set(header, { y: -80, opacity: 0 });
+      intro.to(header, { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }, '-=0.4');
+    }
+
+    // 4. Hero heading — letters cascade up
+    if (heroH1) {
+      const spans = heroH1.querySelectorAll('.w > i');
+      if (spans.length) {
+        gsap.set(spans, { y: '110%', opacity: 0 });
+        intro.to(spans, { y: '0%', opacity: 1, duration: 0.6, stagger: 0.025, ease: 'power3.out' }, '-=0.5');
+      }
+    }
+
+    // 5. Subtitle fades in with upward drift
+    if (heroSub) {
+      gsap.set(heroSub, { y: 30, opacity: 0, filter: 'blur(8px)' });
+      intro.to(heroSub, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: 'power2.out' }, '-=0.3');
+    }
+
+    // 6. CTA buttons stagger in
+    if (heroCtas.length) {
+      gsap.set(heroCtas, { y: 20, opacity: 0, scale: 0.9 });
+      intro.to(heroCtas, { y: 0, opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)' }, '-=0.4');
+    }
+
+    // 7. Showcase scales in from slight zoom
+    if (heroShowcase) {
+      gsap.set(heroShowcase, { scale: 0.85, opacity: 0, filter: 'blur(6px)' });
+      intro.to(heroShowcase, { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 0.9, ease: 'power2.out' }, '-=0.6');
+    }
+
+    // 8. Dot nav fades in
+    if (dotNav) {
+      gsap.set(dotNav, { x: -20, opacity: 0 });
+      intro.to(dotNav, { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, '-=0.4');
+    }
   }
 
   // Section clip-path transitions
@@ -1149,17 +1175,6 @@ void main(){
     }
   }
 
-  // Hero entrance — simple fade + slide, no character splitting
-  const heroH1 = document.querySelector('.hero h1');
-  const heroCopyEls = document.querySelectorAll('.hero-copy > *');
-  if (heroH1) {
-    gsap.set(heroH1, { opacity: 0, y: 20 });
-    gsap.set(heroCopyEls, { opacity: 0, y: 14 });
-
-    const heroTl = gsap.timeline({ delay: 0.3 });
-    heroTl.to(heroH1, { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' });
-    heroTl.to(heroCopyEls, { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power2.out' }, '-=0.3');
-  }
 
   // Hero process animation — infinite Wireframe → Design → Code → Live cycle
   const processStages = document.querySelectorAll('.process-stage');

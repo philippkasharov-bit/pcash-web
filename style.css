@@ -73,7 +73,7 @@ a { color: inherit; text-decoration: none; }
   transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s, visibility 0.5s 0.1s, clip-path 0.7s cubic-bezier(0.22,1,0.36,1);
   clip-path: inset(0);
 }
-body.loaded .preloader { clip-path: inset(0 0 100% 0); opacity: 0; visibility: hidden; }
+body.loaded .preloader { opacity: 0; visibility: hidden; }
 .preloader-content { display: flex; flex-direction: column; align-items: center; gap: 20px; }
 .preloader-logo { width: 66px; height: 66px; }
 .pre-ring { transform-origin: 24px 24px; animation: spin 1.1s linear infinite; }
@@ -110,9 +110,6 @@ body.loaded .preloader { clip-path: inset(0 0 100% 0); opacity: 0; visibility: h
 .main-nav > a, .nav-item.has-drop > a { display: inline-flex; align-items: center; line-height: 1; }
 .main-nav a { font-size: 14px; color: var(--ink-soft); transition: color 0.2s; }
 .main-nav a:hover { color: var(--ink); }
-.lang-toggle { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--card-bg); }
-.lang-toggle button { border: none; background: none; padding: 6px 13px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); cursor: pointer; }
-.lang-toggle button.active { background: var(--teal); color: #fff; }
 
 .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; transform: scaleX(0); transform-origin: 0 50%; background: var(--violet); z-index: 100; will-change: transform; }
 .section-counter { position: fixed; bottom: 28px; left: 28px; font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); opacity: 0.5; z-index: 50; letter-spacing: 0.03em; transition: opacity 0.3s; }
@@ -376,12 +373,12 @@ body.loaded .shard.s5 { animation-delay: 0.35s; }
 .code-demo { display: flex; flex-direction: column; width: 100%; gap: 10px; }
 .code-window { background: var(--ink); color: #D8D5C7; border-radius: 8px; padding: 12px 14px; font-family: var(--font-mono); font-size: 11px; line-height: 1.7; }
 .code-window .c1 { color: #7FB88A; } .code-window .c2 { color: #E3A24C; }
-.code-line { opacity: 0; }
+.code-window .code-line { opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  .code-line:nth-child(1) { animation: codeReveal 11s ease-in-out infinite; }
-  .code-line:nth-child(2) { animation: codeReveal 11s ease-in-out infinite; animation-delay: 0.3s; }
-  .code-line:nth-child(3) { animation: codeReveal 11s ease-in-out infinite; animation-delay: 0.6s; }
-  .code-line:nth-child(4) { animation: codeReveal 11s ease-in-out infinite; animation-delay: 0.9s; }
+  .code-window .code-line:nth-child(1) { animation: codeReveal 11s ease-in-out infinite; }
+  .code-window .code-line:nth-child(2) { animation: codeReveal 11s ease-in-out infinite; animation-delay: 0.3s; }
+  .code-window .code-line:nth-child(3) { animation: codeReveal 11s ease-in-out infinite; animation-delay: 0.6s; }
+  .code-window .code-line:nth-child(4) { animation: codeReveal 11s ease-in-out infinite; animation-delay: 0.9s; }
   .browser-frame { animation: browserReveal 11s ease-in-out infinite; }
 }
 @keyframes codeReveal { 0%,10% {opacity:0;} 20%,85% {opacity:1;} 95%,100% {opacity:0;} }
@@ -692,9 +689,8 @@ body:has(a:hover, button:hover, .btn:hover) .cursor-pen { color: var(--violet); 
 .cursor-text { font-family: var(--font-mono); font-size: 11px; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0; transition: opacity 0.2s; }
 .cursor-follow.has-text .cursor-text { opacity: 1; }
 @media (hover: none) { .cursor-dot, .cursor-pen, .cursor-glow { display: none !important; } body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button { cursor: auto; } }
-body.has-custom-cursor { cursor: auto; }
-body.has-custom-cursor a, body.has-custom-cursor button, body.has-custom-cursor .btn { cursor: pointer; }
-body.has-custom-cursor input, body.has-custom-cursor textarea { cursor: text; }
+body.has-custom-cursor, body.has-custom-cursor * { cursor: none !important; }
+body.has-custom-cursor input, body.has-custom-cursor textarea { cursor: none !important; }
 
 /* preloader clip-path reveal */
 body.clip-revealing { clip-path: circle(0% at 50% 50%); }
@@ -1179,10 +1175,10 @@ body:has(a:hover, button:hover, .btn:hover, input:hover, textarea:hover) .cursor
 .hero-roles span em { display: block; height: 1.4em; line-height: 1.4em; font-style: normal; }
 
 /* ==================================================================
-   Заголовок героя. Скрипт разбивает его на посимвольные спаны — это
-   нужно для вступительной анимации, где каждая буква выезжает снизу.
-   Раньше эти же спаны несли посимвольный градиент; сейчас цвет
-   сплошной и задаётся ниже, поэтому фоновых свойств здесь нет.
+   Hero heading. The script splits it into per-character spans for
+   the intro animation, where each letter slides up from below.
+   These spans used to carry a per-character gradient; the color is
+   now solid and set below, so there are no background props here.
    ================================================================== */
 .hero h1 {
   background: none;
@@ -1384,10 +1380,11 @@ body.gsap-ready .section:not(.seen) :is(.kicker, .section-sub, .service-card,
 }
 
 /* ==================================================================
-   Подсветка буквы под курсором. Когда-то буквы красились градиентом с
-   background-clip, и filter на них ломал заливку — буква пропадала или
-   превращалась в прямоугольник. Градиента больше нет, так что запрет
-   на filter снят; подсветка держится на одном transform.
+   Highlight for the letter under the cursor. Letters used to be
+   colored with a background-clip gradient, and filter broke the
+   fill — the letter would vanish or turn into a rectangle. No
+   gradient anymore, so filter is allowed; the highlight now just
+   uses transform.
    ================================================================== */
 .hero h1 .char { transition: transform 0.32s cubic-bezier(0.22,1,0.36,1); }
 .hero h1 .char.near {
@@ -1458,8 +1455,8 @@ body.gsap-ready .section:not(.seen) :is(.kicker, .section-sub, .service-card,
 .wf-card .c1, .wf-card .c2, .c1, .c2 { font-size: 12px; }
 .amb-chip, .chat-time, .msg-time { font-size: 12px; }
 
-/* Тени у текста здесь сняты: заголовки набраны крупно и сплошным
-   цветом, тень на таком кегле читается как грязь по краю глифа. */
+/* Text shadows removed here: headings are large and solid-colored,
+   a shadow at this size just reads as dirt on the glyph edge. */
 .hero-facts .fact strong,
 .fact strong,
 .service-card h3, .post h3, .step-card h3,
@@ -1604,7 +1601,7 @@ body.gsap-ready .section:not(.seen) :is(.kicker, .section-sub, .service-card,
 @media (max-width: 1120px) {
   .main-nav > a:not(.nav-cta), .nav-item.has-drop > a { font-size: 12.5px; }
 }
-.mobile-menu a, .nav-drop .drop-link em, .lang-toggle button { font-size: 13px; }
+.mobile-menu a, .nav-drop .drop-link em { font-size: 13px; }
 
 /* mobile sticky CTA removed — it collided with the chat button and
    covered the footer, and the header CTA already carries that action */
@@ -1658,7 +1655,7 @@ body.gsap-ready .section:not(.seen) :is(.kicker, .section-sub, .service-card,
 input, textarea, select, .step-num, .drop-link, .quick {
   border-radius: 12px;
 }
-.pill, .step-tag, .combo-badge, .stack-chips span, .chip, .lang-toggle,
+.pill, .step-tag, .combo-badge, .stack-chips span, .chip,
 .marquee-track span { border-radius: 999px; }
 .to-top, .chat-fab, .ap-ic, .step-num { border-radius: 50%; }
 .step-num { border-radius: 50%; }
@@ -1684,7 +1681,7 @@ input, textarea, select, .step-num, .drop-link, .quick {
 .step-tag, .pill, .footer-note, .flow-node { font-size: 12px; }
 .review-form label, .contact-form label, form label { font-size: 14px; }
 .main-nav a, .mobile-menu a, .drop-link, .site-footer,
-.hero-roles, .fact > span, .lang-toggle button { font-size: 13px; }
+.hero-roles, .fact > span { font-size: 13px; }
 .pt-row, .pt-row b, .addon-price, .btn { font-size: 14px; }
 
 /* ==================================================================
@@ -2050,10 +2047,10 @@ input, textarea, select, .step-num, .drop-link, .quick {
 .step.lit .step-card { border-color: rgba(124,92,255,0.30); }
 .step-tag { background: rgba(255,255,255,0.05); color: #C9C6D4; }
 
-/* --- обложка проекта в карточке «Работы» ---
-   Карточка без изображения читается как анонс, а не как работа.
-   Обложка выходит в край: паддинг карточки (22px) гасится
-   отрицательными полями, верхние углы совпадают с её радиусом (18px). */
+/* --- project cover in the "Works" card ---
+   A card with no image reads as an announcement, not a project.
+   The cover bleeds to the edge: the card's padding (22px) is
+   cancelled with negative margins, top corners match its radius (18px). */
 .post-thumb {
   display: block;
   margin: -22px -22px 16px;
@@ -2070,17 +2067,17 @@ input, textarea, select, .step-num, .drop-link, .quick {
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .post.has-thumb:hover .post-thumb img { transform: scale(1.04); }
-/* тег ложится поверх обложки, а не занимает отдельную строку под ней */
+/* tag sits over the cover instead of its own line below it */
 .post.has-thumb .post-tag { margin-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   .post-thumb img { transition: none; }
   .post.has-thumb:hover .post-thumb img { transform: none; }
 }
 
-/* --- обложка кейса о самом сайте ---
-   Собрана на CSS, а не картинкой: карточка ведёт на разбор этой же
-   страницы, поэтому скриншот дублировал бы то, что и так перед глазами.
-   Плюс обложка не весит ни байта и не расходится с палитрой. */
+/* --- cover for the case study about this site ---
+   Built with CSS, not an image: the card links to a breakdown of this
+   same page, so a screenshot would just duplicate what's already on
+   screen. Also costs zero bytes and can't drift from the palette. */
 .self-cover {
   position: relative;
   display: flex; flex-direction: column;
@@ -2092,7 +2089,7 @@ input, textarea, select, .step-num, .drop-link, .quick {
     linear-gradient(150deg, #171633 0%, #0E0F17 62%, #0B0C12 100%);
   overflow: hidden;
 }
-/* мягкая световая дымка — тот же приём, что у фонового тумана */
+/* soft light haze — same trick as the background fog */
 .self-cover::after {
   content: '';
   position: absolute; inset: -30%;
@@ -2116,14 +2113,14 @@ input, textarea, select, .step-num, .drop-link, .quick {
 }
 
 /* ==================================================================
-   Правки по разбору презентации
+   Fixes from the presentation review
    ================================================================== */
 
-/* --- 1. Заголовок героя без градиента ---
-   Разноцветная заливка распределяла цвет по координате буквы, а не по
-   смыслу: тёплый конец доставался последнему слову строки независимо
-   от того, что выделено. Сплошной цвет читается ровно, а выделение
-   несёт <em> — одним акцентным цветом, без перелива. */
+/* --- 1. Hero heading without a gradient ---
+   The multicolor fill distributed color by letter position, not by
+   meaning: the warm end always landed on the line's last word
+   regardless of what was emphasized. Solid color reads evenly, and
+   emphasis is now carried by <em> in a single accent color, no blend. */
 .hero h1,
 .hero h1 span,
 .hero h1 .char {
@@ -2141,13 +2138,13 @@ input, textarea, select, .step-num, .drop-link, .quick {
   -webkit-text-fill-color: #FFB07A;
   color: #FFB07A;
 }
-/* подсветка буквы под курсором тоже была частью градиентного слоя */
+/* cursor-hover letter highlight was also part of the gradient layer */
 .hero h1 .char.near { filter: none; }
 
-/* --- 2. Точечная навигация: цель была 24px при видимой точке 7px ---
-   Попасть по ней трудно, и она не читается как кнопка. Цель доведена
-   до 44px (минимум WCAG 2.2 для комфортного касания), сама точка —
-   заметнее. Визуальный размер точки не изменился. */
+/* --- 2. Dot nav: target was 24px with a 7px visible dot ---
+   Hard to hit, and didn't read as a button. Target bumped to 44px
+   (WCAG 2.2 minimum for comfortable touch), the dot itself is more
+   visible. Its rendered size is unchanged. */
 .dot-nav { gap: 4px; }
 .dot-nav a { width: 44px; height: 44px; }
 .dot-nav a::before {
@@ -2157,12 +2154,12 @@ input, textarea, select, .step-num, .drop-link, .quick {
 .dot-nav a:hover::before { background: rgba(255,255,255,0.85); }
 .dot-nav .dot-label { left: 38px; }
 
-/* --- 3. Гарантии снова на поверхности ---
-   Блок был намеренно оставлен без карточек, чтобы не выстраивать шестую
-   сетку подряд. Но текст оказался прямо на движущемся тумане, где
-   контраст меняется от кадра к кадру. Возвращаю штатную «вторичную»
-   поверхность сайта — ту же, что у шагов процесса и FAQ: она заметно
-   легче основных карточек, поэтому ритм страницы сохраняется. */
+/* --- 3. Guarantees back on a surface ---
+   The block was deliberately left card-less to avoid a sixth grid in
+   a row. But the text sat right on the moving fog, where contrast
+   shifts frame to frame. Bringing back the site's standard "secondary"
+   surface — same as process steps and FAQ: noticeably lighter than
+   the main cards, so the page rhythm holds. */
 .guarantees { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
 .guar-card {
   --accent-bar: linear-gradient(90deg, var(--violet), var(--violet-2));
@@ -2192,17 +2189,18 @@ input, textarea, select, .step-num, .drop-link, .quick {
 @media (max-width: 760px) { .guarantees { grid-template-columns: 1fr; gap: 16px; } .guar-card { padding: 22px; } }
 
 /* ==================================================================
-   Градиентный текст убран по всему сайту
-   Заливка градиентом ничего не сообщала: цвет распределялся по
-   координате буквы, а не по смыслу, и на заголовках читался как
-   украшение. Здесь перечислены все элементы, которые красились через
-   background-clip: text. Сами градиентные объявления удалены из своих
-   правил выше, здесь задан только сплошной цвет — поэтому !important
-   не нужен. Иерархия сохранена самим цветом: заголовки светлые, цены
-   и числа тёплые (цвет «денег» на сайте), номера-маркеры фиолетовые.
+   Gradient text removed site-wide
+   The gradient fill didn't communicate anything: color was
+   distributed by letter position, not meaning, and read as
+   decoration on headings. Listed here are all the elements that
+   were colored via background-clip: text. The gradient declarations
+   themselves were removed from their rules above; only a solid
+   color is set here, so !important isn't needed. Hierarchy is kept
+   through color alone: headings light, prices/numbers warm (the
+   site's "money" color), number markers purple.
    ================================================================== */
 
-/* заголовки и названия */
+/* headings and titles */
 .section h2,
 .section h2 .w > i,
 .price-head h1,
@@ -2216,7 +2214,7 @@ input, textarea, select, .step-num, .drop-link, .quick {
   color: #F3F1FA;
 }
 
-/* цены и ключевые числа — тёплый акцент, он же цвет «денег» */
+/* prices and key numbers — warm accent, the site's "money" color */
 .pt-row b, .pprice, .addon-price, .calc-total, .total-num, .count-up,
 .fact strong, .hero-facts .fact strong {
   background-image: none;
@@ -2224,7 +2222,7 @@ input, textarea, select, .step-num, .drop-link, .quick {
   color: #FFB07A;
 }
 
-/* подписи строк прайса и калькулятора — обычный текст, не акцент */
+/* price/calculator row labels — plain text, not an accent */
 .addon-name, .calc-row span:first-child,
 .price-teaser .pt-row > span:first-child {
   background-image: none;
@@ -2232,7 +2230,7 @@ input, textarea, select, .step-num, .drop-link, .quick {
   color: var(--ink);
 }
 
-/* номера-маркеры: гарантии и шаги процесса */
+/* number markers: guarantees and process steps */
 .guar-num,
 .step-num, .step.lit .step-num {
   background-image: none;
@@ -2241,12 +2239,12 @@ input, textarea, select, .step-num, .drop-link, .quick {
   opacity: 1;
 }
 
-/* --- вес заголовков ---
-   С заголовков снят градиент, и выразительность теперь должна идти от
-   самого шрифта. Unbounded набирался весами 400–500 — лёгкой половиной
-   семейства; на крупном кегле это читалось вяло. Главные заголовки
-   переведены на 700 с более плотным трекингом. Мелкие подписи и
-   названия карточек не трогаю: там жирный спорил бы с текстом. */
+/* --- heading weight ---
+   Gradient removed from headings, so emphasis now has to come from
+   the font itself. Unbounded was loaded at 400–500 — the light half
+   of the family; at large sizes that read as flat. Main headings
+   moved to 700 with tighter tracking. Small labels and card titles
+   are left alone: bold there would compete with the body text. */
 .hero h1,
 .hero.hero-dark h1,
 .section h2,
@@ -2255,12 +2253,12 @@ input, textarea, select, .step-num, .drop-link, .quick {
   letter-spacing: -0.03em;
 }
 
-/* --- шапка: без сжатия, только мягкое проявление ---
-   Высота шапки анимировалась с 68px до 56px, а .shrunk дополнительно
-   менял паддинги — то есть при скролле пересчитывалась вёрстка, и
-   содержимое шапки дёргалось. Размер теперь постоянный; реакция на
-   скролл осталась, но идёт по свойствам, которые не трогают вёрстку:
-   фон плотнеет, появляется тень и подсвечивается нижняя граница. */
+/* --- header: no shrinking, only a soft reveal ---
+   Header height used to animate from 68px to 56px, and .shrunk also
+   changed padding — so layout recalculated on scroll and the header
+   content jittered. Size is now fixed; the scroll reaction stays, but
+   only through properties that don't affect layout: background
+   deepens, a shadow appears, bottom border lights up. */
 .header-inner {
   height: 68px;
   transition: none;
@@ -2279,17 +2277,17 @@ input, textarea, select, .step-num, .drop-link, .quick {
 }
 @media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
 
-/* --- серифный заголовок ---
-   Геометрический гротеск на всех уровнях делал типографику ровной и
-   предсказуемой, а после снятия градиента заголовкам стало нечем
-   держать характер. Крупные заголовки уходят на Literata — серьёзный
-   текстовый сериф с добротной кириллицей (рисовался для Google Play
-   Books, то есть под длинное чтение). Для сайта разработчика сериф —
-   ход неочевидный: он даёт редакционную интонацию и контраст с
-   моношрифтом подписей. Мелкие уровни остаются на Unbounded, иначе
-   страница поплывёт в книжную вёрстку.
-   Пробовал Oi — сверхжирный слэб: на кириллице буквы слипаются и
-   заголовок читается как афиша, поэтому отказался. */
+/* --- serif heading ---
+   A geometric grotesque at every level made the typography flat and
+   predictable, and once the gradient was gone headings had nothing
+   left to carry character. Large headings now use Literata — a
+   serious text serif with solid Cyrillic (designed for Google Play
+   Books, i.e. long-form reading). A serif is a non-obvious choice for
+   a developer's site: it gives an editorial tone and contrasts with
+   the monospace labels. Smaller levels stay on Unbounded, otherwise
+   the page drifts into book-layout territory.
+   Tried Oi — an ultra-bold slab: its Cyrillic letters clump together
+   and the heading reads like a poster, so dropped it. */
 .hero h1,
 .hero.hero-dark h1,
 .section h2,
@@ -2302,22 +2300,22 @@ input, textarea, select, .step-num, .drop-link, .quick {
 .hero.hero-dark h1 { font-size: clamp(28px, 5.5vw, 72px); font-weight: 700; color: #FFFFFF; text-shadow: 0 2px 50px rgba(124,92,255,0.4), 0 0 80px rgba(124,92,255,0.15); max-width: none; }
 .section h2 { font-size: clamp(32px, 4.2vw, 54px); font-weight: 700; color: #FFFFFF; }
 
-/* --- обрезанные буквы в заголовках секций ---
-   Слова в h2 лежат в обёртках с overflow: hidden — они нужны, чтобы
-   строка выезжала снизу при появлении. У Unbounded выносные элементы
-   короткие и в обёртку помещались; у Literata они длиннее, и у 25 слов
-   из 39 низ букв (у, р, д, ц, щ) срезался на 1–7px.
-   Расширяю область отсечения вниз паддингом и гашу его отрицательным
-   полем: видимый бокс больше, а вёрстка не сдвигается. */
+/* --- clipped letters in section headings ---
+   Words in h2 sit in wrappers with overflow: hidden — needed so the
+   line slides up on reveal. Unbounded's descenders were short enough
+   to fit the wrapper; Literata's are longer, clipping the bottom of
+   letters (у, р, д, ц, щ) by 1–7px in 25 of 39 words.
+   Extending the clip area downward with padding and cancelling it
+   with a negative margin: bigger visible box, layout unaffected. */
 .section h2 .w {
   padding-bottom: 0.22em;
   margin-bottom: -0.22em;
 }
-/* заголовок кейса набирается тем же серифом и режется так же */
+/* case heading uses the same serif and clips the same way */
 .case-head h2 .w, .case-hero h1 .w { padding-bottom: 0.22em; margin-bottom: -0.22em; }
 
-/* содержимое ответа во внутреннем блоке: схлопываться до нуля должен
-   он вместе с отступами, иначе паддинг абзаца держит высоту */
+/* answer content in the inner block: it must collapse to zero along
+   with its padding, otherwise the paragraph's padding holds height */
 .faq-a > .faq-a-in { overflow: hidden; min-height: 0; }
 .faq-a p { padding: 0 18px 16px; margin: 0; }
 
@@ -2526,7 +2524,7 @@ body { letter-spacing: 0.005em; color: #F0EDE7; }
   counter-reset: codeline;
 }
 .code-gutter::before {
-  content: '1\A2\A3\A4\A5\A6\A7\A8\A9\A10\A11\A12\A13\A14\A15\A16';
+  content: '1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9\A 10\A 11\A 12\A 13\A 14\A 15\A 16';
   white-space: pre; color: rgba(255,255,255,0.15); font-size: 9px;
 }
 .code-body { flex: 1; padding: 12px 14px; overflow: hidden; display: flex; flex-direction: column; }
@@ -2800,7 +2798,6 @@ body { letter-spacing: 0.005em; color: #F0EDE7; }
 /* touch-friendly: ensure all interactive items meet 44px min */
 @media (pointer: coarse) {
   .faq-q { min-height: 48px; padding: 14px 18px; }
-  .lang-toggle button { min-width: 44px; min-height: 44px; padding: 8px 14px; }
   .socials a { width: 44px; height: 44px; }
   .to-top { width: 48px; height: 48px; }
   .quick { padding: 10px 16px; font-size: 13px; }

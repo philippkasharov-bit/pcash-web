@@ -254,7 +254,7 @@
    Newsreader has no Cyrillic at all, so headings were running on a
    borrowed serif. A single geometric family now covers both scripts,
    which also removes the serif-Latin / sans-Cyrillic mismatch inside
-   mixed strings like "UI/UX-дизайн".
+   mixed strings like "UI/UX-design".
    latin-ext and weight 600 are not shipped: 115KB per weight for
    glyphs this site never renders.
    ============================================================ */
@@ -314,12 +314,11 @@
 }
 
 /* ============================================================
-   Unbounded 700 — добавлен после того, как с заголовков убрали
-   градиент. Раньше выразительность держалась на цвете; теперь её
-   должен нести сам шрифт, а набор шёл весами 400–500, то есть
-   лёгкой половиной семейства. Три подмножества весят 35KB —
-   заметно меньше, чем опасался комментарий выше: там речь про
-   полный неподрезанный вес.
+   Unbounded 700 — added after removing the gradient from headings.
+   Emphasis now has to come from the font weight itself instead of
+   color, since only 400–500 were loaded before. The three subsets
+   are 35KB total — much lighter than the comment above worries
+   about, which refers to the full, unsubset weight.
    ============================================================ */
 /* cyrillic-ext */
 @font-face {
@@ -350,9 +349,9 @@
 }
 
 /* ============================================================
-   Literata 700 — серифный заголовок.
-   Кириллица у Literata сделана добротно (шрифт рисовался для
-   Google Play Books, то есть под длинное чтение). 85KB.
+   Literata 700 — serif heading font.
+   Literata's Cyrillic is solid (designed for Google Play Books,
+   i.e. for long-form reading). 85KB.
    ============================================================ */
 /* cyrillic-ext */
 @font-face {

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>KRSH — кейс: streetwear e-commerce | P.Cash</title>
-<meta name="description" content="Кейс KRSH — streetwear e-commerce: как ограничения (13 разномастных товарных фото, отсутствие бэкенда, соло-разработка) определили каждое дизайн-решение.">
+<title>KRSH — Case Study: Streetwear E-Commerce | P.Cash</title>
+<meta name="description" content="KRSH case study — streetwear e-commerce: how constraints (13 mismatched product photos, no backend, solo build) shaped every design decision.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M37.5 13 A17 17 0 1 0 37.5 35' fill='none' stroke='%23FF6A1A' stroke-width='5' stroke-linecap='round'/%3E%3Crect x='16.4' y='14.2' width='5' height='19.6' rx='2.3' fill='%231B1A17'/%3E%3Ccircle cx='22.6' cy='18.8' r='6.4' fill='%231B1A17'/%3E%3Ccircle cx='23.3' cy='18.8' r='2.6' fill='%23FF6A1A'/%3E%3C/svg%3E">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0E0F0D">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KRSH — кейс: streetwear e-commerce">
-<meta property="og:description" content="Как ограничения определили каждое дизайн-решение в этом проекте.">
+<meta property="og:title" content="KRSH — Case Study: Streetwear E-Commerce">
+<meta property="og:description" content="How constraints shaped every design decision in this project.">
 <meta property="og:image" content="https://pcash.pro/images/case-krsh/krsh-01.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pcash.pro/images/case-krsh/krsh-01.jpg">
@@ -19,8 +19,8 @@
 <link rel="stylesheet" href="fonts.css?v=8">
 <link rel="stylesheet" href="style.css?v=106">
 <style>
-  /* Страница кейса — те же токены и поверхности, что на главной.
-     Плоских фонов у секций нет: liquid-фон просвечивает насквозь. */
+  /* Case study page — same tokens and surfaces as the homepage.
+     Sections have no solid backgrounds: the liquid background shows through. */
   .case-hero { padding: 72px 32px 40px; position: relative; }
   .case-hero .kicker { margin-bottom: 14px; }
   .case-hero h1 {
@@ -36,8 +36,8 @@
   .case-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
   .case-hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
 
-  /* Слайды как стеклянные карточки на атмосферном фоне —
-     та же поверхность, что у .service-card / .guar-card на главной. */
+  /* Slides as glass cards on an atmospheric background —
+     same surface as .service-card / .guar-card on the homepage. */
   .slide-gallery {
     max-width: 1120px; margin: 0 auto;
     padding: 8px 32px 96px;
@@ -95,7 +95,7 @@
 </style>
 </head>
 <body>
-<a class="skip-link" href="#top">Перейти к содержимому</a>
+<a class="skip-link" href="#top">Skip to content</a>
 <canvas id="liquid-bg" aria-hidden="true"></canvas>
 <div class="cursor-glow" aria-hidden="true"></div>
 <div class="cursor-pen" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 2.2l14.4 8.6-6.1 1.1-2.6 5.6z" fill="currentColor" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
@@ -122,82 +122,78 @@
       </svg>
       <span>P<span style="color:#FF6A1A">.</span>Cash</span>
     </a>
-    <nav class="main-nav" aria-label="Навигация">
-      <a href="index.html#cases" data-ru="Работы" data-en="Work">Работы</a>
-      <a href="index.html#services" data-ru="Услуги" data-en="Services">Услуги</a>
-      <a href="index.html#about" data-ru="Обо мне" data-en="About">Обо мне</a>
-      <a href="index.html#process" data-ru="Процесс" data-en="Process">Процесс</a>
-      <a href="pricing.html" data-ru="Прайс" data-en="Pricing">Прайс</a>
-      <a href="index.html#faq" data-ru="Вопросы" data-en="FAQ">Вопросы</a>
-      <a href="index.html#contact" data-ru="Контакты" data-en="Contact">Контакты</a>
-      <a href="index.html#contact" class="nav-cta btn btn-primary" data-ru="Обсудить" data-en="Let's talk">Обсудить</a>
+    <nav class="main-nav" aria-label="Navigation">
+      <a href="index.html#cases" >Work</a>
+      <a href="index.html#services" >Services</a>
+      <a href="index.html#about" >About</a>
+      <a href="index.html#process" >Process</a>
+      <a href="pricing.html" >Pricing</a>
+      <a href="index.html#faq" >FAQ</a>
+      <a href="index.html#contact" >Contact</a>
+      <a href="index.html#contact" class="nav-cta btn btn-primary" >Let's talk</a>
     </nav>
     <div class="nav-right">
-      <div class="lang-toggle" role="group" aria-label="Язык">
-        <button data-lang="ru" class="active">RU</button>
-        <button data-lang="en">EN</button>
-      </div>
-      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html#cases" data-ru="Работы" data-en="Work">Работы</a>
-    <a href="index.html#services" data-ru="Услуги" data-en="Services">Услуги</a>
-    <a href="index.html#about" data-ru="Обо мне" data-en="About">Обо мне</a>
-    <a href="index.html#process" data-ru="Процесс" data-en="Process">Процесс</a>
-    <a href="pricing.html" data-ru="Прайс" data-en="Pricing">Прайс</a>
-    <a href="index.html#faq" data-ru="Вопросы" data-en="FAQ">Вопросы</a>
-    <a href="index.html#contact" data-ru="Контакты" data-en="Contact">Контакты</a>
-    <a href="index.html#contact" class="btn btn-primary btn-block" data-ru="Обсудить задачу" data-en="Discuss a project">Обсудить задачу</a>
+    <a href="index.html#cases" >Work</a>
+    <a href="index.html#services" >Services</a>
+    <a href="index.html#about" >About</a>
+    <a href="index.html#process" >Process</a>
+    <a href="pricing.html" >Pricing</a>
+    <a href="index.html#faq" >FAQ</a>
+    <a href="index.html#contact" >Contact</a>
+    <a href="index.html#contact" class="btn btn-primary btn-block" >Discuss a project</a>
   </div>
 </header>
 
-<a class="back-link" href="index.html#cases" data-ru="← Все работы" data-en="← All work">← Все работы</a>
+<a class="back-link" href="index.html#cases" >← All work</a>
 
 <main id="top">
 
   <section class="case-hero wrap">
-    <p class="kicker" data-ru="Кейс · Веб-разработка" data-en="Case study · Web development">Кейс · Веб-разработка</p>
-    <h1 data-ru="KRSH — streetwear e-commerce, от ограничений к решениям" data-en="KRSH — streetwear e-commerce, from constraints to decisions">KRSH — streetwear e-commerce, от ограничений к решениям</h1>
-    <p class="lede" data-ru="Полноценный streetwear-магазин: каталог с фильтрами и сортировкой, карточки товара с выбором размера и живым остатком на складе, выезжающая корзина, вишлист и полноценный чекаут — и всё это без единого аккаунта. Разработан и спроектирован от начала до конца в одиночку." data-en="A complete streetwear storefront: a catalog with filtering and sorting, product pages with size selection and live stock counts, a slide-in cart, a wishlist and a full checkout — all without ever asking for an account. Designed and built end to end, solo.">Полноценный streetwear-магазин: каталог с фильтрами и сортировкой, карточки товара с выбором размера и живым остатком на складе, выезжающая корзина, вишлист и полноценный чекаут — и всё это без единого аккаунта. Разработан и спроектирован от начала до конца в одиночку.</p>
+    <p class="kicker" >Case study · Web development</p>
+    <h1 >KRSH — streetwear e-commerce, from constraints to decisions</h1>
+    <p class="lede" >A complete streetwear storefront: a catalog with filtering and sorting, product pages with size selection and live stock counts, a slide-in cart, a wishlist and a full checkout — all without ever asking for an account. Designed and built end to end, solo.</p>
     <div class="case-meta">
-      <span class="pill" data-ru="Роль: Дизайн + Разработка" data-en="Role: Design + Dev">Роль: Дизайн + Разработка</span>
-      <span class="pill" data-ru="Соло-проект" data-en="Solo project">Соло-проект</span>
-      <span class="pill" data-ru="Vanilla JS, без фреймворка" data-en="Vanilla JS, no framework">Vanilla JS, без фреймворка</span>
-      <span class="pill" data-ru="8 страниц · 13 товаров" data-en="8 pages · 13 products">8 страниц · 13 товаров</span>
+      <span class="pill" >Role: Design + Dev</span>
+      <span class="pill" >Solo project</span>
+      <span class="pill" >Vanilla JS, no framework</span>
+      <span class="pill" >8 pages · 13 products</span>
     </div>
     <div class="case-hero-cta">
-      <a class="btn btn-primary" href="https://krsh-shop.netlify.app" target="_blank" rel="noopener" data-ru="Открыть живой сайт" data-en="Open the live site">Открыть живой сайт</a>
-      <a class="btn btn-ghost" href="index.html#contact" data-ru="Обсудить свой проект" data-en="Discuss your project">Обсудить свой проект</a>
+      <a class="btn btn-primary" href="https://krsh-shop.netlify.app" target="_blank" rel="noopener" >Open the live site</a>
+      <a class="btn btn-ghost" href="index.html#contact" >Discuss your project</a>
     </div>
   </section>
 
   <div class="slide-gallery">
-    <div class="slide-frame"><img src="images/case-krsh/krsh-01.jpg" alt="KRSH — обложка кейса" loading="eager"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-02.jpg" alt="Бриф, который я поставил себе" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-03.jpg" alt="Фиксированные вводные: разномастные фото, отсутствие бэкенда, маленький каталог, соло-сборка" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-04.jpg" alt="Сборка: 8 страниц, 13 товаров, 0 фреймворков, 3 брейкпоинта, 1.5MB всей графики" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-05.jpg" alt="Как принималось каждое решение: ограничение → варианты → решение → эффект" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-06.jpg" alt="Решение 1: фон. Почему страница почти чёрная" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-07.jpg" alt="Решение 2: два акцентных цвета — лайм для действий, розовый для статуса" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-08.jpg" alt="Решение 3: типографическая шкала на clamp()" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-09.jpg" alt="Решение 4: единый фото-грейд для тринадцати разномастных снимков" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-10.jpg" alt="Решение 5: порядок секций страницы — от hero к цене" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-11.jpg" alt="Каталог: три колонки, фильтры-чипы, цена в нейтральном цвете" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-12.jpg" alt="Карточка товара: имя перед ценой, дефицит розовым, один главный CTA" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-13.jpg" alt="Корзина, чекаут и пустой вишлист — без обязательной регистрации" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-14.jpg" alt="Адаптивность: три брейкпоинта, ничего не скрывается" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-15.jpg" alt="Что не видно на скриншоте: 44px тач-таргеты, фокус-кольца, сокращение веса фото на 97%" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-16.jpg" alt="Итоги: что произвёл этот процесс" loading="lazy"></div>
-    <div class="slide-frame"><img src="images/case-krsh/krsh-17.jpg" alt="KRSH — Your feet. Your rules. Ссылка на живой сайт и контакты" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-01.jpg" alt="KRSH — case study cover" loading="eager"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-02.jpg" alt="The brief I set for myself" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-03.jpg" alt="Fixed constraints: mismatched photos, no backend, small catalog, solo build" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-04.jpg" alt="Build: 8 pages, 13 products, 0 frameworks, 3 breakpoints, 1.5 MB total imagery" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-05.jpg" alt="How each decision was made: constraint, options, decision, effect" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-06.jpg" alt="Decision 1: background — why the page is nearly black" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-07.jpg" alt="Decision 2: two accent colors — lime for actions, pink for status" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-08.jpg" alt="Decision 3: typographic scale using clamp()" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-09.jpg" alt="Decision 4: unified photo grade for thirteen mismatched shots" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-10.jpg" alt="Decision 5: page section order — from hero to price" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-11.jpg" alt="Catalog: three columns, filter chips, price in a neutral color" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-12.jpg" alt="Product card: name before price, scarcity in pink, one primary CTA" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-13.jpg" alt="Cart, checkout, and empty wishlist — no mandatory sign-up" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-14.jpg" alt="Responsiveness: three breakpoints, nothing hidden" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-15.jpg" alt="What the screenshot doesn't show: 44 px touch targets, focus rings, 97% image weight reduction" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-16.jpg" alt="Results: what this process produced" loading="lazy"></div>
+    <div class="slide-frame"><img src="images/case-krsh/krsh-17.jpg" alt="KRSH — Your feet. Your rules. Link to the live site and contacts" loading="lazy"></div>
   </div>
 
   <section class="case-cta-section">
-    <h2 data-ru="Хотите такой же уровень внимания к деталям?" data-en="Want this level of attention to detail?">Хотите такой же уровень внимания к деталям?</h2>
-    <p data-ru="Обсудим задачу — от дизайна до продакшн-деплоя." data-en="Let's talk about your project — from design to production deploy.">Обсудим задачу — от дизайна до продакшн-деплоя.</p>
+    <h2 >Want this level of attention to detail?</h2>
+    <p >Let's talk about your project — from design to production deploy.</p>
     <div class="case-cta-buttons">
-      <a class="btn btn-primary" href="index.html#contact" data-ru="Обсудить задачу" data-en="Discuss a project">Обсудить задачу</a>
-      <a class="btn btn-ghost" href="index.html#cases" data-ru="Смотреть другие работы" data-en="See other work">Смотреть другие работы</a>
+      <a class="btn btn-primary" href="index.html#contact" >Discuss a project</a>
+      <a class="btn btn-ghost" href="index.html#cases" >See other work</a>
     </div>
   </section>
 
@@ -213,7 +209,7 @@
   </div>
 </footer>
 
-<button class="to-top" id="toTop" aria-label="Наверх"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<button class="to-top" id="toTop" aria-label="Back to top"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
 <script src="gsap.min.js"></script>
 <script src="ScrollTrigger.min.js"></script>
