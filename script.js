@@ -97,7 +97,7 @@ const navObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.5 });
-['cases','services','about','process','calc','guarantees','faq','contact'].forEach((id) => {
+['cases','services','about','process','calc','guarantees','faq','contact'].forEach(id => {
   const el = document.getElementById(id);
   if (el) navObserver.observe(el);
 });
@@ -108,7 +108,7 @@ const navObserver = new IntersectionObserver((entries) => {
   const nav = document.getElementById('dotNav');
   if (!nav) return;
   const names = {
-    services: 'Услуги', about: 'Обо мне', cases: 'Работы', process: 'Процесс',
+    cases: 'Работы', services: 'Услуги', about: 'Обо мне', process: 'Процесс',
     calc: 'Цены', guarantees: 'Гарантии', faq: 'Вопросы', contact: 'Контакты'
   };
   const secs = [{ id: 'top', el: document.querySelector('.hero'), name: 'Начало' }]
@@ -887,7 +887,6 @@ void main(){
       { sel: '#calc',        c1:'#07080C', c2:'#1E1524', c3:'#572F44', c4:'#955A33' },
       { sel: '#guarantees',  c1:'#06070A', c2:'#0E1A1C', c3:'#1F3A44', c4:'#38726A' },
       { sel: '#faq',         c1:'#06070A', c2:'#12112A', c3:'#332863', c4:'#6A54A6' },
-      { sel: '#reviews',     c1:'#07080C', c2:'#181234', c3:'#452B84', c4:'#7F53AE' },
       { sel: '#contact',     c1:'#08090F', c2:'#1C1440', c3:'#523098', c4:'#8152AD' }
     ];
 
@@ -989,7 +988,6 @@ void main(){
     calc:       { from: 'inset(15%)',                 to: 'inset(0%)' },
     guarantees: { from: 'polygon(50% 0, 50% 0, 50% 100%, 50% 100%)', to: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
     faq:        { from: 'inset(8% round 20px)',      to: 'inset(0% round 0px)' },
-    reviews:    { from: 'inset(0 100% 0 0)',          to: 'inset(0 0% 0 0)' },
     contact:    { from: 'circle(0% at 90% 90%)',      to: 'circle(150% at 90% 90%)' }
   };
 
@@ -1163,28 +1161,31 @@ void main(){
     heroTl.to(heroCopyEls, { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power2.out' }, '-=0.3');
   }
 
-  // Hero showcase — auto-rotate slides
-  const showcaseSlides = document.querySelectorAll('.showcase-slide');
-  const showcasePips = document.querySelectorAll('.showcase-pip');
-  const showcaseUrl = document.querySelector('.showcase-url');
-  const showcaseUrls = ['pcash.pro', 'pcash.pro/cases', 'krsh.store', 'pcash.pro/pricing'];
-  if (showcaseSlides.length > 1) {
-    let current = 0;
-    const showcaseBrowser = document.querySelector('.showcase-browser');
-    if (showcaseBrowser) {
-      gsap.set(showcaseBrowser, { opacity: 0, y: 30 });
-      gsap.to(showcaseBrowser, { opacity: 1, y: 0, duration: 1, delay: 0.7, ease: 'power3.out' });
+  // Hero process animation — infinite Wireframe → Design → Code → Live cycle
+  const processStages = document.querySelectorAll('.process-stage');
+  const processSteps = document.querySelectorAll('.process-step');
+  const processUrl = document.querySelector('.process-url');
+  const processUrls = ['wireframe.fig', 'design.fig', 'project/src', 'pcash.pro'];
+  const processBrowser = document.querySelector('.process-browser');
+  if (processStages.length > 1) {
+    let pCurrent = 0;
+    if (processBrowser) {
+      gsap.set(processBrowser, { opacity: 0, y: 30 });
+      gsap.to(processBrowser, { opacity: 1, y: 0, duration: 1, delay: 0.7, ease: 'power3.out' });
     }
-    function goToSlide(idx) {
-      showcaseSlides[current].classList.remove('active');
-      showcasePips[current].classList.remove('active');
-      current = idx;
-      showcaseSlides[current].classList.add('active');
-      showcasePips[current].classList.add('active');
-      if (showcaseUrl) showcaseUrl.textContent = showcaseUrls[current] || 'pcash.pro';
+    function goToProcess(idx) {
+      processStages[pCurrent].classList.remove('active');
+      processSteps[pCurrent].classList.remove('active');
+      pCurrent = idx;
+      processStages[pCurrent].classList.remove('active');
+      void processStages[pCurrent].offsetWidth;
+      processStages[pCurrent].classList.add('active');
+      processSteps[pCurrent].classList.add('active');
+      if (processUrl) processUrl.textContent = processUrls[pCurrent] || '';
     }
-    showcasePips.forEach((pip, i) => pip.addEventListener('click', () => { goToSlide(i); }));
-    setInterval(() => { goToSlide((current + 1) % showcaseSlides.length); }, 4000);
+    processSteps.forEach((s, i) => s.addEventListener('click', () => { goToProcess(i); clearInterval(processTimer); processTimer = setInterval(autoAdvance, 4000); }));
+    function autoAdvance() { goToProcess((pCurrent + 1) % processStages.length); }
+    let processTimer = setInterval(autoAdvance, 4000);
   }
 
   // Hero facts entrance — staggered scale+slide from below
@@ -1438,7 +1439,7 @@ void main(){
 
 /* ===================== Showcase scroll parallax ===================== */
 (function initShowcaseParallax() {
-  const browser = document.querySelector('.showcase-browser');
+  const browser = document.querySelector('.process-browser');
   const hero = document.querySelector('.hero');
   if (!browser || !hero || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;

@@ -9,13 +9,14 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="P.Cash — UI/UX, веб-разработка и ИИ">
 <meta property="og:description" content="Сайты под ключ, ИИ чат-боты и автоматизация для малого бизнеса. Дизайн, код и запуск в одних руках.">
-<meta property="og:image" content="og-image.png">
+<meta property="og:image" content="https://pcash.pro/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pcash.pro/og-image.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0E0F0D">
-<link rel="canonical" href="https://pcash.example/">
+<link rel="canonical" href="https://pcash.pro/">
 <link rel="stylesheet" href="fonts.css?v=8">
 <link rel="stylesheet" href="style.css?v=106">
 <!-- ─── Приватная аналитика (Plausible) ───────────────────────────────
@@ -128,26 +129,97 @@
           <a class="btn btn-ghost" href="#process" data-ru="Как я работаю" data-en="How I work">Как я работаю<svg class="btn-arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
       </div>
-      <div class="hero-showcase" aria-label="Project showcase">
-        <div class="showcase-browser">
-          <div class="showcase-bar">
-            <span class="showcase-dots"><i></i><i></i><i></i></span>
-            <span class="showcase-url" data-ru="pcash.pro" data-en="pcash.pro">pcash.pro</span>
-          </div>
-          <div class="showcase-viewport">
-            <img class="showcase-slide active" src="images/case-pcash/01-hero.webp" alt="PCash Web — hero" loading="eager">
-            <img class="showcase-slide" src="images/case-pcash/03-cases.webp" alt="PCash Web — cases" loading="lazy">
-            <img class="showcase-slide" src="images/case-krsh/krsh-01.jpg" alt="KRSH Store — home" loading="lazy">
-            <img class="showcase-slide" src="images/case-pcash/05-pricing.webp" alt="PCash Web — pricing" loading="lazy">
-          </div>
-          <div class="showcase-pips">
-            <button class="showcase-pip active" aria-label="Slide 1"></button>
-            <button class="showcase-pip" aria-label="Slide 2"></button>
-            <button class="showcase-pip" aria-label="Slide 3"></button>
-            <button class="showcase-pip" aria-label="Slide 4"></button>
+      <div class="hero-showcase" aria-label="Design process animation">
+        <div class="process-scene">
+          <div class="process-browser">
+            <div class="showcase-bar">
+              <span class="showcase-dots"><i></i><i></i><i></i></span>
+              <span class="process-url">wireframe.fig</span>
+            </div>
+            <div class="process-viewport">
+
+              <div class="process-stage stage-wire active">
+                <div class="wire-nav"></div>
+                <div class="wire-hero-block">
+                  <div class="wire-h1"></div>
+                  <div class="wire-h1 wire-h1--short"></div>
+                  <div class="wire-text"></div>
+                  <div class="wire-text wire-text--short"></div>
+                  <div class="wire-btn-row"><span class="wire-btn"></span><span class="wire-btn wire-btn--ghost"></span></div>
+                </div>
+                <div class="wire-cards">
+                  <div class="wire-card"><div class="wire-card-icon"></div><div class="wire-card-line"></div><div class="wire-card-line wire-card-line--short"></div></div>
+                  <div class="wire-card"><div class="wire-card-icon"></div><div class="wire-card-line"></div><div class="wire-card-line wire-card-line--short"></div></div>
+                  <div class="wire-card"><div class="wire-card-icon"></div><div class="wire-card-line"></div><div class="wire-card-line wire-card-line--short"></div></div>
+                </div>
+              </div>
+
+              <div class="process-stage stage-design">
+                <div class="design-nav"><span class="design-logo"></span><span class="design-nav-link"></span><span class="design-nav-link"></span><span class="design-nav-cta"></span></div>
+                <div class="design-hero">
+                  <div class="design-h1"></div>
+                  <div class="design-h1 design-h1--accent"></div>
+                  <div class="design-sub"></div>
+                  <div class="design-btn-row"><span class="design-btn"></span><span class="design-btn design-btn--ghost"></span></div>
+                </div>
+                <div class="design-cards">
+                  <div class="design-card"><div class="design-card-top"></div><div class="design-card-body"><div class="design-card-title"></div><div class="design-card-text"></div></div></div>
+                  <div class="design-card"><div class="design-card-top"></div><div class="design-card-body"><div class="design-card-title"></div><div class="design-card-text"></div></div></div>
+                  <div class="design-card"><div class="design-card-top"></div><div class="design-card-body"><div class="design-card-title"></div><div class="design-card-text"></div></div></div>
+                </div>
+              </div>
+
+              <div class="process-stage stage-code">
+                <div class="code-gutter"></div>
+                <div class="code-body">
+                  <div class="code-line"><span class="ck">const</span> <span class="cv">hero</span> <span class="cp">=</span> <span class="cs">document</span>.<span class="cf">querySelector</span>(<span class="cstr">'.hero'</span>);</div>
+                  <div class="code-line"><span class="ck">const</span> <span class="cv">cards</span> <span class="cp">=</span> <span class="cs">document</span>.<span class="cf">querySelectorAll</span>(<span class="cstr">'.card'</span>);</div>
+                  <div class="code-line code-blank"></div>
+                  <div class="code-line"><span class="cf">gsap</span>.<span class="cf">from</span>(<span class="cv">hero</span>, {</div>
+                  <div class="code-line code-indent"><span class="cv">opacity</span>: <span class="cn">0</span>,</div>
+                  <div class="code-line code-indent"><span class="cv">y</span>: <span class="cn">40</span>,</div>
+                  <div class="code-line code-indent"><span class="cv">duration</span>: <span class="cn">0.9</span>,</div>
+                  <div class="code-line code-indent"><span class="cv">ease</span>: <span class="cstr">'power3.out'</span></div>
+                  <div class="code-line">});</div>
+                  <div class="code-line code-blank"></div>
+                  <div class="code-line"><span class="cv">cards</span>.<span class="cf">forEach</span>((<span class="cv">c</span>, <span class="cv">i</span>) <span class="cp">=></span> {</div>
+                  <div class="code-line code-indent"><span class="cf">gsap</span>.<span class="cf">from</span>(<span class="cv">c</span>, {</div>
+                  <div class="code-line code-indent2"><span class="cv">opacity</span>: <span class="cn">0</span>, <span class="cv">scale</span>: <span class="cn">.92</span>,</div>
+                  <div class="code-line code-indent2"><span class="cv">delay</span>: <span class="cv">i</span> <span class="cp">*</span> <span class="cn">0.12</span></div>
+                  <div class="code-line code-indent">});</div>
+                  <div class="code-line">});</div>
+                </div>
+              </div>
+
+              <div class="process-stage stage-live">
+                <div class="live-nav"><span class="live-logo"></span><span class="live-links"><span></span><span></span><span></span></span><span class="live-cta"></span></div>
+                <div class="live-hero">
+                  <div class="live-h1"></div>
+                  <div class="live-sub"></div>
+                  <div class="live-btn"></div>
+                </div>
+                <div class="live-grid">
+                  <div class="live-card"><div class="live-card-glow"></div></div>
+                  <div class="live-card"><div class="live-card-glow"></div></div>
+                  <div class="live-card"><div class="live-card-glow"></div></div>
+                </div>
+                <div class="live-lighthouse">
+                  <span class="live-score">100</span>
+                  <span class="live-score">100</span>
+                  <span class="live-score">100</span>
+                  <span class="live-score">100</span>
+                </div>
+              </div>
+
+            </div>
+            <div class="process-steps">
+              <button class="process-step active" data-stage="0">Wireframe</button>
+              <button class="process-step" data-stage="1">Design</button>
+              <button class="process-step" data-stage="2">Code</button>
+              <button class="process-step" data-stage="3">Live</button>
+            </div>
           </div>
         </div>
-        <div class="showcase-label" data-ru="Реальные проекты" data-en="Real projects">Реальные проекты</div>
       </div>
     </div>
     <div class="hero-facts">
@@ -188,11 +260,8 @@
         <span class="post-read" data-ru="Читать разбор →" data-en="Read the case study →">Читать разбор →</span>
       </a>
       <a class="post has-thumb" href="case-pcash.html">
-        <span class="post-thumb" aria-hidden="true">
-          <span class="self-cover">
-            <span class="self-mark">P<i>.</i>Cash</span>
-            <span class="self-sub" data-ru="этот сайт" data-en="this very site">этот сайт</span>
-          </span>
+        <span class="post-thumb">
+          <img src="images/case-pcash/01-hero.webp" width="1200" height="760" alt="P.Cash — сайт-портфолио, обложка проекта" loading="lazy" decoding="async">
         </span>
         <span class="post-tag case" data-ru="Кейс" data-en="Case study">Кейс</span>
         <h3 data-ru="P.Cash — сайт, который продаёт меня" data-en="P.Cash — the site that sells me">P.Cash — сайт, который продаёт меня</h3>

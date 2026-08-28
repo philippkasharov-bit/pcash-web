@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Замени домен на свой после деплоя
-Sitemap: https://ВАШ-ДОМЕН/sitemap.xml
+Sitemap: https://pcash.pro/sitemap.xml
