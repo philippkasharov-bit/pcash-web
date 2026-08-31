@@ -68,18 +68,22 @@ if (burger && mobileMenu) {
 const navLinks = document.querySelectorAll('.main-nav a:not(.nav-cta):not(.drop-link)');
 const navMap = {};
 navLinks.forEach((a) => { navMap[a.getAttribute('href').slice(1)] = a; });
-const navObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting && navMap[entry.target.id]) {
-      navLinks.forEach((a) => a.classList.remove('active'));
-      navMap[entry.target.id].classList.add('active');
-    }
+const NAV_SPY_IDS = ['cases','services','about','process','calc','guarantees','faq','contact'];
+function syncNav() {
+  const line = 160;
+  let best = null;
+  NAV_SPY_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top - line <= 0) best = id;
   });
-}, { threshold: 0.5 });
-['cases','services','about','process','calc','guarantees','faq','contact'].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) navObserver.observe(el);
-});
+  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+  if (atBottom) best = 'contact';
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + best));
+}
+syncNav();
+window.addEventListener('scroll', syncNav, { passive: true });
+const navIO = new IntersectionObserver(syncNav, { threshold: [0, 0.25, 0.5] });
+NAV_SPY_IDS.forEach(id => { const el = document.getElementById(id); if (el) navIO.observe(el); });
 
 // ---- anchor dots (replaces the old "01 / 11" counter, which showed a
 // number but could not take you anywhere) ----
