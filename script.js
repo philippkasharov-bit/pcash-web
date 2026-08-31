@@ -513,8 +513,10 @@ if (fab && panel && chatInput && chatSend) {
 
   function draw(it) {
     const s = it.size / 24;
+    const parallaxX = fine ? (mouse.x - W * 0.5) * it.depth * 0.012 : 0;
+    const parallaxY = fine ? (mouse.y - H * 0.5) * it.depth * 0.008 : 0;
     ctx.save();
-    ctx.translate(it.x, it.y);
+    ctx.translate(it.x + parallaxX, it.y + parallaxY);
     ctx.rotate(it.rot);
     ctx.scale(s, s);
     ctx.translate(-12, -12);
@@ -992,7 +994,21 @@ void main(){
       intro.to(heroCtas, { y: 0, opacity: 1, scale: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.4)' }, '-=0.4');
     }
 
-    // 7. Showcase scales in from slight zoom
+    // 7. Badge drops in
+    const heroBadge = document.querySelector('.hero-badge');
+    if (heroBadge) {
+      gsap.set(heroBadge, { y: -20, opacity: 0 });
+      intro.to(heroBadge, { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.2);
+    }
+
+    // 8. Portrait scales in with ring
+    const heroPortrait = document.querySelector('.hero-portrait');
+    if (heroPortrait) {
+      gsap.set(heroPortrait, { scale: 0.8, opacity: 0 });
+      intro.to(heroPortrait, { scale: 1, opacity: 1, duration: 0.9, ease: 'back.out(1.3)' }, '-=0.5');
+    }
+
+    // 9. Showcase scales in from slight zoom
     if (heroShowcase) {
       gsap.set(heroShowcase, { scale: 0.85, opacity: 0, filter: 'blur(6px)' });
       intro.to(heroShowcase, { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 0.9, ease: 'power2.out' }, '-=0.6');
