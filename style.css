@@ -2629,6 +2629,48 @@ body { letter-spacing: 0.005em; color: #F0EDE7; }
   border: 2px solid #35C87E; box-shadow: 0 0 10px rgba(53,200,126,0.25);
 }
 
+/* ── KRSH overrides ── */
+.krsh-logo {
+  width: auto; height: auto; border-radius: 0; background: none;
+  font-family: var(--font-mono); font-weight: 800; font-size: 11px; letter-spacing: 0.08em;
+  color: #D4FF00;
+}
+.krsh-title {
+  height: auto; width: auto; border-radius: 0;
+  background: none; font-family: var(--font-body); font-weight: 700;
+  font-size: 13px; color: #F5F3ED; letter-spacing: 0.04em;
+}
+.krsh-count {
+  height: auto; width: auto; border-radius: 0; background: none;
+  font-size: 9px; color: rgba(255,255,255,0.4); margin-top: 0;
+}
+.krsh-grid { grid-template-columns: repeat(3, 1fr); }
+.krsh-product { border-color: rgba(212,255,0,0.12); }
+.krsh-img { background: linear-gradient(135deg, rgba(212,255,0,0.15), rgba(212,255,0,0.05)); }
+.krsh-product .design-card-title { font-size: 8px; color: #F5F3ED; background: none; height: auto; width: auto; border-radius: 0; }
+.krsh-product .design-card-text { font-size: 8px; color: #D4FF00; background: none; height: auto; width: auto; border-radius: 0; }
+.design-nav .krsh-logo { margin-right: 2px; }
+.design-nav-cta:has(~ .krsh-logo), .krsh-logo ~ .design-nav-cta { background: #D4FF00; }
+.wire-card-img { height: 28px; border-radius: 4px; background: rgba(255,255,255,0.06); }
+.krsh-live-logo {
+  width: auto; height: auto; border-radius: 0; background: none;
+  font-family: var(--font-mono); font-weight: 800; font-size: 10px; letter-spacing: 0.08em;
+  color: #D4FF00;
+}
+.krsh-live-h1 {
+  height: auto; width: auto; border-radius: 0; background: none;
+  font-family: var(--font-body); font-weight: 800; font-size: 16px;
+  color: #F5F3ED; letter-spacing: 0.06em; line-height: 1.1;
+}
+.krsh-live-btn {
+  width: auto; height: auto; border-radius: 6px; padding: 5px 14px;
+  background: #D4FF00; color: #0E0F0D; font-size: 9px; font-weight: 700;
+  letter-spacing: 0.04em; box-shadow: 0 4px 16px rgba(212,255,0,0.25);
+}
+.stage-live .live-links span { width: auto; height: auto; background: none; font-size: 8px; color: rgba(255,255,255,0.5); }
+.stage-live .live-cta { width: auto; height: auto; border-radius: 4px; background: #D4FF00; color: #0E0F0D; font-size: 8px; font-weight: 700; padding: 3px 8px; }
+.stage-live .live-sub { height: auto; width: auto; background: none; font-size: 9px; color: rgba(255,255,255,0.4); border-radius: 0; }
+
 .stage-live.active .live-nav { animation: liveReveal 0.5s 0.1s both; }
 .stage-live.active .live-h1 { animation: liveReveal 0.5s 0.2s both; }
 .stage-live.active .live-sub { animation: liveReveal 0.5s 0.25s both; }

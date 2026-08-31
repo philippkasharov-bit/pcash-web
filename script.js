@@ -68,7 +68,7 @@ if (burger && mobileMenu) {
 const navLinks = document.querySelectorAll('.main-nav a:not(.nav-cta):not(.drop-link)');
 const navMap = {};
 navLinks.forEach((a) => { navMap[a.getAttribute('href').slice(1)] = a; });
-const NAV_SPY_IDS = ['cases','services','about','process','calc','guarantees','faq','contact'];
+const NAV_SPY_IDS = ['cases','services','about','process','calc','faq','contact'];
 function syncNav() {
   const line = 160;
   let best = null;
@@ -92,7 +92,7 @@ NAV_SPY_IDS.forEach(id => { const el = document.getElementById(id); if (el) navI
   if (!nav) return;
   const names = {
     cases: 'Work', services: 'Services', about: 'About', process: 'Process',
-    calc: 'Pricing', guarantees: 'Guarantees', faq: 'FAQ', contact: 'Contact'
+    calc: 'Pricing', faq: 'FAQ', contact: 'Contact'
   };
   const secs = [{ id: 'top', el: document.querySelector('.hero'), name: 'Home' }]
     .concat(Object.keys(names)
@@ -866,7 +866,6 @@ void main(){
       { sel: '#about',       c1:'#07080C', c2:'#101C22', c3:'#2A3F63', c4:'#685DAD' },
       { sel: '#process',     c1:'#06070A', c2:'#0F1720', c3:'#28324F', c4:'#5E5A9E' },
       { sel: '#calc',        c1:'#07080C', c2:'#1E1524', c3:'#572F44', c4:'#955A33' },
-      { sel: '#guarantees',  c1:'#06070A', c2:'#0E1A1C', c3:'#1F3A44', c4:'#38726A' },
       { sel: '#faq',         c1:'#06070A', c2:'#12112A', c3:'#332863', c4:'#6A54A6' },
       { sel: '#contact',     c1:'#08090F', c2:'#1C1440', c3:'#523098', c4:'#8152AD' }
     ];
@@ -1032,7 +1031,6 @@ void main(){
     cases:      { from: 'inset(10% round 24px)',     to: 'inset(0% round 0px)' },
     process:    { from: 'inset(20%)',                 to: 'inset(0%)' },
     calc:       { from: 'inset(15%)',                 to: 'inset(0%)' },
-    guarantees: { from: 'polygon(50% 0, 50% 0, 50% 100%, 50% 100%)', to: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
     faq:        { from: 'inset(8% round 20px)',      to: 'inset(0% round 0px)' },
     contact:    { from: 'circle(0% at 90% 90%)',      to: 'circle(150% at 90% 90%)' }
   };

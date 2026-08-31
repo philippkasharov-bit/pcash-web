@@ -18,7 +18,7 @@
 <meta name="theme-color" content="#0E0F0D">
 <link rel="canonical" href="https://pcash.pro/">
 <link rel="stylesheet" href="fonts.css?v=8">
-<link rel="stylesheet" href="style.css?v=126">
+<link rel="stylesheet" href="style.css?v=127">
 <!-- Analytics (Plausible) — uncomment and set your domain to enable -->
 <script>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };</script>
 <!-- <script defer data-domain="YOUR-DOMAIN.com" src="https://plausible.io/js/script.js"></script> -->
@@ -140,7 +140,7 @@
           <div class="process-browser">
             <div class="showcase-bar">
               <span class="showcase-dots"><i></i><i></i><i></i></span>
-              <span class="process-url">wireframe.fig</span>
+              <span class="process-url">krsh-store.fig</span>
             </div>
             <div class="process-viewport">
 
@@ -149,65 +149,55 @@
                 <div class="wire-hero-block">
                   <div class="wire-h1"></div>
                   <div class="wire-h1 wire-h1--short"></div>
-                  <div class="wire-text"></div>
-                  <div class="wire-text wire-text--short"></div>
-                  <div class="wire-btn-row"><span class="wire-btn"></span><span class="wire-btn wire-btn--ghost"></span></div>
+                  <div class="wire-btn-row"><span class="wire-btn"></span><span class="wire-btn wire-btn--ghost"></span><span class="wire-btn wire-btn--ghost"></span><span class="wire-btn wire-btn--ghost"></span></div>
                 </div>
                 <div class="wire-cards">
-                  <div class="wire-card"><div class="wire-card-icon"></div><div class="wire-card-line"></div><div class="wire-card-line wire-card-line--short"></div></div>
-                  <div class="wire-card"><div class="wire-card-icon"></div><div class="wire-card-line"></div><div class="wire-card-line wire-card-line--short"></div></div>
-                  <div class="wire-card"><div class="wire-card-icon"></div><div class="wire-card-line"></div><div class="wire-card-line wire-card-line--short"></div></div>
+                  <div class="wire-card"><div class="wire-card-img"></div><div class="wire-card-line"></div><div class="wire-card-line wire-card-line--short"></div></div>
+                  <div class="wire-card"><div class="wire-card-img"></div><div class="wire-card-line"></div><div class="wire-card-line wire-card-line--short"></div></div>
+                  <div class="wire-card"><div class="wire-card-img"></div><div class="wire-card-line"></div><div class="wire-card-line wire-card-line--short"></div></div>
                 </div>
               </div>
 
               <div class="process-stage stage-design">
-                <div class="design-nav"><span class="design-logo"></span><span class="design-nav-link"></span><span class="design-nav-link"></span><span class="design-nav-cta"></span></div>
+                <div class="design-nav"><span class="design-logo krsh-logo">KRSH</span><span class="design-nav-link"></span><span class="design-nav-link"></span><span class="design-nav-cta"></span></div>
                 <div class="design-hero">
-                  <div class="design-h1"></div>
-                  <div class="design-h1 design-h1--accent"></div>
-                  <div class="design-sub"></div>
-                  <div class="design-btn-row"><span class="design-btn"></span><span class="design-btn design-btn--ghost"></span></div>
+                  <div class="design-h1 krsh-title">SHOP ALL</div>
+                  <div class="design-sub krsh-count">13 products</div>
                 </div>
-                <div class="design-cards">
-                  <div class="design-card"><div class="design-card-top"></div><div class="design-card-body"><div class="design-card-title"></div><div class="design-card-text"></div></div></div>
-                  <div class="design-card"><div class="design-card-top"></div><div class="design-card-body"><div class="design-card-title"></div><div class="design-card-text"></div></div></div>
-                  <div class="design-card"><div class="design-card-top"></div><div class="design-card-body"><div class="design-card-title"></div><div class="design-card-text"></div></div></div>
+                <div class="design-cards krsh-grid">
+                  <div class="design-card krsh-product"><div class="design-card-top krsh-img"></div><div class="design-card-body"><div class="design-card-title">Venom</div><div class="design-card-text">$310</div></div></div>
+                  <div class="design-card krsh-product"><div class="design-card-top krsh-img"></div><div class="design-card-body"><div class="design-card-title">Ghost</div><div class="design-card-text">$220</div></div></div>
+                  <div class="design-card krsh-product"><div class="design-card-top krsh-img"></div><div class="design-card-body"><div class="design-card-title">Patrol</div><div class="design-card-text">$340</div></div></div>
                 </div>
               </div>
 
               <div class="process-stage stage-code">
                 <div class="code-gutter"></div>
                 <div class="code-body">
-                  <div class="code-line"><span class="ck">const</span> <span class="cv">hero</span> <span class="cp">=</span> <span class="cs">document</span>.<span class="cf">querySelector</span>(<span class="cstr">'.hero'</span>);</div>
-                  <div class="code-line"><span class="ck">const</span> <span class="cv">cards</span> <span class="cp">=</span> <span class="cs">document</span>.<span class="cf">querySelectorAll</span>(<span class="cstr">'.card'</span>);</div>
+                  <div class="code-line"><span class="ck">const</span> <span class="cv">PRODUCTS</span> <span class="cp">=</span> <span class="cs">window</span>.<span class="cv">KRSH_PRODUCTS</span>;</div>
+                  <div class="code-line"><span class="ck">let</span> <span class="cv">filter</span> <span class="cp">=</span> <span class="cstr">'all'</span>;</div>
                   <div class="code-line code-blank"></div>
-                  <div class="code-line"><span class="cf">gsap</span>.<span class="cf">from</span>(<span class="cv">hero</span>, {</div>
-                  <div class="code-line code-indent"><span class="cv">opacity</span>: <span class="cn">0</span>,</div>
-                  <div class="code-line code-indent"><span class="cv">y</span>: <span class="cn">40</span>,</div>
-                  <div class="code-line code-indent"><span class="cv">duration</span>: <span class="cn">0.9</span>,</div>
-                  <div class="code-line code-indent"><span class="cv">ease</span>: <span class="cstr">'power3.out'</span></div>
-                  <div class="code-line">});</div>
+                  <div class="code-line"><span class="ck">function</span> <span class="cf">render</span>(<span class="cv">items</span>) {</div>
+                  <div class="code-line code-indent"><span class="cv">grid</span>.<span class="cv">innerHTML</span> <span class="cp">=</span> <span class="cv">items</span></div>
+                  <div class="code-line code-indent2">.<span class="cf">filter</span>(<span class="cv">p</span> <span class="cp">=></span> <span class="cv">filter</span> <span class="cp">===</span> <span class="cstr">'all'</span></div>
+                  <div class="code-line code-indent2"><span class="cp">||</span> <span class="cv">p</span>.<span class="cv">category</span> <span class="cp">===</span> <span class="cv">filter</span>)</div>
+                  <div class="code-line code-indent2">.<span class="cf">map</span>(<span class="cv">p</span> <span class="cp">=></span> <span class="cf">card</span>(<span class="cv">p</span>))</div>
+                  <div class="code-line code-indent2">.<span class="cf">join</span>(<span class="cstr">''</span>);</div>
+                  <div class="code-line">}</div>
                   <div class="code-line code-blank"></div>
-                  <div class="code-line"><span class="cv">cards</span>.<span class="cf">forEach</span>((<span class="cv">c</span>, <span class="cv">i</span>) <span class="cp">=></span> {</div>
-                  <div class="code-line code-indent"><span class="cf">gsap</span>.<span class="cf">from</span>(<span class="cv">c</span>, {</div>
-                  <div class="code-line code-indent2"><span class="cv">opacity</span>: <span class="cn">0</span>, <span class="cv">scale</span>: <span class="cn">.92</span>,</div>
-                  <div class="code-line code-indent2"><span class="cv">delay</span>: <span class="cv">i</span> <span class="cp">*</span> <span class="cn">0.12</span></div>
-                  <div class="code-line code-indent">});</div>
+                  <div class="code-line"><span class="cv">filterBtns</span>.<span class="cf">forEach</span>(<span class="cv">btn</span> <span class="cp">=></span> {</div>
+                  <div class="code-line code-indent"><span class="cv">btn</span>.<span class="cf">addEventListener</span>(<span class="cstr">'click'</span>,</div>
+                  <div class="code-line code-indent2">() <span class="cp">=></span> <span class="cf">render</span>(<span class="cv">PRODUCTS</span>));</div>
                   <div class="code-line">});</div>
                 </div>
               </div>
 
               <div class="process-stage stage-live">
-                <div class="live-nav"><span class="live-logo"></span><span class="live-links"><span></span><span></span><span></span></span><span class="live-cta"></span></div>
+                <div class="live-nav"><span class="live-logo krsh-live-logo">KRSH</span><span class="live-links"><span>Lookbook</span><span>Shop</span><span>About</span></span><span class="live-cta">Shop now</span></div>
                 <div class="live-hero">
-                  <div class="live-h1"></div>
-                  <div class="live-sub"></div>
-                  <div class="live-btn"></div>
-                </div>
-                <div class="live-grid">
-                  <div class="live-card"><div class="live-card-glow"></div></div>
-                  <div class="live-card"><div class="live-card-glow"></div></div>
-                  <div class="live-card"><div class="live-card-glow"></div></div>
+                  <div class="live-h1 krsh-live-h1">STREET CULTURE</div>
+                  <div class="live-sub">Summer 2026</div>
+                  <div class="live-btn krsh-live-btn">Shop the collection</div>
                 </div>
                 <div class="live-lighthouse">
                   <span class="live-score">100</span>
@@ -588,39 +578,6 @@
     </div>
   </section>
 
-  <section class="section wrap alt clip-reveal clip-fade" id="guarantees">
-    <div class="ambient">
-      <span class="amb-chip ac2 amb-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
-      <span class="amb-chip ac4 amb-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
-      <div class="amb-dot ad1"></div>
-      <div class="amb-dot ad2"></div>
-    </div>
-
-    <h2 >How you're protected</h2>
-    <p class="section-sub" >Four rules that apply to every project. Clear terms, no surprises.</p>
-    <div class="guarantees">
-      <div class="guar-card">
-        <span class="guar-num">01</span>
-        <h3 >Staged payment</h3>
-        <p >You never pay the full amount upfront. 50% to start, the rest after your review.</p>
-      </div>
-      <div class="guar-card">
-        <span class="guar-num">02</span>
-        <h3 >Edits included</h3>
-        <p >Any edits within scope are free. Extra cost only if the scope grows.</p>
-      </div>
-      <div class="guar-card">
-        <span class="guar-num">03</span>
-        <h3 >Deadline is fixed</h3>
-        <p >If the project runs late on my end, no extra charge. The written agreement protects both sides.</p>
-      </div>
-      <div class="guar-card">
-        <span class="guar-num">04</span>
-        <h3 >Result shown live</h3>
-        <p >You see a working site or bot, not a mockup screenshot. Final payment comes after your OK.</p>
-      </div>
-    </div>
-  </section>
 
   <section class="section wrap clip-reveal clip-fade" id="faq">
     <div class="ambient">
@@ -634,8 +591,8 @@
     <div class="faq">
       <div class="faq-item open"><button class="faq-q" aria-expanded="false"><span >Can I start with a small task?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p >Yes, a UX audit or a single automation takes 2–3 days and starts at $25. It's a great way to try working together without a big budget.</p></div></div></div>
       <div class="faq-item"><button class="faq-q" aria-expanded="false"><span >How does payment work?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p >In stages: 50% upfront, the rest after delivery and your review.</p></div></div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false"><span >What about timelines?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p >UX audit: 2–3 days. Landing: from a week. Site with an AI bot: 2–3 weeks. The deadline is fixed before we start.</p></div></div></div>
-      <div class="faq-item"><button class="faq-q" aria-expanded="false"><span >What if I don't like the result?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p >That's what the progress check-ins are for: we correct course along the way, not at the end. Edits within scope are included.</p></div></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false"><span >What about timelines?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p >UX audit: 2–3 days. Landing: from a week. Site with an AI bot: 2–3 weeks. The deadline is fixed before we start — if I run late, no extra charge.</p></div></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false"><span >What if I don't like the result?</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><div class="faq-a-in"><p >That's what the progress check-ins are for: we correct course along the way, not at the end. Any edits within scope are free — extra cost only if the scope grows.</p></div></div></div>
     </div>
   </section>
 
@@ -720,6 +677,6 @@
 <script src="gsap.min.js"></script>
 <script src="ScrollTrigger.min.js"></script>
 <script src="lenis.min.js?v=1"></script>
-<script src="script.js?v=105"></script>
+<script src="script.js?v=106"></script>
 </body>
 </html>
