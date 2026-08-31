@@ -552,7 +552,7 @@ if (fab && panel && chatInput && chatSend) {
   let lenis = null;
   if (window.Lenis && !reducedMotion) {
     try {
-      lenis = new Lenis({ duration: 1.1, smoothWheel: true, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+      lenis = new Lenis({ duration: 1.6, smoothWheel: true, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
       window.__lenis = lenis;
       // If GSAP is present, its ticker will drive Lenis (see GSAP IIFE
       // below). Otherwise fall back to a standalone RAF loop.
