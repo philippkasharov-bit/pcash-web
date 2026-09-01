@@ -66,19 +66,25 @@ if (burger && mobileMenu) {
 
 // ---- active nav highlight ----
 const navLinks = document.querySelectorAll('.main-nav a:not(.nav-cta):not(.drop-link)');
-const navMap = {};
-navLinks.forEach((a) => { navMap[a.getAttribute('href').slice(1)] = a; });
 const NAV_SPY_IDS = ['cases','services','about','process','calc','faq','contact'];
+const SECTION_TO_HREF = { cases:'#cases', services:'#services', about:'#about', process:'#process', calc:'pricing.html', faq:'#faq', contact:'#contact' };
 function syncNav() {
-  const line = 160;
+  const scrollY = window.scrollY;
+  const vh = window.innerHeight;
+  const viewCenter = scrollY + vh / 2;
   let best = null;
-  NAV_SPY_IDS.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && el.getBoundingClientRect().top - line <= 0) best = id;
-  });
-  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
-  if (atBottom) best = 'contact';
-  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + best));
+  let bestDist = Infinity;
+  for (let i = 0; i < NAV_SPY_IDS.length; i++) {
+    const el = document.getElementById(NAV_SPY_IDS[i]);
+    if (!el) continue;
+    const center = el.offsetTop + el.offsetHeight / 2;
+    const dist = Math.abs(viewCenter - center);
+    if (dist < bestDist) { bestDist = dist; best = NAV_SPY_IDS[i]; }
+  }
+  if (vh + scrollY >= document.documentElement.scrollHeight - 4) best = 'contact';
+  if (scrollY < 200) best = null;
+  const activeHref = best ? SECTION_TO_HREF[best] : null;
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === activeHref));
 }
 syncNav();
 window.addEventListener('scroll', syncNav, { passive: true });

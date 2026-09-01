@@ -796,7 +796,7 @@ body.clip-revealing.loaded { clip-path: circle(100% at 50% 50%); transition: cli
 
 /* narrow containers */
 #faq .wrap, #guarantees .wrap { max-width: var(--container-narrow); }
-#faq { min-height: 70vh; }
+#faq { padding-bottom: calc(var(--space-3xl) + 4rem); }
 
 /* section spacing with vars */
 .section { padding: var(--space-3xl) var(--space-lg); }
