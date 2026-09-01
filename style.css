@@ -796,6 +796,7 @@ body.clip-revealing.loaded { clip-path: circle(100% at 50% 50%); transition: cli
 
 /* narrow containers */
 #faq .wrap, #guarantees .wrap { max-width: var(--container-narrow); }
+#faq { min-height: 70vh; }
 
 /* section spacing with vars */
 .section { padding: var(--space-3xl) var(--space-lg); }
@@ -2466,6 +2467,7 @@ body { letter-spacing: 0.005em; color: #F0EDE7; }
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
   text-transform: uppercase; color: rgba(255,255,255,0.3); background: transparent;
   transition: color 0.3s, background 0.3s; position: relative;
+  text-align: center;
 }
 .process-step::after {
   content: ''; position: absolute; bottom: 0; left: 10%; width: 80%; height: 2px;
