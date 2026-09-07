@@ -605,7 +605,7 @@ body.loaded .shard.s5 { animation-delay: 0.35s; }
 .footer-brand .logo { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
 .footer-tagline { font-size: 13px; color: var(--ink-soft); line-height: 1.5; max-width: 22ch; }
 .footer-nav { display: flex; flex-direction: column; gap: 8px; }
-.footer-nav-heading { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; }
+.footer-nav-heading { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
 .footer-nav a { color: var(--ink-soft); font-size: 13px; transition: color 0.2s; }
 .footer-nav a:hover { color: var(--accent); }
 .footer-connect { display: flex; flex-direction: column; gap: 10px; }

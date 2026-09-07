@@ -19,10 +19,10 @@
 <link rel="stylesheet" href="style.css?v=128">
 <style>
   /* transparent — the shared liquid WebGL background shows through */
-  .price-stage { perspective: 1600px; padding: 40px 0 64px; background: none; }
+  .price-stage { perspective: 1600px; padding: 40px 0 64px; background: none; text-align: center; }
   .price-head { text-align: center; max-width: 720px; margin: 0 auto 34px; }
   .price-head .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; color: var(--amber-ink); text-transform: uppercase; margin: 0 0 14px; }
-  .price-head h1 { font-family: var(--font-display); font-size: clamp(30px, 5vw, 46px); font-weight: 500; line-height: 1.08; margin: 0 0 14px; letter-spacing: -0.01em; text-wrap: balance; }
+  .price-head h1 { font-family: var(--font-display); font-size: clamp(30px, 5vw, 46px); font-weight: 500; line-height: 1.08; margin: 0 auto 14px; letter-spacing: -0.01em; width: fit-content; }
   .price-head h1 em { font-style: normal; color: var(--accent); }
   .price-head .sub { font-size: 15px; color: var(--ink-soft); line-height: 1.6; margin: 0; }
 
@@ -37,7 +37,7 @@
   @keyframes priceRise { from { opacity: 0; transform: translateY(24px) rotateX(-6deg); } to { opacity: 1; transform: translateY(0) rotateX(0); } }
   .tagline { text-align: center; font-family: var(--font-mono); font-size: 13px; color: var(--amber-ink); margin: 0 0 26px; letter-spacing: 0.02em; }
 
-  .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 22px; }
+  .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 22px; text-align: left; }
   .pcard { position: relative; min-height: 200px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.09); background: #0A0B0F; padding: 22px 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; box-shadow: 0 8px 28px rgba(0,0,0,0.45), 0 24px 60px rgba(0,0,0,0.3); transition: border-color 0.25s, transform 0.35s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.35s; }
   .pcard:hover { border-color: rgba(124,92,255,0.4); }
   .pcard.recommended { border-color: rgba(124,92,255,0.35); }
@@ -90,7 +90,7 @@
 
 <main class="price-stage" id="top">
   <div class="price-head">
-    <p class="eyebrow" >Pricing · interactive</p>
+    <p class="eyebrow" >Pricing</p>
     <h1 >Sites · Automation · UX</h1>
     <p class="sub" >Pick a category and compare packages. Recommended option is marked.</p>
   </div>
