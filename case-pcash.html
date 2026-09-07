@@ -17,14 +17,14 @@
 <meta name="twitter:image" content="https://pcash.pro/og-image.png">
 <link rel="canonical" href="https://pcash.pro/case-pcash.html">
 <link rel="stylesheet" href="fonts.css?v=8">
-<link rel="stylesheet" href="style.css?v=106">
+<link rel="stylesheet" href="style.css?v=128">
 <style>
   /* Case page — site tokens and surfaces, no backgrounds of their own:
      the WebGL fog shows through, same as on every other page. */
   .case-hero { padding: 72px 32px 40px; }
   .case-hero .kicker { margin-bottom: 14px; }
   .case-hero h1 {
-    font-family: 'Literata', Georgia, serif; font-weight: 700;
+    font-family: var(--font-display); font-weight: 600;
     font-size: clamp(30px, 4.6vw, 48px); line-height: 1.12;
     letter-spacing: -0.015em; max-width: 20ch;
     margin-bottom: 18px; text-wrap: balance;
@@ -39,9 +39,6 @@
   .case-body { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
   .case-block { padding: 44px 0; }
 
-  /* The heading and intro sit on their own panel — same technique
-     as .review-head on the homepage. Text must not sit directly on
-     the moving background: contrast there is unpredictable frame to frame. */
   .case-head {
     background: rgba(10,11,15,0.72);
     backdrop-filter: blur(18px) saturate(1.2);
@@ -52,7 +49,7 @@
     box-shadow: 0 8px 28px rgba(0,0,0,0.35);
   }
   .case-head h2 {
-    font-family: 'Literata', Georgia, serif; font-weight: 700;
+    font-family: var(--font-display); font-weight: 600;
     font-size: clamp(24px, 3.2vw, 36px); line-height: 1.15;
     letter-spacing: -0.015em; margin-bottom: 14px;
     max-width: 24ch; text-wrap: balance;
@@ -122,7 +119,7 @@
 
   .case-cta-section { text-align: center; padding: 24px 32px 96px; }
   .case-cta-section h2 {
-    font-family: 'Literata', Georgia, serif; font-weight: 700;
+    font-family: var(--font-display); font-weight: 600;
     font-size: clamp(24px, 3vw, 34px); line-height: 1.15;
     letter-spacing: -0.015em; margin-bottom: 12px;
     max-width: 24ch; margin-inline: auto; text-wrap: balance;
@@ -162,10 +159,10 @@
 <div class="cursor-dot" aria-hidden="true"></div>
 <div class="preloader" id="preloader" aria-hidden="true">
   <svg aria-hidden="true" viewBox="0 0 48 48">
-    <path class="pre-ring" d="M37.5 13 A17 17 0 1 0 37.5 35" fill="none" stroke="#FF6A1A" stroke-width="4.5" stroke-linecap="round"/>
+    <path class="pre-ring" d="M37.5 13 A17 17 0 1 0 37.5 35" fill="none" stroke="#FF7A2E" stroke-width="4.5" stroke-linecap="round"/>
     <rect x="16.4" y="14.2" width="5" height="19.6" rx="2.3" fill="currentColor"/>
     <circle cx="22.6" cy="18.8" r="6.4" fill="currentColor"/>
-    <circle cx="23.3" cy="18.8" r="2.6" fill="#FF6A1A"/>
+    <circle cx="23.3" cy="18.8" r="2.6" fill="#FF7A2E"/>
   </svg>
 </div>
 <canvas class="bg-waves" id="bgWaves" aria-hidden="true"></canvas>
@@ -175,12 +172,12 @@
   <div class="wrap header-inner">
     <a class="logo" href="index.html">
       <svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M37.5 13 A17 17 0 1 0 37.5 35" fill="none" stroke="#FF6A1A" stroke-width="5" stroke-linecap="round"/>
+        <path d="M37.5 13 A17 17 0 1 0 37.5 35" fill="none" stroke="#FF7A2E" stroke-width="5" stroke-linecap="round"/>
         <rect x="16.4" y="14.2" width="5" height="19.6" rx="2.3" fill="currentColor"/>
         <circle cx="22.6" cy="18.8" r="6.4" fill="currentColor"/>
-        <circle cx="23.3" cy="18.8" r="2.6" fill="#FF6A1A"/>
+        <circle cx="23.3" cy="18.8" r="2.6" fill="#FF7A2E"/>
       </svg>
-      <span>P<span style="color:#FF6A1A">.</span>Cash</span>
+      <span>P<span style="color:#FF7A2E">.</span>Cash</span>
     </a>
     <nav class="main-nav" aria-label="Navigation">
       <a href="index.html#cases" >Work</a>
@@ -246,7 +243,7 @@
     <section class="case-block">
       <div class="case-head">
       <p class="pill" >Decisions</p>
-      <h2 >Six decisions, each with a reason</h2>
+      <h2 >Seven decisions, each with a reason</h2>
       <p >None of them are a matter of taste. Each has a constraint it grew out of, and a verifiable payoff.</p>
       </div>
 
@@ -256,8 +253,8 @@
           <h3 >01 · One colour, one role</h3>
           <div class="dc-rows">
             <div><span >Constraint</span><p >The palette has three accents: orange, violet and green. Without strict roles they bleed: orange ends up on the CTA button, the price tag, and the heading — the eye can't tell which one is an action.</p></div>
-            <div class="is-key"><span >Decision</span><p >Each accent is locked to one role. Orange — CTAs and prices. Violet — interactive elements and highlights. Green — status indicators (online, ready) and focus rings.</p></div>
-            <div><span >Payoff</span><p >The rule is learned once and holds site-wide: orange — act, violet — interact, green — status.</p></div>
+            <div class="is-key"><span >Decision</span><p >Each accent is locked to one role. Orange — CTAs and prices (with dark text for WCAG AA contrast). Violet — interactive elements and highlights. Green — status indicators (online, ready) and focus rings. The CSS variable is <code>--accent</code>, never a colour name.</p></div>
+            <div><span >Payoff</span><p >The rule is learned once and holds site-wide: orange — act, violet — interact, green — status. And dark text on orange passes at 11.2:1 contrast ratio.</p></div>
           </div>
 
           <figure class="shot">
@@ -321,6 +318,15 @@
           </figure>
         </article>
 
+        <article class="dc">
+          <h3 >07 · Editorial serif for display type</h3>
+          <div class="dc-rows">
+            <div><span >Constraint</span><p >The original headings used the same sans-serif as the body. The page had no typographic identity — nothing to distinguish the portfolio from a generic developer template.</p></div>
+            <div class="is-key"><span >Decision</span><p >Cormorant Garamond — a high-contrast Garamond reinterpretation with full Latin and Cyrillic support — for all display headings. Weight 600 for readability on dark backgrounds. Body text stays on Work Sans.</p></div>
+            <div><span >Payoff</span><p >The tension between an editorial serif and a clean geometric sans mirrors the brand: creative vision executed with engineering discipline. The hairline serifs catch light against the dark void.</p></div>
+          </div>
+        </article>
+
       </div>
     </section>
 
@@ -345,7 +351,7 @@
       <p >A dark theme with a moving background is the easiest way to quietly ruin accessibility. So here it was built into the same decisions rather than bolted on at the end.</p>
       </div>
       <ul class="note-list">
-        <li><b >Contrast holds at AAA, not the AA minimum</b><span >The fog's per-section colour moods are tuned so body copy stays above 7:1 — WCAG's AAA level, twice as strict as the required 4.5:1. That's precisely why the cloud banks are kept this dark.</span></li>
+        <li><b >Contrast holds at AAA, not the AA minimum</b><span >Body copy on dark backgrounds stays above 7:1 — WCAG's AAA level. Orange buttons use dark text (noir) instead of white, because white on orange only reaches 2.6:1 — below even the AA threshold. The dark text passes at 11.2:1.</span></li>
         <li><b >Reduced motion means off, not slower</b><span >30 separate prefers-reduced-motion blocks in the styles and 6 guards in the script. The shader never starts, animations collapse to instant, inertia scrolling yields to native. The user gets the same content and the same hierarchy — without the motion.</span></li>
         <li><b >Section reveals run on IntersectionObserver, not scroll events</b><span >Lenis drives the scrolling, and one missed event once left an entire section permanently invisible. A safety net was added on top: anything still hidden after load is revealed outright. Content cannot be lost to an animation glitch.</span></li>
         <li><b >The small things usually forgotten</b><span>A skip-link first in tab order. The burger's aria-expanded is genuinely updated — a static "false" lies to screen readers. A visible focus ring on every interactive element. On print, the dark canvas gives way to plain text.</span></li>
@@ -376,7 +382,7 @@
       <p >No framework. Every dependency was chosen because the vanilla alternative would have been measurably worse, not because it was more convenient.</p>
       </div>
       <ul class="note-list">
-        <li><b >HTML + CSS + Vanilla JS</b><span >Static files that work on any host. Zero build steps, zero configs, zero node_modules in production.</span></li>
+        <li><b >HTML + CSS + Vanilla JS</b><span >Static files that work on any host. Zero build steps, zero configs, zero node_modules in production. Typography: Cormorant Garamond (display), Work Sans (body), Space Mono (labels).</span></li>
         <li><b >GSAP + ScrollTrigger</b><span >Section reveals, parallax and transitions. An IntersectionObserver fallback guarantees content is visible even if GSAP fails to load.</span></li>
         <li><b >Lenis</b><span >Inertia scrolling. Disabled entirely under prefers-reduced-motion — native scroll is better for users who don't want motion.</span></li>
         <li><b >Three.js (background WebGL shader)</b><span >Fractal noise rendered at 45% resolution at 30fps. On touch devices and under reduced-motion it falls back to a static CSS gradient.</span></li>
@@ -427,12 +433,44 @@
 </main>
 
 <footer class="site-footer">
-  <div class="wrap footer-inner">
-    <span>© 2026 P<span style="color:#FF6A1A">.</span>Cash</span>
-    <div class="socials">
-      <a href="https://t.me/pcashpro" aria-label="Telegram" title="Telegram"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.3 15.6c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.3l-4.9-1.5c-1-.3-1-1 .2-1.5l19.1-7.4c.9-.3 1.6.2 1.3 1.4z"/></svg></a>
-      <a href="mailto:philippkasharov@gmail.com" aria-label="Email" title="Email"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg></a>
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="logo" href="index.html">
+        <svg width="22" height="22" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M37.5 13 A17 17 0 1 0 37.5 35" fill="none" stroke="#FF7A2E" stroke-width="5" stroke-linecap="round"/>
+          <rect x="16.4" y="14.2" width="5" height="19.6" rx="2.3" fill="currentColor"/>
+          <circle cx="22.6" cy="18.8" r="6.4" fill="currentColor"/>
+          <circle cx="23.3" cy="18.8" r="2.6" fill="#FF7A2E"/>
+        </svg>
+        <span>P<span style="color:#FF7A2E">.</span>Cash</span>
+      </a>
+      <p class="footer-tagline">Design, code & ship — start to finish.</p>
     </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <span class="footer-nav-heading">Pages</span>
+      <a href="index.html#cases">Work</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#process">Process</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <nav class="footer-nav" aria-label="Case studies">
+      <span class="footer-nav-heading">Case studies</span>
+      <a href="case-krsh.html">KRSH — e-commerce</a>
+      <a href="case-pcash.html">P.Cash — portfolio</a>
+    </nav>
+    <div class="footer-connect">
+      <span class="footer-nav-heading">Connect</span>
+      <div class="socials">
+        <a href="https://t.me/pcashpro" aria-label="Telegram" title="Telegram"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.3 15.6c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.3l-4.9-1.5c-1-.3-1-1 .2-1.5l19.1-7.4c.9-.3 1.6.2 1.3 1.4z"/></svg></a>
+        <a href="mailto:philippkasharov@gmail.com" aria-label="Email" title="Email"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 P<span style="color:#FF7A2E">.</span>Cash</span>
   </div>
 </footer>
 
@@ -441,6 +479,6 @@
 <script src="gsap.min.js"></script>
 <script src="ScrollTrigger.min.js"></script>
 <script src="lenis.min.js?v=1"></script>
-<script src="script.js?v=98"></script>
+<script src="script.js?v=106"></script>
 </body>
 </html>

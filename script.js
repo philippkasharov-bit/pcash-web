@@ -328,6 +328,53 @@ function submitWithFeedback(form, subject) {
 }
 submitWithFeedback(document.getElementById('contactForm'), 'Enquiry from P.Cash');
 
+// ---- file dropzone ----
+(function initDropzone() {
+  const dz = document.getElementById('dropzone');
+  const input = document.getElementById('cf-file');
+  const preview = document.getElementById('filePreview');
+  const nameEl = document.getElementById('fileName');
+  const removeBtn = document.getElementById('fileRemove');
+  if (!dz || !input) return;
+
+  const MAX_SIZE = 5 * 1024 * 1024;
+
+  function showFile(file) {
+    if (file.size > MAX_SIZE) {
+      alert('File is too large. Maximum size is 5 MB.');
+      input.value = '';
+      return;
+    }
+    nameEl.textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
+    preview.hidden = false;
+    dz.hidden = true;
+  }
+
+  dz.addEventListener('click', function() { input.click(); });
+  dz.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); } });
+
+  input.addEventListener('change', function() {
+    if (input.files && input.files[0]) showFile(input.files[0]);
+  });
+
+  dz.addEventListener('dragover', function(e) { e.preventDefault(); dz.classList.add('drag-over'); });
+  dz.addEventListener('dragleave', function() { dz.classList.remove('drag-over'); });
+  dz.addEventListener('drop', function(e) {
+    e.preventDefault();
+    dz.classList.remove('drag-over');
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      input.files = e.dataTransfer.files;
+      showFile(e.dataTransfer.files[0]);
+    }
+  });
+
+  removeBtn.addEventListener('click', function() {
+    input.value = '';
+    preview.hidden = true;
+    dz.hidden = false;
+  });
+})();
+
 // ---- chat widget ----
 const kb = [
   { keys: ['price','cost','how much'], text: 'Full site — from $250, AI bot — from $80, UX audit — from $25. Exact price after a brief.' },
@@ -1114,10 +1161,61 @@ void main(){
   }
 
   function scheduleRevealTriggers() {
-    requestAnimationFrame(() => requestAnimationFrame(buildRevealTriggers));
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      buildRevealTriggers();
+      startRevealSafetyNet();
+    }));
   }
   if (document.readyState === 'complete') scheduleRevealTriggers();
   else window.addEventListener('load', () => setTimeout(scheduleRevealTriggers, 200));
+
+  // Safety net: catch elements that ScrollTrigger missed during fast scroll
+  // or Lenis desync. A secondary IntersectionObserver watches every GSAP-hidden
+  // element; if it's been in the viewport for 600ms and still has opacity < 0.1,
+  // force-reveal it.
+  function startRevealSafetyNet() {
+    const pending = new Map();
+    const allHidden = [];
+    revealGroups.forEach(({ head, blocks }) => {
+      allHidden.push(...head, ...blocks);
+    });
+    if (!allHidden.length) return;
+
+    const safetyIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          if (!pending.has(e.target)) {
+            pending.set(e.target, setTimeout(() => {
+              const op = parseFloat(getComputedStyle(e.target).opacity);
+              if (op < 0.1) {
+                gsap.to(e.target, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'power2.out' });
+              }
+              safetyIO.unobserve(e.target);
+              pending.delete(e.target);
+            }, 600));
+          }
+        } else {
+          const tid = pending.get(e.target);
+          if (tid) { clearTimeout(tid); pending.delete(e.target); }
+        }
+      });
+    }, { rootMargin: '20% 0px 20% 0px' });
+
+    allHidden.forEach((el) => safetyIO.observe(el));
+
+    // One-shot sweep after full load: force-reveal anything in viewport still hidden
+    window.addEventListener('load', () => setTimeout(() => {
+      allHidden.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) {
+          const op = parseFloat(getComputedStyle(el).opacity);
+          if (op < 0.1) {
+            gsap.to(el, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'power2.out' });
+          }
+        }
+      });
+    }, 1500));
+  }
 
   // ---- 3D drum: sections tilt through the viewport ----------------
   // Each section rides a cylinder — it enters tipped away from you,
