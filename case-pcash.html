@@ -211,13 +211,13 @@
 
   <section class="case-hero wrap">
     <p class="kicker" >Case study · Brand, UX, front-end</p>
-    <h1 >P.Cash — the site that sells me. You're inside it right now</h1>
-    <p class="lede" >This isn't a description of the project — it is the project. Everything described below is running on the page you're reading: the background, the type, the section transitions, the accessibility work. Every claim can be checked without leaving the tab.</p>
+    <h1 >I built my own portfolio from scratch. Here's every decision I made</h1>
+    <p class="lede" >This is the site you're on right now. I designed, coded and shipped it myself — no templates, no frameworks. Below I walk through the thinking behind every major choice: what I tried, what I cut, and why.</p>
     <div class="case-meta">
-      <span class="pill" >Role: brand · UX · front-end · copy</span>
-      <span class="pill" >Solo project</span>
-      <span class="pill" >Vanilla JS + GSAP</span>
-      <span class="pill" >5 pages · RU/EN</span>
+      <span class="pill" >Design · UX · front-end · copy</span>
+      <span class="pill" >Solo, end to end</span>
+      <span class="pill" >Vanilla JS + GSAP + Three.js</span>
+      <span class="pill" >5 pages</span>
     </div>
     <div class="case-hero-cta">
       <a class="btn btn-primary" href="index.html#contact" >Discuss a project</a>
@@ -229,101 +229,100 @@
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" >The premise</p>
-      <h2 >Why a freelancer needs their own site</h2>
-      <p>My site is the first thing a client judges me by, long before they see a line of my code. So it has to prove the skill rather than describe it. Anyone can write "I build fast, accessible sites"; only the page itself can prove it.</p>
-      <p>Hence the rule every effect was judged by: it stays only if it helps convey the content or demonstrates a specific skill. Everything that was merely "nice" was cut — and below you can see exactly what, and why.</p>
+      <p class="pill" >The problem</p>
+      <h2 >Why I needed my own site</h2>
+      <p>I'm a freelancer. My site is the first thing a potential client sees — before any portfolio link, before any call. If the site itself isn't well-made, nothing I write on it matters. So I set one rule: every effect, every animation, every visual choice stays only if it proves a skill or helps the visitor act. Everything that was just "cool" got cut.</p>
       </div>
       <figure class="shot">
-        <img src="images/case-pcash/01-hero.webp" width="1200" height="760" alt="P.Cash hero screen" loading="lazy" decoding="async">
-        <figcaption >The first screen: a promise, two actions and two facts. Nothing else is on it.</figcaption>
+        <img src="images/case-pcash/01-hero.webp" width="1200" height="750" alt="P.Cash hero screen" loading="lazy" decoding="async">
+        <figcaption >The hero: who I am, what I do, two ways to act. Nothing else competes for attention.</figcaption>
       </figure>
     </section>
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" >Decisions</p>
-      <h2 >Seven decisions, each with a reason</h2>
-      <p >None of them are a matter of taste. Each has a constraint it grew out of, and a verifiable payoff.</p>
+      <p class="pill" >Design decisions</p>
+      <h2 >What I chose and why</h2>
+      <p >Every decision below started with a problem I ran into during the build. None of them are taste — each one has a reason you can verify on the live page.</p>
       </div>
 
       <div class="dc-list">
 
         <article class="dc">
-          <h3 >01 · One colour, one role</h3>
+          <h3 >01 · I gave each colour a single job</h3>
           <div class="dc-rows">
-            <div><span >Constraint</span><p >The palette has three accents: orange, violet and green. Without strict roles they bleed: orange ends up on the CTA button, the price tag, and the heading — the eye can't tell which one is an action.</p></div>
-            <div class="is-key"><span >Decision</span><p >Each accent is locked to one role. Orange — CTAs and prices (with dark text for WCAG AA contrast). Violet — interactive elements and highlights. Green — status indicators (online, ready) and focus rings. The CSS variable is <code>--accent</code>, never a colour name.</p></div>
-            <div><span >Payoff</span><p >The rule is learned once and holds site-wide: orange — act, violet — interact, green — status. And dark text on orange passes at 11.2:1 contrast ratio.</p></div>
+            <div><span >Problem</span><p >I had three accent colours — orange, violet, green — and early on they were everywhere. Orange showed up on buttons, price tags, and headings. The page looked colourful but nothing stood out as "click me".</p></div>
+            <div class="is-key"><span >What I did</span><p >Locked each colour to one role. Orange = actions and prices. Violet = interactive highlights. Green = status (online, available). I use <code>--accent</code> in CSS, never a colour name — so the rule holds even when I forget.</p></div>
+            <div><span >Result</span><p >Visitors learn the system in seconds: see orange, click it. Dark text on orange passes WCAG at 11.2:1 contrast.</p></div>
           </div>
 
           <figure class="shot">
-            <img src="images/case-pcash/04-process.webp" width="1200" height="760" alt="How I Work section on the site" loading="lazy" decoding="async">
-            <figcaption >Orange only on CTAs, violet on interactive elements, green on status indicators.</figcaption>
+            <img src="images/case-pcash/04-process.webp" width="1200" height="750" alt="Process section showing colour roles" loading="lazy" decoding="async">
+            <figcaption >Orange on CTAs only, violet on hover states, green on status dots.</figcaption>
           </figure>
         </article>
 
         <article class="dc">
-          <h3 >02 · The section counter became navigation</h3>
+          <h3 >02 · I turned decoration into navigation</h3>
           <div class="dc-rows">
-            <div><span >Constraint</span><p>A "01 / 11" indicator sat in the corner. It showed a number — and nothing else.</p></div>
-            <div class="is-key"><span >Decision</span><p >Replaced with a column of dots: each one anchors to a section, the active one is highlighted, and hovering names it.</p></div>
-            <div><span >Payoff</span><p >The same screen real estate now gives navigation across a long page instead of decoration.</p></div>
+            <div><span >Problem</span><p>I had a "01 / 11" section counter in the corner. It looked slick but told the visitor nothing useful — just a number.</p></div>
+            <div class="is-key"><span >What I did</span><p >Replaced it with a vertical dot column. Each dot anchors to a section, the current one lights up, and hovering shows the section name.</p></div>
+            <div><span >Result</span><p >Same corner, same footprint — but now it actually helps people move around a long page.</p></div>
           </div>
         </article>
 
         <article class="dc">
-          <h3 >03 · One particle system instead of two</h3>
+          <h3 >03 · I replaced random particles with meaning</h3>
           <div class="dc-rows">
-            <div><span >Constraint</span><p >A layer of dots ran on top of the background shader. Two particle systems at once make the background noisy and pull attention off the copy.</p></div>
-            <div class="is-key"><span >Decision</span><p >The dots were replaced by ten schematic symbols — one per thing I sell: microchip, terminal, neural net, API, database, automation, artboard, Bézier curve, git branch, waveform.</p></div>
-            <div><span >Payoff</span><p >Same canvas, same render loop — but the background stopped competing with the copy and started speaking about the content.</p></div>
+            <div><span >Problem</span><p >Floating dots layered on top of the background shader. Two moving layers at once made the page feel noisy and pulled attention away from the text.</p></div>
+            <div class="is-key"><span >What I did</span><p >Swapped the random dots for ten schematic icons — one for each service I offer: microchip, terminal, neural net, API, database, automation, artboard, Bézier curve, git branch, waveform.</p></div>
+            <div><span >Result</span><p >Same canvas, same performance — but the background now quietly says what I do instead of being visual noise.</p></div>
           </div>
         </article>
 
         <article class="dc">
-          <h3 >04 · The 3D card tilt was removed</h3>
+          <h3 >04 · I killed the 3D card tilt</h3>
           <div class="dc-rows">
-            <div><span >Constraint</span><p >Service cards tilted toward the cursor — striking in a demo, but alien next to the flat, calm block layout.</p></div>
-            <div class="is-key"><span >Decision</span><p >Removed outright. In its place: a 2–4px lift and a violet border highlight — the same feedback, but in the logic of flat surfaces.</p></div>
-            <div><span >Payoff</span><p >Hover feedback became uniform across every card on the site — the blocks stopped looking like different systems.</p></div>
+            <div><span >Problem</span><p >Service cards tilted toward the cursor on hover. Cool in isolation, but next to the flat, minimal layout it looked like a different website.</p></div>
+            <div class="is-key"><span >What I did</span><p >Cut it entirely. Replaced with a subtle lift (2–4px) and a violet border glow. Same hover feedback, same visual system as everything else.</p></div>
+            <div><span >Result</span><p >Every card on the site now behaves the same way. The page feels like one coherent product.</p></div>
           </div>
         </article>
 
         <article class="dc">
-          <h3 >05 · Budget calculator → price teaser</h3>
+          <h3 >05 · I ditched the price calculator</h3>
           <div class="dc-rows">
-            <div><span >Constraint</span><p >The homepage had an interactive calculator: tick services, get a range. It asked the visitor to do work before they understood the ballpark.</p></div>
-            <div class="is-key"><span >Decision</span><p >Replaced with a short teaser: four starting prices, the payment terms in one line, and a link to a dedicated pricing page with scope.</p></div>
-            <div><span >Payoff</span><p >The ballpark reads in a couple of seconds; the detail stays available for those who actually need it.</p></div>
+            <div><span >Problem</span><p >I built an interactive calculator — tick services, get a price range. But it asked visitors to configure something before they even knew the ballpark.</p></div>
+            <div class="is-key"><span >What I did</span><p >Replaced it with four starting prices, payment terms in one line, and a link to a full pricing page for people who want detail.</p></div>
+            <div><span >Result</span><p >The ballpark reads in two seconds. Detail is one click away for those who need it.</p></div>
           </div>
-        
+
           <figure class="shot">
-            <img src="images/case-pcash/05-pricing.webp" width="1200" height="620" alt="Pricing section on the site" loading="lazy" decoding="async">
-            <figcaption >Four starting prices, the payment terms and a link to the full list — instead of an interactive calculator.</figcaption>
+            <img src="images/case-pcash/05-pricing.webp" width="1200" height="750" alt="Pricing section" loading="lazy" decoding="async">
+            <figcaption >Four prices, payment terms, one link. No calculator, no configuration.</figcaption>
           </figure>
         </article>
 
         <article class="dc">
-          <h3 >06 · Surfaces split into two classes</h3>
+          <h3 >06 · I split surfaces into solid and transparent</h3>
           <div class="dc-rows">
-            <div><span >Constraint</span><p >A living background under the whole page looks good, but reading text over a moving gradient is hard.</p></div>
-            <div class="is-key"><span >Decision</span><p >Surfaces were split by role: those carrying the main copy are solid dark; secondary ones stay translucent so the background reads through. Sections themselves are transparent, and the separators between them were removed.</p></div>
-            <div><span >Payoff</span><p >The copy stays readable, the background stays visible, and the page scrolls as one seamless canvas.</p></div>
+            <div><span >Problem</span><p >The WebGL background looks great, but reading body text over a moving gradient is painful.</p></div>
+            <div class="is-key"><span >What I did</span><p >Cards and blocks that carry text are solid dark. Everything else stays transparent so the background shows through. No section dividers — the page scrolls as one continuous canvas.</p></div>
+            <div><span >Result</span><p >Text is always readable, the background is always visible, and neither fights the other.</p></div>
           </div>
-        
+
           <figure class="shot">
-            <img src="images/case-pcash/02-services.webp" width="1200" height="800" alt="Service cards on the live background" loading="lazy" decoding="async">
-            <figcaption >Service cards are solid: their copy stays readable no matter what the background is doing underneath.</figcaption>
+            <img src="images/case-pcash/02-services.webp" width="1200" height="750" alt="Service cards on the live background" loading="lazy" decoding="async">
+            <figcaption >Solid cards over the living background. Copy stays sharp, atmosphere stays alive.</figcaption>
           </figure>
         </article>
 
         <article class="dc">
-          <h3 >07 · Editorial serif for display type</h3>
+          <h3 >07 · I picked a serif that means something</h3>
           <div class="dc-rows">
-            <div><span >Constraint</span><p >The original headings used the same sans-serif as the body. The page had no typographic identity — nothing to distinguish the portfolio from a generic developer template.</p></div>
-            <div class="is-key"><span >Decision</span><p >Cormorant Garamond — a high-contrast Garamond reinterpretation with full Latin and Cyrillic support — for all display headings. Weight 600 for readability on dark backgrounds. Body text stays on Work Sans.</p></div>
-            <div><span >Payoff</span><p >The tension between an editorial serif and a clean geometric sans mirrors the brand: creative vision executed with engineering discipline. The hairline serifs catch light against the dark void.</p></div>
+            <div><span >Problem</span><p >Headings used the same sans-serif as body text. The page had zero typographic personality — it could have been any developer template.</p></div>
+            <div class="is-key"><span >What I did</span><p >Chose Cormorant Garamond for all display headings — high-contrast, editorial, full Latin and Cyrillic support. Weight 600 so it reads clean on dark. Body stays on Work Sans.</p></div>
+            <div><span >Result</span><p >The contrast between an editorial serif and a geometric sans tells the story: design thinking meets clean code. The hairline serifs catch light against the dark background.</p></div>
           </div>
         </article>
 
@@ -333,89 +332,89 @@
     <section class="case-block">
       <div class="case-head">
       <p class="pill" >Performance</p>
-      <h2 >A background three times cheaper, and it doesn't show</h2>
-      <p >The background is neither an image nor a video but a WebGL shader: fractal noise warped by a second one, producing soft cloud banks with no hard edges. An effect like this easily becomes a battery drain, so it carries three decisions that each save work while staying invisible.</p>
+      <h2 >How I made the background 3x cheaper</h2>
+      <p >The background is a WebGL shader — fractal noise that produces soft fog with no hard edges. Effects like this eat battery, so I found three ways to cut the cost without anyone noticing.</p>
       </div>
       <ul class="note-list">
-        <li><b >Three noise octaves instead of five</b><span >The last two produce detail finer than a visible wisp of fog — literally indistinguishable. They cost about 40% of the shader's work.</span></li>
-        <li><b >Rendering at 45% resolution</b><span >Fog is nothing but smooth gradients, so it doesn't need one texel per screen pixel. Rendering at 45% and letting the GPU upscale costs roughly five times fewer fragment shader runs.</span></li>
-        <li><b >30 frames per second instead of 60</b><span >The fog drifts at 0.035 units per second. At that speed 30fps is indistinguishable from 60, and it halves the GPU's work.</span></li>
-        <li><b >And a full shutdown where the effect isn't wanted</b><span >Rendering pauses on a hidden tab, switches off on touch devices, and shuts down entirely under a reduced-motion preference, falling back to a static CSS gradient.</span></li>
+        <li><b >3 noise octaves instead of 5</b><span >The last two add detail finer than a wisp of fog. You literally can't see the difference. Removing them saves about 40% of the shader's work.</span></li>
+        <li><b >Rendering at 45% resolution</b><span >Fog is smooth gradients — it doesn't need pixel-perfect rendering. Running at 45% and upscaling cuts fragment shader work by roughly 5x.</span></li>
+        <li><b >30fps instead of 60</b><span >The fog drifts slowly. At that speed, 30fps looks identical to 60. Half the GPU work for free.</span></li>
+        <li><b >Full shutdown when not needed</b><span >Hidden tab? Paused. Touch device? Off. Reduced-motion preference? Static CSS gradient. No wasted cycles.</span></li>
       </ul>
     </section>
 
     <section class="case-block">
       <div class="case-head">
       <p class="pill" >Accessibility</p>
-      <h2 >What a screenshot can't show</h2>
-      <p >A dark theme with a moving background is the easiest way to quietly ruin accessibility. So here it was built into the same decisions rather than bolted on at the end.</p>
+      <h2 >The stuff you can't see in screenshots</h2>
+      <p >A dark theme with a moving background is the fastest way to break accessibility. I built it into the design from the start instead of patching it at the end.</p>
       </div>
       <ul class="note-list">
-        <li><b >Contrast holds at AAA, not the AA minimum</b><span >Body copy on dark backgrounds stays above 7:1 — WCAG's AAA level. Orange buttons use dark text (noir) instead of white, because white on orange only reaches 2.6:1 — below even the AA threshold. The dark text passes at 11.2:1.</span></li>
-        <li><b >Reduced motion means off, not slower</b><span >30 separate prefers-reduced-motion blocks in the styles and 6 guards in the script. The shader never starts, animations collapse to instant, inertia scrolling yields to native. The user gets the same content and the same hierarchy — without the motion.</span></li>
-        <li><b >Section reveals run on IntersectionObserver, not scroll events</b><span >Lenis drives the scrolling, and one missed event once left an entire section permanently invisible. A safety net was added on top: anything still hidden after load is revealed outright. Content cannot be lost to an animation glitch.</span></li>
-        <li><b >The small things usually forgotten</b><span>A skip-link first in tab order. The burger's aria-expanded is genuinely updated — a static "false" lies to screen readers. A visible focus ring on every interactive element. On print, the dark canvas gives way to plain text.</span></li>
+        <li><b >AAA contrast, not just AA</b><span >Body text on dark backgrounds holds above 7:1. Orange buttons use dark text instead of white — white on orange only hits 2.6:1, which fails even AA. Dark text passes at 11.2:1.</span></li>
+        <li><b >Reduced motion = completely off</b><span >30 CSS blocks and 6 JS guards. If you prefer reduced motion, the shader never starts, animations are instant, and scrolling is native. Same content, same layout, no motion.</span></li>
+        <li><b >Content can't disappear</b><span >Section reveals use IntersectionObserver. A safety net catches anything still hidden after page load and forces it visible. I learned this the hard way — a scroll event once left a whole section invisible.</span></li>
+        <li><b >The details most people skip</b><span>Skip-link in the tab order. The burger menu's aria-expanded actually updates. Visible focus ring on every interactive element. Print stylesheet flips to plain text.</span></li>
       </ul>
     </section>
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" >Being upfront</p>
-      <h2 >What's deliberately absent</h2>
-      <p >The biggest risk for a beginner's portfolio is looking more experienced than you are. Three places where lying would have been easier were resolved the other way.</p>
+      <p class="pill" >Honesty</p>
+      <h2 >What I deliberately left out</h2>
+      <p >The easiest trap for a new freelancer is faking experience. I found three places where lying would have been simpler — and went the other way.</p>
       </div>
       <ul class="note-list">
-        <li><b >The reviews section was removed entirely</b><span >Along with its submission form. There are no reviews yet, and an empty block with a form implies they exist somewhere — a quiet lie. When real ones arrive, the section comes back.</span></li>
-        <li><b>"Work" shows self-initiated projects, no client logos</b><span >It's stated plainly in the section subtitle and inside every case study. Logos of companies I haven't worked with would borrow trust and destroy it at the first question.</span></li>
-        <li><b >Analytics is wired up but switched off</b><span >The Plausible setup — no cookies, no personal data — sits commented out and switches on with a single line. Until there's a domain, nothing is collected and nothing leaves the page.</span></li>
+        <li><b >No testimonials section</b><span >I don't have reviews yet, so I removed the section entirely. An empty "Reviews" block with a submission form implies they exist somewhere. When real ones come, the section comes back.</span></li>
+        <li><b >No client logos</b><span >The Work section says it clearly: these are self-initiated projects. Borrowing someone else's logo would build trust that collapses at the first real question.</span></li>
+        <li><b >Analytics wired but off</b><span >Plausible is set up — no cookies, no personal data. But it's commented out until the site has real traffic. Nothing is collected, nothing leaves the page.</span></li>
       </ul>
           <figure class="shot">
-            <img src="images/case-pcash/03-cases.webp" width="1200" height="612" alt="Work section on the site" loading="lazy" decoding="async">
-            <figcaption >The Work section subtitle says it plainly: these are self-initiated projects, not client logos.</figcaption>
+            <img src="images/case-pcash/03-cases.webp" width="1200" height="750" alt="Work section on the site" loading="lazy" decoding="async">
+            <figcaption >The Work section: self-initiated projects, stated upfront. No borrowed logos.</figcaption>
           </figure>
     </section>
 
     <section class="case-block">
       <div class="case-head">
       <p class="pill" >Stack</p>
-      <h2 >What the site is built with</h2>
-      <p >No framework. Every dependency was chosen because the vanilla alternative would have been measurably worse, not because it was more convenient.</p>
+      <h2 >What I used and why</h2>
+      <p >No React, no Next.js, no build tools. Every dependency earned its place by being measurably better than the vanilla alternative.</p>
       </div>
       <ul class="note-list">
-        <li><b >HTML + CSS + Vanilla JS</b><span >Static files that work on any host. Zero build steps, zero configs, zero node_modules in production. Typography: Cormorant Garamond (display), Work Sans (body), Space Mono (labels).</span></li>
-        <li><b >GSAP + ScrollTrigger</b><span >Section reveals, parallax and transitions. An IntersectionObserver fallback guarantees content is visible even if GSAP fails to load.</span></li>
-        <li><b >Lenis</b><span >Inertia scrolling. Disabled entirely under prefers-reduced-motion — native scroll is better for users who don't want motion.</span></li>
-        <li><b >Three.js (background WebGL shader)</b><span >Fractal noise rendered at 45% resolution at 30fps. On touch devices and under reduced-motion it falls back to a static CSS gradient.</span></li>
+        <li><b >HTML + CSS + Vanilla JS</b><span >Static files, zero build steps, works on any host. Typography: Cormorant Garamond (headings), Work Sans (body), Space Mono (labels).</span></li>
+        <li><b >GSAP + ScrollTrigger</b><span >Section reveals and transitions. IntersectionObserver fallback keeps content visible if GSAP doesn't load.</span></li>
+        <li><b >Lenis</b><span >Smooth inertia scrolling. Completely disabled under reduced-motion — native scroll is better in that case.</span></li>
+        <li><b >Three.js</b><span >The WebGL fog shader. Renders at 45% resolution, 30fps. Falls back to a CSS gradient on mobile and for reduced-motion users.</span></li>
       </ul>
     </section>
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" >Metrics</p>
-      <h2 >Numbers you can check</h2>
+      <p class="pill" >Results</p>
+      <h2 >Numbers</h2>
       </div>
       <ul class="note-list">
-        <li><b >Lighthouse: 100 / 100 / 100 / 100</b><span >Performance, Accessibility, Best Practices, SEO — on every page. Not a screenshot of a lucky run, but a stable result.</span></li>
-        <li><b >30 prefers-reduced-motion blocks in CSS + 6 JS guards</b><span >Every effect that could cause discomfort is disabled by a system preference. Content and hierarchy are fully preserved.</span></li>
-        <li><b >Contrast ≥ 7:1 (AAA) on all body text</b><span >Twice as strict as the required 4.5:1. The dark cloud banks are tuned so contrast never dips below this threshold.</span></li>
-        <li><b >5 pages · full RU/EN · 0 frameworks</b><span>Everything is translated: headings, forms, hints, validation errors, bot copy. Not "main content in two languages" but every single string.</span></li>
+        <li><b >Lighthouse: 100 / 100 / 100 / 100</b><span >Performance, Accessibility, Best Practices, SEO — stable across every page, not a one-off screenshot.</span></li>
+        <li><b >30 reduced-motion CSS blocks + 6 JS guards</b><span >Every animated element respects the user's system preference. Content and hierarchy stay intact.</span></li>
+        <li><b >AAA contrast (≥ 7:1) on all body text</b><span >Double the required minimum. The background palette is tuned so contrast never drops below this.</span></li>
+        <li><b >5 pages · 0 frameworks</b><span>Fully translated: headings, form labels, hints, validation errors, bot replies. Every string, not just the headlines.</span></li>
       </ul>
     </section>
 
     <section class="case-block">
       <div class="case-head">
-      <p class="pill" >The upshot</p>
-      <h2 >What it adds up to</h2>
+      <p class="pill" >Takeaway</p>
+      <h2 >What I learned</h2>
       </div>
       <ul class="note-list">
-        <li><b >The site doesn't depend on a framework</b><span >These are plain static files: they can go on almost any host, and they won't break because someone else's library shipped a new major version.</span></li>
-        <li><b >Two languages in full, not half</b><span >Every page is translated along with form labels, hints and the bot's replies — not just the headlines on the homepage.</span></li>
-        <li><b >Motion and contrast are checked, not eyeballed</b><span >All animation switches off with a system preference, and the dark theme's colours were checked against contrast requirements.</span></li>
+        <li><b >Cutting features is harder than adding them</b><span >The 3D tilt, the calculator, the particle system — each one took hours to build and seconds to cut. The site got better every time I removed something.</span></li>
+        <li><b >Accessibility isn't a checklist, it's a design constraint</b><span >Building contrast and motion control into the decisions from day one was easier than retrofitting them later.</span></li>
+        <li><b >Honesty is a feature</b><span >Saying "these are my own projects" upfront builds more trust than a borrowed logo ever could.</span></li>
       </ul>
-      <p class="case-outro" >This isn't a list of achievements. It's what follows from every decision above growing out of a constraint rather than a preference.</p>
+      <p class="case-outro" >Every choice on this site grew out of a constraint, not a preference. That's the approach I bring to client work too.</p>
           <figure class="shot">
-            <img src="images/case-pcash/06-contact.webp" width="1200" height="592" alt="Contact form on the site" loading="lazy" decoding="async">
-            <figcaption >The end of the page: one form, three fields and a promise to reply within a day.</figcaption>
+            <img src="images/case-pcash/06-contact.webp" width="1200" height="750" alt="Contact form on the site" loading="lazy" decoding="async">
+            <figcaption >The end of the page: one form, three fields, a promise to reply within a day.</figcaption>
           </figure>
     </section>
 
